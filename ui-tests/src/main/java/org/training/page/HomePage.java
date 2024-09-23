@@ -3,6 +3,7 @@ package org.training.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.training.page.base.BasePage;
+import org.training.utils.config.TestConfig;
 
 public class HomePage extends BasePage {
 
@@ -11,7 +12,7 @@ public class HomePage extends BasePage {
   }
 
   public void load() {
-    load("https://google.com/");
+    load(TestConfig.baseUrl);
     wait.until(ExpectedConditions.titleContains("Customers App"));
   }
 }
