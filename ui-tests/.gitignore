@@ -43,3 +43,7 @@ bin/
 
 ### Reporting ###
 /reports/
+/screenshots/
+
+### Selenium ###
+/drivers/
