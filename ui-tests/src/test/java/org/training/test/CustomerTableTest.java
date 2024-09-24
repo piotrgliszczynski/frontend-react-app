@@ -105,6 +105,20 @@ public class CustomerTableTest extends BaseTest {
     assertTrue(isSecondSelected);
   }
 
+  @Test
+  void oldCustomerRowShouldBeDeselected_When_ClickingNewRow() {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickFirstCustomer();
+
+    // When
+    customerTableSteps.clickSecondCustomer();
+    boolean isFirstSelected = customerTableSteps.firstIsSelected();
+
+    // Then
+    assertFalse(isFirstSelected);
+  }
+
   @Override
   public void prepareSteps() {
     customerTableSteps = new CustomerTableSteps(getDriver());
