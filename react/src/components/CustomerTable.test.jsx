@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, within } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
 import * as restdb from '../rest/restdb';
@@ -50,9 +50,25 @@ describe('Customer Table', () => {
     const password = await findByRole('cell', { name: returnData[0].password });
 
     // Then
-    expect(restdb.getAll).toHaveBeenCalledTimes(1);[]
+    expect(restdb.getAll).toHaveBeenCalledTimes(1);
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
   })
+
+  it('Should fire event when clicking on table', async () => {
+    // Given
+    jest.spyOn(console, 'log').mockImplementationOnce(() => { });
+    const { findByRole } = render(<CustomerTable />);
+    const name = await findByRole('cell', { name: returnData[0].name });
+    const customerRow = name.closest('tr');
+
+    // When
+    fireEvent.click(customerRow);
+
+    // Then
+    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.log.mock.calls[0][1]).toEqual(returnData[0]);
+    console.log.mockRestore();
+  });
 })

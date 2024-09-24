@@ -9,6 +9,10 @@ const CustomerTable = () => {
     getAll().then(response => setCustomerData(response));
   }, []);
 
+  const onRowClick = (customer) => {
+    console.log(`Row event`, customer);
+  }
+
   return (
     <table id='customer-table'>
       <thead>
@@ -20,14 +24,14 @@ const CustomerTable = () => {
       </thead>
       <tbody>
         {customerData.map(customer => (
-          <tr key={customer.id}>
+          <tr onClick={() => onRowClick(customer)} key={customer.id}>
             <td>{customer.name}</td>
             <td>{customer.email}</td>
             <td>{customer.password}</td>
           </tr>
         ))}
       </tbody>
-    </table>
+    </table >
   )
 }
 
