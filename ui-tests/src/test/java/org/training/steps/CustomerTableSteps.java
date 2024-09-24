@@ -1,8 +1,11 @@
 package org.training.steps;
 
 import org.openqa.selenium.WebDriver;
+import org.training.data.Customer;
 import org.training.page.HomePage;
 import org.training.steps.base.BaseSteps;
+
+import java.util.List;
 
 public class CustomerTableSteps extends BaseSteps {
 
@@ -28,5 +31,9 @@ public class CustomerTableSteps extends BaseSteps {
 
   public String getPasswordHeader() {
     return homePage.getCustomerTablePasswordHeader();
+  }
+
+  public List<Customer> getAllCustomers() {
+    return homePage.getAllCustomers();
   }
 }

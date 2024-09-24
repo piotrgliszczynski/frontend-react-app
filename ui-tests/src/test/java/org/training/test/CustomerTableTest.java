@@ -1,11 +1,16 @@
 package org.training.test;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.training.data.Customer;
+import org.training.data.providers.CustomerDataProvider;
 import org.training.steps.CustomerTableSteps;
 import org.training.test.base.BaseTest;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTableTest extends BaseTest {
 
@@ -30,6 +35,20 @@ public class CustomerTableTest extends BaseTest {
         () -> assertEquals(expectedEmailHeader, actualEmailHeader),
         () -> assertEquals(expectedPasswordHeader, actualPasswordHeader)
     );
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(CustomerDataProvider.class)
+  void customerShouldBeVisible_When_NavigatingToMainPage(Customer customer) {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    List<Customer> customers = customerTableSteps.getAllCustomers();
+
+    // Then
+    assertAll(() -> assertEquals(3, customers.size()),
+        () -> assertTrue(customers.contains(customer)));
   }
 
   @Override

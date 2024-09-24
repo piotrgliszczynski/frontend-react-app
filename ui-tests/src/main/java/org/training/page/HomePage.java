@@ -4,13 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.training.data.Customer;
 import org.training.page.base.BasePage;
 import org.training.utils.config.TestConfig;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
 
   private final By customerListTitle = By.id("customer-list-title");
   private final By customerTable = By.id("customer-table");
+  private final By customerRow = By.cssSelector("#customer-table > tbody > tr");
 
   public HomePage(WebDriver driver) {
     super(driver);
@@ -49,5 +53,20 @@ public class HomePage extends BasePage {
         ExpectedConditions.visibilityOf(
             table.findElement(By.cssSelector("thead > tr > th:nth-child(3)")))
     ).getText();
+  }
+
+  public List<Customer> getAllCustomers() {
+    WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(customerTable));
+
+    wait.until(ExpectedConditions.visibilityOfElementLocated(customerRow));
+    List<WebElement> rows = table.findElements(By.cssSelector("tbody > tr"));
+    return rows.stream()
+        .map(row -> row.findElements(By.tagName("td")))
+        .map(columns -> new Customer(
+            columns.get(0).getText(),
+            columns.get(1).getText(),
+            columns.get(2).getText())
+        )
+        .toList();
   }
 }
