@@ -76,6 +76,21 @@ public class CustomerTableTest extends BaseTest {
     assertTrue(isSelected);
   }
 
+  @Test
+  void customerRowShouldBeNormal_When_CustomerRowIsDeselected() {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    customerTableSteps
+        .clickCustomer()
+        .clickCustomer();
+    boolean isSelected = customerTableSteps.isSelected();
+
+    // Then
+    assertFalse(isSelected);
+  }
+
   @Override
   public void prepareSteps() {
     customerTableSteps = new CustomerTableSteps(getDriver());
