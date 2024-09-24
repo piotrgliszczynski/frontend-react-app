@@ -75,6 +75,12 @@ public class HomePage extends BasePage {
     driver.findElement(customerRow).click();
   }
 
+  public void clickCustomer(int row) {
+    By customerRow = By.cssSelector(String.format("#customer-table > tbody > tr:nth-child(%d)", row));
+    isCustomerClickable();
+    wait.until(ExpectedConditions.elementToBeClickable(customerRow)).click();
+  }
+
   public boolean isCustomerClickable() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(customerTable));
     wait.until(ExpectedConditions.elementToBeClickable(customerRow));
@@ -82,6 +88,11 @@ public class HomePage extends BasePage {
   }
 
   public String getRowClass() {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(customerRow)).getAttribute("class");
+  }
+
+  public String getRowClass(int row) {
+    By customerRow = By.cssSelector(String.format("#customer-table > tbody > tr:nth-child(%d)", row));
     return wait.until(ExpectedConditions.visibilityOfElementLocated(customerRow)).getAttribute("class");
   }
 }

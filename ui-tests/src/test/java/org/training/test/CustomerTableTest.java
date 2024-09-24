@@ -91,6 +91,20 @@ public class CustomerTableTest extends BaseTest {
     assertFalse(isSelected);
   }
 
+  @Test
+  void newCustomerRowShouldBeSelected_When_ClickingNewRow() {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickFirstCustomer();
+
+    // When
+    customerTableSteps.clickSecondCustomer();
+    boolean isSecondSelected = customerTableSteps.secondIsSelected();
+
+    // Then
+    assertTrue(isSecondSelected);
+  }
+
   @Override
   public void prepareSteps() {
     customerTableSteps = new CustomerTableSteps(getDriver());
