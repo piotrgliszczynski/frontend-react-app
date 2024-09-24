@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727187746040" clover="3.2.0">
-  <project timestamp="1727187746041" name="All files">
-    <metrics statements="29" coveredstatements="29" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9" elements="44" coveredelements="44" complexity="0" loc="29" ncloc="29" packages="2" files="3" classes="3"/>
+<coverage generated="1727190850819" clover="3.2.0">
+  <project timestamp="1727190850819" name="All files">
+    <metrics statements="31" coveredstatements="31" conditionals="6" coveredconditionals="6" methods="10" coveredmethods="10" elements="47" coveredelements="47" complexity="0" loc="31" ncloc="31" packages="2" files="4" classes="4"/>
     <package name="components">
-      <metrics statements="19" coveredstatements="19" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="8"/>
+      <metrics statements="21" coveredstatements="21" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9"/>
+      <file name="CustomerList.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerList.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+      </file>
       <file name="CustomerListTitle.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerListTitle.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
       </file>
       <file name="CustomerTable.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerTable.jsx">
         <metrics statements="17" coveredstatements="17" conditionals="4" coveredconditionals="4" methods="7" coveredmethods="7"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="11" type="stmt"/>
-        <line num="15" count="11" type="stmt"/>
-        <line num="17" count="11" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="21" count="11" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="15" count="17" type="stmt"/>
+        <line num="17" count="17" type="stmt"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="21" count="17" type="stmt"/>
         <line num="22" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
-        <line num="29" count="11" type="stmt"/>
-        <line num="30" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="31" count="5" type="stmt"/>
+        <line num="29" count="17" type="stmt"/>
+        <line num="30" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="8" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="36" count="11" type="stmt"/>
-        <line num="47" count="7" type="stmt"/>
+        <line num="36" count="17" type="stmt"/>
+        <line num="47" count="10" type="stmt"/>
       </file>
     </package>
     <package name="rest">
       <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="restdb.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\rest\restdb.js">
         <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
