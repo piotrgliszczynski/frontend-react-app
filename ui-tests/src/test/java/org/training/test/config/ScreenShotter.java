@@ -23,14 +23,17 @@ public class ScreenShotter implements AfterTestExecutionCallback {
 
   @Override
   public void afterTestExecution(ExtensionContext context) throws Exception {
-    if (context.getExecutionException().isPresent()) { // if the test execution has failed
-      String baseFileName = context.getRequiredTestClass().getSimpleName() + "-"
-          + context.getRequiredTestMethod().getName()
-          + LocalDateTime.now().format(DateTimeFormatter.ofPattern("-yyMMdd-HHmmss"));
+    if (context.getExecutionException().isPresent()) {
+
       String browserName = ((RemoteWebDriver) driver).getCapabilities().getBrowserName();
+      String classFolder = context.getRequiredTestClass().getSimpleName();
+      String baseFileName = context.getRequiredTestMethod().getName()
+          + LocalDateTime.now().format(DateTimeFormatter.ofPattern("-yyMMdd-HHmmss"));
 
       File targetFile = new File("screenshots" + File.separator
-          + browserName + File.separator + baseFileName + ".png");
+          + browserName + File.separator
+          + classFolder + File.separator
+          + baseFileName + ".png");
       File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
       Files.createDirectories(targetFile.toPath().getParent());
       Files.copy(scrFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
