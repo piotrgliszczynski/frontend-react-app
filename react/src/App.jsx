@@ -1,4 +1,5 @@
 import './App.css'
+import AddUpdateForm from './components/AddUpdateForm'
 import CustomerList from './components/CustomerList'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <CustomerList />
+      <AddUpdateForm />
     </>
   )
 }
