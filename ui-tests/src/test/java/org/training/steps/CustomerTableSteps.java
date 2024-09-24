@@ -1,8 +1,11 @@
 package org.training.steps;
 
 import org.openqa.selenium.WebDriver;
+import org.training.data.Customer;
 import org.training.page.HomePage;
 import org.training.steps.base.BaseSteps;
+
+import java.util.List;
 
 public class CustomerTableSteps extends BaseSteps {
 
@@ -19,14 +22,50 @@ public class CustomerTableSteps extends BaseSteps {
   }
 
   public String getNameHeader() {
-    return homePage.getCustomerTableNameHeader();
+    return homePage.getCustomerTable().getCustomerTableNameHeader();
   }
 
   public String getEmailHeader() {
-    return homePage.getCustomerTableEmailHeader();
+    return homePage.getCustomerTable().getCustomerTableEmailHeader();
   }
 
   public String getPasswordHeader() {
-    return homePage.getCustomerTablePasswordHeader();
+    return homePage.getCustomerTable().getCustomerTablePasswordHeader();
   }
+
+  public List<Customer> getAllCustomers() {
+    return homePage.getCustomerTable().getAllCustomers();
+  }
+
+  public boolean isRowClickable() {
+    return homePage.getCustomerTable().isCustomerClickable();
+  }
+
+  public CustomerTableSteps clickCustomer() {
+    homePage.getCustomerTable().clickCustomer();
+    return this;
+  }
+
+  public CustomerTableSteps clickFirstCustomer() {
+    homePage.getCustomerTable().clickCustomer(1);
+    return this;
+  }
+
+  public CustomerTableSteps clickSecondCustomer() {
+    homePage.getCustomerTable().clickCustomer(2);
+    return this;
+  }
+
+  public boolean isSelected() {
+    return homePage.getCustomerTable().getRowClass().contains("selected");
+  }
+
+  public boolean firstIsSelected() {
+    return homePage.getCustomerTable().getRowClass(1).contains("selected");
+  }
+
+  public boolean secondIsSelected() {
+    return homePage.getCustomerTable().getRowClass(2).contains("selected");
+  }
+
 }

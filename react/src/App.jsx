@@ -1,13 +1,11 @@
 import './App.css'
-import CustomerListTitle from './components/CustomerListTitle'
-import CustomerTable from './components/CustomerTable'
+import CustomerList from './components/CustomerList'
 
 function App() {
 
   return (
     <>
-      <CustomerListTitle />
-      <CustomerTable />
+      <CustomerList />
     </>
   )
 }
