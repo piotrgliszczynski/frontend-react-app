@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, within } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
 import * as restdb from '../rest/restdb';
@@ -56,19 +56,40 @@ describe('Customer Table', () => {
     expect(password).toBeInTheDocument();
   })
 
-  it('Should fire event when clicking on table', async () => {
+  it('Should fire event and select when clicking on table', async () => {
     // Given
-    jest.spyOn(console, 'log').mockImplementationOnce(() => { });
     const { findByRole } = render(<CustomerTable />);
     const name = await findByRole('cell', { name: returnData[0].name });
     const customerRow = name.closest('tr');
 
     // When
     fireEvent.click(customerRow);
+    const nameBold = await findByRole('cell', { name: returnData[0].name });
+    const customerRowBold = nameBold.closest('tr');
 
     // Then
-    expect(console.log).toHaveBeenCalledTimes(1);
-    expect(console.log.mock.calls[0][1]).toEqual(returnData[0]);
-    console.log.mockRestore();
+    expect(customerRowBold).toHaveClass('selected');
   });
+
+  it('Should deselect a customer when clicked twice', async () => {
+    // Given
+    const { findByRole } = render(<CustomerTable />);
+    const name = await findByRole('cell', { name: returnData[0].name });
+    const customerRow = name.closest('tr');
+
+    // When
+    fireEvent.click(customerRow);
+    const nameBold = await findByRole('cell', { name: returnData[0].name });
+    const customerRowBold = nameBold.closest('tr');
+    expect(customerRowBold).toHaveClass('selected');
+
+    fireEvent.click(customerRow);
+    const nameNormal = await findByRole('cell', { name: returnData[0].name });
+    const customerNormal = nameNormal.closest('tr');
+
+    // Then
+    expect(customerNormal).not.toHaveClass('selected');
+  })
+
+
 })
