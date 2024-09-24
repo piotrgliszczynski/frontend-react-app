@@ -70,9 +70,18 @@ public class HomePage extends BasePage {
         .toList();
   }
 
+  public void clickCustomer() {
+    isCustomerClickable();
+    driver.findElement(customerRow).click();
+  }
+
   public boolean isCustomerClickable() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(customerTable));
     wait.until(ExpectedConditions.elementToBeClickable(customerRow));
     return true;
+  }
+
+  public String getRowClass() {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(customerRow)).getAttribute("class");
   }
 }

@@ -63,6 +63,19 @@ public class CustomerTableTest extends BaseTest {
     assertTrue(isClickable);
   }
 
+  @Test
+  void customerRowShouldBeBold_When_CustomerRowIsClicked() {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    customerTableSteps.clickCustomer();
+    boolean isSelected = customerTableSteps.isSelected();
+
+    // Then
+    assertTrue(isSelected);
+  }
+
   @Override
   public void prepareSteps() {
     customerTableSteps = new CustomerTableSteps(getDriver());
