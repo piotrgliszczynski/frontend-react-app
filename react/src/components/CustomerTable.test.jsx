@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
 import * as restdb from '../rest/restdb';
@@ -50,9 +50,46 @@ describe('Customer Table', () => {
     const password = await findByRole('cell', { name: returnData[0].password });
 
     // Then
-    expect(restdb.getAll).toHaveBeenCalledTimes(1);[]
+    expect(restdb.getAll).toHaveBeenCalledTimes(1);
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
   })
+
+  it('Should fire event and select when clicking on table', async () => {
+    // Given
+    const { findByRole } = render(<CustomerTable />);
+    const name = await findByRole('cell', { name: returnData[0].name });
+    const customerRow = name.closest('tr');
+
+    // When
+    fireEvent.click(customerRow);
+    const nameBold = await findByRole('cell', { name: returnData[0].name });
+    const customerRowBold = nameBold.closest('tr');
+
+    // Then
+    expect(customerRowBold).toHaveClass('selected');
+  });
+
+  it('Should deselect a customer when clicked twice', async () => {
+    // Given
+    const { findByRole } = render(<CustomerTable />);
+    const name = await findByRole('cell', { name: returnData[0].name });
+    const customerRow = name.closest('tr');
+
+    // When
+    fireEvent.click(customerRow);
+    const nameBold = await findByRole('cell', { name: returnData[0].name });
+    const customerRowBold = nameBold.closest('tr');
+    expect(customerRowBold).toHaveClass('selected');
+
+    fireEvent.click(customerRow);
+    const nameNormal = await findByRole('cell', { name: returnData[0].name });
+    const customerNormal = nameNormal.closest('tr');
+
+    // Then
+    expect(customerNormal).not.toHaveClass('selected');
+  })
+
+
 })
