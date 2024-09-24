@@ -36,4 +36,36 @@ public class CustomerTableSteps extends BaseSteps {
   public List<Customer> getAllCustomers() {
     return homePage.getAllCustomers();
   }
+
+  public boolean isRowClickable() {
+    return homePage.isCustomerClickable();
+  }
+
+  public CustomerTableSteps clickCustomer() {
+    homePage.clickCustomer();
+    return this;
+  }
+
+  public CustomerTableSteps clickFirstCustomer() {
+    homePage.clickCustomer(1);
+    return this;
+  }
+
+  public CustomerTableSteps clickSecondCustomer() {
+    homePage.clickCustomer(2);
+    return this;
+  }
+
+  public boolean isSelected() {
+    return homePage.getRowClass().contains("selected");
+  }
+
+  public boolean firstIsSelected() {
+    return homePage.getRowClass(1).contains("selected");
+  }
+
+  public boolean secondIsSelected() {
+    return homePage.getRowClass(2).contains("selected");
+  }
+
 }

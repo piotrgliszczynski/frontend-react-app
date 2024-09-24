@@ -51,6 +51,74 @@ public class CustomerTableTest extends BaseTest {
         () -> assertTrue(customers.contains(customer)));
   }
 
+  @Test
+  void customerRowShouldBeClickable_When_NavigateToMainPAge() {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    boolean isClickable = customerTableSteps.isRowClickable();
+
+    // Then
+    assertTrue(isClickable);
+  }
+
+  @Test
+  void customerRowShouldBeBold_When_CustomerRowIsClicked() {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    customerTableSteps.clickCustomer();
+    boolean isSelected = customerTableSteps.isSelected();
+
+    // Then
+    assertTrue(isSelected);
+  }
+
+  @Test
+  void customerRowShouldBeNormal_When_CustomerRowIsDeselected() {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    customerTableSteps
+        .clickCustomer()
+        .clickCustomer();
+    boolean isSelected = customerTableSteps.isSelected();
+
+    // Then
+    assertFalse(isSelected);
+  }
+
+  @Test
+  void newCustomerRowShouldBeSelected_When_ClickingNewRow() {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickFirstCustomer();
+
+    // When
+    customerTableSteps.clickSecondCustomer();
+    boolean isSecondSelected = customerTableSteps.secondIsSelected();
+
+    // Then
+    assertTrue(isSecondSelected);
+  }
+
+  @Test
+  void oldCustomerRowShouldBeDeselected_When_ClickingNewRow() {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickFirstCustomer();
+
+    // When
+    customerTableSteps.clickSecondCustomer();
+    boolean isFirstSelected = customerTableSteps.firstIsSelected();
+
+    // Then
+    assertFalse(isFirstSelected);
+  }
+
   @Override
   public void prepareSteps() {
     customerTableSteps = new CustomerTableSteps(getDriver());
