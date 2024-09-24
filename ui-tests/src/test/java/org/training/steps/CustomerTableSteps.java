@@ -36,4 +36,8 @@ public class CustomerTableSteps extends BaseSteps {
   public List<Customer> getAllCustomers() {
     return homePage.getAllCustomers();
   }
+
+  public boolean isRowClickable() {
+    return homePage.isCustomerClickable();
+  }
 }

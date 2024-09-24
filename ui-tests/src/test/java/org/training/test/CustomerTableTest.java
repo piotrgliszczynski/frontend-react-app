@@ -51,6 +51,18 @@ public class CustomerTableTest extends BaseTest {
         () -> assertTrue(customers.contains(customer)));
   }
 
+  @Test
+  void customerRowShouldBeClickable_When_NavigateToMainPAge() {
+    // Given
+    customerTableSteps.openHomePage();
+
+    // When
+    boolean isClickable = customerTableSteps.isRowClickable();
+
+    // Then
+    assertTrue(isClickable);
+  }
+
   @Override
   public void prepareSteps() {
     customerTableSteps = new CustomerTableSteps(getDriver());

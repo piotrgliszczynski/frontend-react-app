@@ -69,4 +69,10 @@ public class HomePage extends BasePage {
         )
         .toList();
   }
+
+  public boolean isCustomerClickable() {
+    wait.until(ExpectedConditions.visibilityOfElementLocated(customerTable));
+    wait.until(ExpectedConditions.elementToBeClickable(customerRow));
+    return true;
+  }
 }
