@@ -19,6 +19,6 @@ public class CustomerListTitleSteps extends BaseSteps {
   }
 
   public String getCustomerListTitle() {
-    return homePage.getCustomerListTitle();
+    return homePage.getCustomerListTitle().getTitle();
   }
 }
