@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
-import { getAll, deleteById } from './rest/restdb';
+import { getAll, deleteById, post } from './rest/restdb';
 import AddUpdateForm from './components/AddUpdateForm'
 import CustomerList from './components/CustomerList'
 import { CustomerProvider } from './components/hooks/CustomerContext'
@@ -16,6 +16,14 @@ function App() {
     );
   }
 
+  const addCustomer = async (newCustomer) => {
+    const customerResponse = await post(newCustomer);
+    console.log(customerResponse);
+    setCustomerData(
+      [...customerData, customerResponse]
+    );
+  }
+
   useEffect(() => {
     getAll().then(response => setCustomerData(response));
   }, []);
@@ -24,7 +32,7 @@ function App() {
     <>
       <CustomerProvider>
         <CustomerList customerData={customerData} />
-        <AddUpdateForm deleteCustomer={deleteCustomer} />
+        <AddUpdateForm crudOperations={{ deleteCustomer, addCustomer }} />
       </CustomerProvider>
     </>
   )
