@@ -22,6 +22,20 @@ public class AddUpdateFormTest extends BaseTest {
     assertTrue(isFormVisible);
   }
 
+  @Test
+  void addUpdateFormShouldBeInAddState_When_NavigateToMainPage() {
+    // Given
+    boolean isFormVisible = addUpdateFormSteps.openHomePage()
+        .isFormVisible();
+    assertTrue(isFormVisible);
+
+    // When
+    boolean isFormInAddState = addUpdateFormSteps.isFormInAddState();
+
+    // Then
+    assertTrue(isFormInAddState);
+  }
+
   @Override
   public void prepareSteps() {
     addUpdateFormSteps = new AddUpdateFormSteps(getDriver());

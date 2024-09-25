@@ -36,6 +36,10 @@ public class AddUpdateForm extends BasePage {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput)).getAttribute("placeholder");
   }
 
+  public String getNameValue() {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput)).getAttribute("value");
+  }
+
   public String getEmailLabel() {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(emailLabel)).getText();
   }
@@ -44,12 +48,20 @@ public class AddUpdateForm extends BasePage {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput)).getAttribute("placeholder");
   }
 
+  public String getEmailValue() {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput)).getAttribute("value");
+  }
+
   public String getPasswordLabel() {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordLabel)).getText();
   }
 
   public String getPasswordPlaceholder() {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).getAttribute("placeholder");
+  }
+
+  public String getPasswordValue() {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).getAttribute("value");
   }
 
   public String getDeleteButtonText() {

@@ -19,7 +19,8 @@ public class AddUpdateFormSteps extends BaseSteps {
   }
 
   public boolean isFormVisible() {
-    if (!homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add/Update")) {
+    if (!homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add")
+        && !homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update")) {
       return false;
     }
     if (!homePage.getAddUpdateForm().getNameLabel().equals("Name:")) {
@@ -50,5 +51,9 @@ public class AddUpdateFormSteps extends BaseSteps {
       return false;
     }
     return true;
+  }
+
+  public boolean isFormInAddState() {
+    return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add");
   }
 }
