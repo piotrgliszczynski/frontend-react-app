@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
 import * as restdb from '../rest/restdb';
+import { CustomerProvider, useCustomer } from './hooks/CustomerContext';
 
 const returnData = [
   {
@@ -11,6 +12,13 @@ const returnData = [
     "email": "maryj@abc.com",
     "password": "maryj"
   }];
+
+const EMPTY_CUSTOMER = {
+  id: -1,
+  name: "",
+  email: "",
+  password: ""
+};
 
 describe('Customer Table', () => {
 
@@ -27,7 +35,11 @@ describe('Customer Table', () => {
     const nameColumn = 'Name';
     const emailColumn = 'Email';
     const passwordColumn = 'Pass';
-    const { findByRole } = render(<CustomerTable />);
+    const { findByRole } = render(
+      <CustomerProvider>
+        <CustomerTable />
+      </CustomerProvider>
+    );
 
     // When
     const nameElement = await findByRole('columnheader', { name: nameColumn });
@@ -42,7 +54,11 @@ describe('Customer Table', () => {
 
   it('Should contain returned data', async () => {
     // Given
-    const { findByRole } = render(<CustomerTable />);
+    const { findByRole } = render(
+      <CustomerProvider>
+        <CustomerTable />
+      </CustomerProvider>
+    );
 
     // When
     const name = await findByRole('cell', { name: returnData[0].name });
@@ -58,7 +74,11 @@ describe('Customer Table', () => {
 
   it('Should fire event and select when clicking on table', async () => {
     // Given
-    const { findByRole } = render(<CustomerTable />);
+    const { findByRole } = render(
+      <CustomerProvider>
+        <CustomerTable />
+      </CustomerProvider>
+    );
     const name = await findByRole('cell', { name: returnData[0].name });
     const customerRow = name.closest('tr');
 
@@ -73,7 +93,11 @@ describe('Customer Table', () => {
 
   it('Should deselect a customer when clicked twice', async () => {
     // Given
-    const { findByRole } = render(<CustomerTable />);
+    const { findByRole } = render(
+      <CustomerProvider>
+        <CustomerTable />
+      </CustomerProvider>
+    );
     const name = await findByRole('cell', { name: returnData[0].name });
     const customerRow = name.closest('tr');
 
