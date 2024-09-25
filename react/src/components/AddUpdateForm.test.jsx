@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import AddUpdateForm from './AddUpdateForm';
 import '@testing-library/jest-dom';
 import * as CustomerContext from './hooks/CustomerContext';
@@ -25,7 +25,7 @@ describe('Add-Update form', () => {
 
   afterEach(() => {
     CustomerContext.useCustomer.mockClear();
-  })
+  });
 
   it('Should have all components and in state Add', () => {
     // Given
@@ -107,5 +107,42 @@ describe('Add-Update form', () => {
     expect(nameInput).toBeInTheDocument();
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
-  })
+  });
+
+  it("Should be able to enter data", async () => {
+    // Given
+    const nameLabel = 'Name:';
+    const emailLabel = 'Email:';
+    const passwordLabel = 'Pass:';
+
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
+
+    render(
+      <AddUpdateForm />
+    );
+
+    const nameInput = screen.getByLabelText(nameLabel);
+    const emailInput = screen.getByLabelText(emailLabel);
+    const passwordInput = screen.getByLabelText(passwordLabel);
+
+    // When
+    fireEvent.change(nameInput, { target: { value: 'test' } });
+    fireEvent.change(emailInput, { target: { value: 'test@test.com' } });
+    fireEvent.change(passwordInput, { target: { value: '12345' } });
+
+    const changedName = await screen.findByLabelText(nameLabel);
+    const changedEmail = await screen.findByLabelText(emailLabel);
+    const changedPassword = await screen.findByLabelText(passwordLabel);
+
+    // Then
+    expect(changedName).toBeInTheDocument();
+    expect(changedEmail).toBeInTheDocument();
+    expect(changedPassword).toBeInTheDocument();
+
+
+  });
 });

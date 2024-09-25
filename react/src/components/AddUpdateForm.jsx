@@ -11,7 +11,6 @@ const AddUpdateForm = () => {
   }
 
   const onType = (field, event) => {
-    console.log(field, event.target.value);
     setCustomerData(
       {
         ...customerData,
