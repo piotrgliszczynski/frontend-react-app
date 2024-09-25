@@ -68,6 +68,30 @@ public class CrudButtonTest extends BaseTest {
     assertFalse(customers.contains(createdCustomer));
   }
 
+  @Test
+  void shouldAddRecord_AfterClick_CorrectlyAdded() throws RestApiException {
+    // Given
+    createdCustomer = new Customer("test", "test@test.com", "12345");
+
+    addUpdateFormSteps.openHomePage()
+        .typeData(createdCustomer);
+
+    // When
+    addUpdateFormSteps.clickSave();
+    List<Customer> customers = customersApi.getCustomers();
+    boolean areFieldsEmpty = addUpdateFormSteps.areFieldsEmpty();
+
+    createdCustomer = customers.get(
+        customers.indexOf(createdCustomer)
+    );
+
+    // Then
+    assertAll(
+        () -> assertTrue(areFieldsEmpty),
+        () -> assertTrue(customers.contains(createdCustomer))
+    );
+  }
+
 
   @Override
   public void prepareSteps() {
