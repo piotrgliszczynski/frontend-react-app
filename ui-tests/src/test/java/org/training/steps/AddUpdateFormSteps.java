@@ -19,6 +19,11 @@ public class AddUpdateFormSteps extends BaseSteps {
     return this;
   }
 
+  public AddUpdateFormSteps typeData(Customer customer) {
+    typeData(customer.getName(), customer.getEmail(), customer.getPassword());
+    return this;
+  }
+
   public AddUpdateFormSteps typeData(String name, String email, String password) {
     homePage.getAddUpdateForm().typeName(name);
     homePage.getAddUpdateForm().typeEmail(email);
@@ -97,5 +102,9 @@ public class AddUpdateFormSteps extends BaseSteps {
   public void clickDelete() {
     homePage.getAddUpdateForm().getCrudButtons().clickDelete();
     homePage.getAddUpdateForm().handleAlert();
+  }
+
+  public void clickSave() {
+    homePage.getAddUpdateForm().getCrudButtons().clickSave();
   }
 }
