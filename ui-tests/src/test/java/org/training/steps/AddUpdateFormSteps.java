@@ -56,4 +56,17 @@ public class AddUpdateFormSteps extends BaseSteps {
   public boolean isFormInAddState() {
     return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add");
   }
+
+  public boolean areFieldsEmpty() {
+    if (!homePage.getAddUpdateForm().getNameValue().isEmpty()) {
+      return false;
+    }
+    if (!homePage.getAddUpdateForm().getEmailValue().isEmpty()) {
+      return false;
+    }
+    if (!homePage.getAddUpdateForm().getPasswordValue().isEmpty()) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -25,15 +25,25 @@ public class AddUpdateFormTest extends BaseTest {
   @Test
   void addUpdateFormShouldBeInAddState_When_NavigateToMainPage() {
     // Given
-    boolean isFormVisible = addUpdateFormSteps.openHomePage()
-        .isFormVisible();
-    assertTrue(isFormVisible);
+    addUpdateFormSteps.openHomePage();
 
     // When
     boolean isFormInAddState = addUpdateFormSteps.isFormInAddState();
 
     // Then
     assertTrue(isFormInAddState);
+  }
+
+  @Test
+  void addUpdateFormInAddState_ShouldFieldsBeEmpty_When_NavigateToMainPage() {
+    // Given
+    addUpdateFormSteps.openHomePage();
+
+    // When
+    boolean areFormsEmpty = addUpdateFormSteps.areFieldsEmpty();
+
+    // Then
+    assertTrue(areFormsEmpty);
   }
 
   @Override
