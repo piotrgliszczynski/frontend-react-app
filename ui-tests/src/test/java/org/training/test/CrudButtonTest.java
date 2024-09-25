@@ -1,5 +1,6 @@
 package org.training.test;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.training.api.actions.CustomersApi;
 import org.training.data.Customer;
@@ -18,11 +19,22 @@ public class CrudButtonTest extends BaseTest {
   private AddUpdateFormSteps addUpdateFormSteps;
   private CustomerTableSteps customerTableSteps;
 
+  private Customer createdCustomer;
+
+  @AfterEach
+  void deleteAllCreatedCustomers() {
+    try {
+      customersApi.deleteCustomer(createdCustomer);
+    } catch (RestApiException e) {
+      System.out.println("Record don't exist in the db already!");
+    }
+  }
+
   @Test
   void shouldDeleteRecord_AfterClick_DeleteButton() throws RestApiException {
     // Given
     Customer customer = new Customer("test", "test@test.com", "12345");
-    Customer createdCustomer = customersApi.createCustomer(customer);
+    createdCustomer = customersApi.createCustomer(customer);
 
     customerTableSteps.openHomePage()
         .clickOnCustomer(createdCustomer);
@@ -43,7 +55,7 @@ public class CrudButtonTest extends BaseTest {
   void shouldDeleteRecord_AfterClick_RecordIsNotVisibleOnList() throws RestApiException {
     // Given
     Customer customer = new Customer("test", "test@test.com", "12345");
-    Customer createdCustomer = customersApi.createCustomer(customer);
+    createdCustomer = customersApi.createCustomer(customer);
 
     customerTableSteps.openHomePage()
         .clickOnCustomer(createdCustomer);
