@@ -9,6 +9,7 @@ import org.training.steps.AddUpdateFormSteps;
 import org.training.steps.CustomerTableSteps;
 import org.training.test.base.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddUpdateFormTest extends BaseTest {
@@ -78,6 +79,24 @@ public class AddUpdateFormTest extends BaseTest {
 
     // Then
     assertTrue(areFieldsFilled);
+  }
+
+  @Test
+  void addUpdateFormShouldBeClear_When_CustomerIsDeselected() {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickFirstCustomer();
+
+    // When
+    customerTableSteps.clickFirstCustomer();
+    boolean isFormInAddState = addUpdateFormSteps.isFormInAddState();
+    boolean areFormsEmpty = addUpdateFormSteps.areFieldsEmpty();
+
+    // Then
+    assertAll(
+        () -> assertTrue(isFormInAddState),
+        () -> assertTrue(areFormsEmpty)
+    );
   }
 
   @Override
