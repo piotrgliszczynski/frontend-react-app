@@ -49,13 +49,13 @@ public class AddUpdateFormSteps extends BaseSteps {
     if (!homePage.getAddUpdateForm().getPasswordPlaceholder().equals("password")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getDeleteButtonText().equals("Delete")) {
+    if (!homePage.getAddUpdateForm().getCrudButtons().getDeleteButtonText().equals("Delete")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getSaveButtonText().equals("Save")) {
+    if (!homePage.getAddUpdateForm().getCrudButtons().getSaveButtonText().equals("Save")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getCancelButtonText().equals("Cancel")) {
+    if (!homePage.getAddUpdateForm().getCrudButtons().getCancelButtonText().equals("Cancel")) {
       return false;
     }
     return true;
@@ -92,5 +92,10 @@ public class AddUpdateFormSteps extends BaseSteps {
     return homePage.getAddUpdateForm().getNameValue().equals(name)
         && homePage.getAddUpdateForm().getEmailValue().equals(email)
         && homePage.getAddUpdateForm().getPasswordValue().equals(password);
+  }
+
+  public void clickDelete() {
+    homePage.getAddUpdateForm().getCrudButtons().clickDelete();
+    homePage.getAddUpdateForm().handleAlert();
   }
 }
