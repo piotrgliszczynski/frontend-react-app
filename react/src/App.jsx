@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
-import { getAll, deleteById, post } from './rest/restdb';
+import { getAll, deleteById, post, put } from './rest/restdb';
 import AddUpdateForm from './components/AddUpdateForm'
 import CustomerList from './components/CustomerList'
 import { CustomerProvider } from './components/hooks/CustomerContext'
@@ -18,10 +18,18 @@ function App() {
 
   const addCustomer = async (newCustomer) => {
     const customerResponse = await post(newCustomer);
-    console.log(customerResponse);
     setCustomerData(
       [...customerData, customerResponse]
     );
+  }
+
+  const updateCustomer = async (changedCustomer) => {
+    const customerResponse = await put(changedCustomer);
+
+    setCustomerData(customerData.map(
+      currCustomer =>
+        currCustomer.id === customerResponse.id ? customerResponse : currCustomer
+    ));
   }
 
   useEffect(() => {
@@ -32,7 +40,7 @@ function App() {
     <>
       <CustomerProvider>
         <CustomerList customerData={customerData} />
-        <AddUpdateForm crudOperations={{ deleteCustomer, addCustomer }} />
+        <AddUpdateForm crudOperations={{ deleteCustomer, addCustomer, updateCustomer }} />
       </CustomerProvider>
     </>
   )
