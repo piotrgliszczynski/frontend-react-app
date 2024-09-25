@@ -99,6 +99,45 @@ public class AddUpdateFormTest extends BaseTest {
     );
   }
 
+  @Test
+  void shouldBeAbleToTypeDataToForm_When_FormInAddState() {
+    // Given
+    String name = "test";
+    String email = "test@test.com";
+    String password = "12345";
+
+    addUpdateFormSteps.openHomePage();
+
+    // When
+    boolean formFilledCorrectly = addUpdateFormSteps.typeData(name, email, password)
+        .fieldsEqual(name, email, password);
+
+    // Then
+    assertTrue(formFilledCorrectly);
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(CustomerDataProvider.class)
+  void shouldBeAbleToTypeDataToForm_When_FormInUpdateState(Customer customer) {
+    // Given
+    String name = "changed";
+    String email = "changed";
+    String password = "changed";
+
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(customer);
+
+    // When
+    boolean formFilledCorrectly = addUpdateFormSteps.typeData(name, email, password)
+        .fieldsEqual(
+            customer.getName() + name,
+            customer.getEmail() + email,
+            customer.getPassword() + password);
+
+    // Then
+    assertTrue(formFilledCorrectly);
+  }
+
   @Override
   public void prepareSteps() {
     addUpdateFormSteps = new AddUpdateFormSteps(getDriver());

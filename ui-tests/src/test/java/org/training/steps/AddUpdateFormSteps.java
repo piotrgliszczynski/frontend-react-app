@@ -19,6 +19,13 @@ public class AddUpdateFormSteps extends BaseSteps {
     return this;
   }
 
+  public AddUpdateFormSteps typeData(String name, String email, String password) {
+    homePage.getAddUpdateForm().typeName(name);
+    homePage.getAddUpdateForm().typeEmail(email);
+    homePage.getAddUpdateForm().typePassword(password);
+    return this;
+  }
+
   public boolean isFormVisible() {
     if (!homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add")
         && !homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update")) {
@@ -79,5 +86,11 @@ public class AddUpdateFormSteps extends BaseSteps {
     return homePage.getAddUpdateForm().getNameValue().equals(customer.getName())
         && homePage.getAddUpdateForm().getEmailValue().equals(customer.getEmail())
         && homePage.getAddUpdateForm().getPasswordValue().equals(customer.getPassword());
+  }
+
+  public boolean fieldsEqual(String name, String email, String password) {
+    return homePage.getAddUpdateForm().getNameValue().equals(name)
+        && homePage.getAddUpdateForm().getEmailValue().equals(email)
+        && homePage.getAddUpdateForm().getPasswordValue().equals(password);
   }
 }
