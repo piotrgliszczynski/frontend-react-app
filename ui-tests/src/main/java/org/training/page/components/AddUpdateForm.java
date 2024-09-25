@@ -24,6 +24,22 @@ public class AddUpdateForm extends BasePage {
     super(driver);
   }
 
+  public void typeName(String name) {
+    typeData(nameInput, name);
+  }
+
+  public void typeEmail(String email) {
+    typeData(emailInput, email);
+  }
+
+  public void typePassword(String password) {
+    typeData(passwordInput, password);
+  }
+
+  private void typeData(By element, String data) {
+    wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(data);
+  }
+
   public String getAddUpdateFormTitle() {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(addUpdateFormTitle)).getText();
   }

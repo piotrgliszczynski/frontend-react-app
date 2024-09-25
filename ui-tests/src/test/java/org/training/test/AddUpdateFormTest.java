@@ -9,6 +9,7 @@ import org.training.steps.AddUpdateFormSteps;
 import org.training.steps.CustomerTableSteps;
 import org.training.test.base.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddUpdateFormTest extends BaseTest {
@@ -78,6 +79,63 @@ public class AddUpdateFormTest extends BaseTest {
 
     // Then
     assertTrue(areFieldsFilled);
+  }
+
+  @Test
+  void addUpdateFormShouldBeClear_When_CustomerIsDeselected() {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickFirstCustomer();
+
+    // When
+    customerTableSteps.clickFirstCustomer();
+    boolean isFormInAddState = addUpdateFormSteps.isFormInAddState();
+    boolean areFormsEmpty = addUpdateFormSteps.areFieldsEmpty();
+
+    // Then
+    assertAll(
+        () -> assertTrue(isFormInAddState),
+        () -> assertTrue(areFormsEmpty)
+    );
+  }
+
+  @Test
+  void shouldBeAbleToTypeDataToForm_When_FormInAddState() {
+    // Given
+    String name = "test";
+    String email = "test@test.com";
+    String password = "12345";
+
+    addUpdateFormSteps.openHomePage();
+
+    // When
+    boolean formFilledCorrectly = addUpdateFormSteps.typeData(name, email, password)
+        .fieldsEqual(name, email, password);
+
+    // Then
+    assertTrue(formFilledCorrectly);
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(CustomerDataProvider.class)
+  void shouldBeAbleToTypeDataToForm_When_FormInUpdateState(Customer customer) {
+    // Given
+    String name = "changed";
+    String email = "changed";
+    String password = "changed";
+
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(customer);
+
+    // When
+    boolean formFilledCorrectly = addUpdateFormSteps.typeData(name, email, password)
+        .fieldsEqual(
+            customer.getName() + name,
+            customer.getEmail() + email,
+            customer.getPassword() + password);
+
+    // Then
+    assertTrue(formFilledCorrectly);
   }
 
   @Override
