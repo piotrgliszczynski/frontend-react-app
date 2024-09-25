@@ -170,7 +170,8 @@ describe('Add-Update form', () => {
     // Given
     const contextValues = {
       customer: CUSTOMER,
-      emptyCustomer: EMPTY_CUSTOMER
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
     }
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
     const mockDelete = jest.fn();
@@ -187,5 +188,7 @@ describe('Add-Update form', () => {
     // Then
     expect(mockDelete).toHaveBeenCalledTimes(1);
     expect(mockDelete).toHaveBeenCalledWith(CUSTOMER.id);
+    expect(contextValues.setCustomer).toHaveBeenCalledTimes(1);
+    expect(contextValues.setCustomer).toHaveBeenCalledWith(EMPTY_CUSTOMER);
   });
 });

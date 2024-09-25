@@ -3,7 +3,7 @@ import { useCustomer } from "./hooks/CustomerContext";
 
 const AddUpdateForm = (props) => {
 
-  const { customer, emptyCustomer } = useCustomer();
+  const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
 
   const setTitle = () => {
@@ -22,6 +22,7 @@ const AddUpdateForm = (props) => {
   const onDelete = () => {
     if (customerData.id !== emptyCustomer.id) {
       props.deleteCustomer(customerData.id);
+      setCustomer(emptyCustomer);
     }
   }
 
