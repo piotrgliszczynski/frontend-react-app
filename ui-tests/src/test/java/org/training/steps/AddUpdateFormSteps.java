@@ -1,6 +1,7 @@
 package org.training.steps;
 
 import org.openqa.selenium.WebDriver;
+import org.training.data.Customer;
 import org.training.page.HomePage;
 import org.training.steps.base.BaseSteps;
 
@@ -57,6 +58,10 @@ public class AddUpdateFormSteps extends BaseSteps {
     return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add");
   }
 
+  public boolean isFormInUpdateState() {
+    return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update");
+  }
+
   public boolean areFieldsEmpty() {
     if (!homePage.getAddUpdateForm().getNameValue().isEmpty()) {
       return false;
@@ -68,5 +73,11 @@ public class AddUpdateFormSteps extends BaseSteps {
       return false;
     }
     return true;
+  }
+
+  public boolean areFieldsFilled(Customer customer) {
+    return homePage.getAddUpdateForm().getNameValue().equals(customer.getName())
+        && homePage.getAddUpdateForm().getEmailValue().equals(customer.getEmail())
+        && homePage.getAddUpdateForm().getPasswordValue().equals(customer.getPassword());
   }
 }
