@@ -68,6 +68,11 @@ public class CustomerTable extends BasePage {
     wait.until(ExpectedConditions.elementToBeClickable(customerRow)).click();
   }
 
+  public void clickCustomer(Customer customer) {
+    By customerCell = By.xpath(String.format("//td[text()='%s']", customer.getName()));
+    wait.until(ExpectedConditions.elementToBeClickable(customerCell)).click();
+  }
+
   public boolean isCustomerClickable() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(customerTable));
     wait.until(ExpectedConditions.elementToBeClickable(customerRow));

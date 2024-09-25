@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727190850819" clover="3.2.0">
-  <project timestamp="1727190850819" name="All files">
-    <metrics statements="31" coveredstatements="31" conditionals="6" coveredconditionals="6" methods="10" coveredmethods="10" elements="47" coveredelements="47" complexity="0" loc="31" ncloc="31" packages="2" files="4" classes="4"/>
+<coverage generated="1727264656483" clover="3.2.0">
+  <project timestamp="1727264656483" name="All files">
+    <metrics statements="50" coveredstatements="50" conditionals="8" coveredconditionals="8" methods="19" coveredmethods="19" elements="77" coveredelements="77" complexity="0" loc="50" ncloc="50" packages="3" files="6" classes="6"/>
     <package name="components">
-      <metrics statements="21" coveredstatements="21" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9"/>
+      <metrics statements="33" coveredstatements="33" conditionals="6" coveredconditionals="6" methods="16" coveredmethods="16"/>
+      <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
+        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="7" type="stmt"/>
+        <line num="7" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="10" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+      </file>
       <file name="CustomerList.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerList.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="1" type="stmt"/>
@@ -15,24 +31,36 @@
         <line num="4" count="4" type="stmt"/>
       </file>
       <file name="CustomerTable.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerTable.jsx">
-        <metrics statements="17" coveredstatements="17" conditionals="4" coveredconditionals="4" methods="7" coveredmethods="7"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="14" count="17" type="stmt"/>
+        <metrics statements="16" coveredstatements="16" conditionals="4" coveredconditionals="4" methods="7" coveredmethods="7"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="17" type="stmt"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="12" count="7" type="stmt"/>
         <line num="15" count="17" type="stmt"/>
-        <line num="17" count="17" type="stmt"/>
-        <line num="18" count="7" type="stmt"/>
-        <line num="21" count="17" type="stmt"/>
-        <line num="22" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="29" count="17" type="stmt"/>
-        <line num="30" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="31" count="8" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="36" count="17" type="stmt"/>
-        <line num="47" count="10" type="stmt"/>
+        <line num="16" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="24" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="30" count="17" type="stmt"/>
+        <line num="41" count="10" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.hooks">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="CustomerContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\CustomerContext.jsx">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="15" type="stmt"/>
+        <line num="14" count="15" type="stmt"/>
+        <line num="16" count="15" type="stmt"/>
+        <line num="23" count="21" type="stmt"/>
       </file>
     </package>
     <package name="rest">

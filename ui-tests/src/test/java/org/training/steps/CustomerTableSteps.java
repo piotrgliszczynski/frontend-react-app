@@ -56,6 +56,11 @@ public class CustomerTableSteps extends BaseSteps {
     return this;
   }
 
+  public CustomerTableSteps clickOnCustomer(Customer customer) {
+    homePage.getCustomerTable().clickCustomer(customer);
+    return this;
+  }
+
   public boolean isSelected() {
     return homePage.getCustomerTable().getRowClass().contains("selected");
   }

@@ -1,11 +1,16 @@
 import './App.css'
+import AddUpdateForm from './components/AddUpdateForm'
 import CustomerList from './components/CustomerList'
+import { CustomerProvider } from './components/hooks/CustomerContext'
 
 function App() {
 
   return (
     <>
-      <CustomerList />
+      <CustomerProvider>
+        <CustomerList />
+        <AddUpdateForm />
+      </CustomerProvider>
     </>
   )
 }

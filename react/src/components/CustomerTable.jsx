@@ -1,33 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { useCustomer } from './hooks/CustomerContext';
 import { getAll } from '../rest/restdb';
 import './styles/CustomerTable.css';
-
-const EMPTY_CUSTOMER = {
-  id: -1,
-  name: "",
-  email: "",
-  password: ""
-};
 
 const CustomerTable = () => {
 
   const [customerData, setCustomerData] = useState([]);
-  const [selectedCustomer, setSelectedCustomer] = useState(EMPTY_CUSTOMER);
+  const { customer, emptyCustomer, setCustomer } = useCustomer();
 
   useEffect(() => {
     getAll().then(response => setCustomerData(response));
   }, []);
 
-  const onRowClick = (customer) => {
-    if (selectedCustomer.id === customer.id) {
-      setSelectedCustomer(EMPTY_CUSTOMER);
+  const onRowClick = (selectedCustomer) => {
+    if (customer.id === selectedCustomer.id) {
+      setCustomer(emptyCustomer);
       return;
     }
-    setSelectedCustomer(customer);
+    setCustomer(selectedCustomer);
   }
 
   const selectedClass = (customerId) => {
-    if (selectedCustomer.id !== customerId) {
+    if (customer.id !== customerId) {
       return undefined;
     }
     return "selected"
