@@ -62,9 +62,9 @@ describe('Add-Update form', () => {
     const emailPlaceholderElement = screen.getByPlaceholderText(emailPlaceholder);
     const passwordLabelElement = screen.getByText(passwordLabel);
     const passwordPlaceholderElement = screen.getByPlaceholderText(passwordPlaceholder);
-    const deleteButton = screen.getByRole('button', { name: deleteName })
-    const saveButton = screen.getByRole('button', { name: saveName })
-    const cancelButton = screen.getByRole('button', { name: cancelName })
+    const deleteButton = screen.getByRole('button', { name: deleteName });
+    const saveButton = screen.getByRole('button', { name: saveName });
+    const cancelButton = screen.getByRole('button', { name: cancelName });
 
     // Then
     expect(titleElement).toBeInTheDocument();
@@ -142,7 +142,50 @@ describe('Add-Update form', () => {
     expect(changedName).toBeInTheDocument();
     expect(changedEmail).toBeInTheDocument();
     expect(changedPassword).toBeInTheDocument();
+  });
 
+  it("Should do nothing when customer is not selected", () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    const mockDelete = jest.fn();
 
+    render(
+      <AddUpdateForm deleteCustomer={mockDelete} />
+    );
+    const deleteName = 'Delete';
+    const deleteButton = screen.getByRole('button', { name: deleteName })
+
+    // When
+    fireEvent.click(deleteButton);
+
+    // Then
+    expect(mockDelete).not.toHaveBeenCalled()
+  });
+
+  it("Should be able to delete data when customer is selected", () => {
+    // Given
+    const contextValues = {
+      customer: CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    const mockDelete = jest.fn();
+
+    render(
+      <AddUpdateForm deleteCustomer={mockDelete} />
+    );
+    const deleteName = 'Delete';
+    const deleteButton = screen.getByRole('button', { name: deleteName })
+
+    // When
+    fireEvent.click(deleteButton);
+
+    // Then
+    expect(mockDelete).toHaveBeenCalledTimes(1);
+    expect(mockDelete).toHaveBeenCalledWith(CUSTOMER.id);
   });
 });
