@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import CustomerList from './CustomerList';
 import '@testing-library/jest-dom';
 import * as restdb from '../rest/restdb';
+import { CustomerProvider } from './hooks/CustomerContext';
 
 const returnData = [
   {
@@ -25,7 +26,11 @@ describe("Customer List", () => {
   it("Customer List title should be visible", async () => {
     // Given
     const HEADING_TITLE = 'Customer List';
-    render(<CustomerList />);
+    render(
+      <CustomerProvider>
+        <CustomerList />
+      </CustomerProvider>
+    );
 
     // When
     const headingElement = await screen.findByRole('heading', { name: new RegExp(HEADING_TITLE) });
@@ -39,7 +44,11 @@ describe("Customer List", () => {
     const nameColumn = 'Name';
     const emailColumn = 'Email';
     const passwordColumn = 'Pass';
-    const { findByRole } = render(<CustomerList />);
+    const { findByRole } = render(
+      <CustomerProvider>
+        <CustomerList />
+      </CustomerProvider>
+    );
 
     // When
     const nameElement = await findByRole('columnheader', { name: nameColumn });
@@ -54,7 +63,11 @@ describe("Customer List", () => {
 
   it('Should contain returned data', async () => {
     // Given
-    const { findByRole } = render(<CustomerList />);
+    const { findByRole } = render(
+      <CustomerProvider>
+        <CustomerList />
+      </CustomerProvider>
+    );
 
     // When
     const name = await findByRole('cell', { name: returnData[0].name });
