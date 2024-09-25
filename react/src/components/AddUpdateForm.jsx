@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
 
-const AddUpdateForm = () => {
+const AddUpdateForm = (props) => {
 
-  const { customer, emptyCustomer } = useCustomer();
+  const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
 
   const setTitle = () => {
@@ -17,6 +17,13 @@ const AddUpdateForm = () => {
         [field]: event.target.value
       }
     )
+  }
+
+  const onDelete = () => {
+    if (customerData.id !== emptyCustomer.id) {
+      props.deleteCustomer(customerData.id);
+      setCustomer(emptyCustomer);
+    }
   }
 
   useEffect(() => {
@@ -45,7 +52,7 @@ const AddUpdateForm = () => {
           value={customerData.password}></input>
       </div>
       <div>
-        <button id="btn-delete">Delete</button>
+        <button id="btn-delete" onClick={onDelete}>Delete</button>
         <button id="btn-save">Save</button>
         <button id="btn-cancel">Cancel</button>
       </div>
