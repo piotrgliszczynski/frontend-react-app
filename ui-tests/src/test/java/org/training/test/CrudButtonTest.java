@@ -39,6 +39,24 @@ public class CrudButtonTest extends BaseTest {
     );
   }
 
+  @Test
+  void shouldDeleteRecord_AfterClick_RecordIsNotVisibleOnList() throws RestApiException {
+    // Given
+    Customer customer = new Customer("test", "test@test.com", "12345");
+    Customer createdCustomer = customersApi.createCustomer(customer);
+
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer);
+
+    // When
+    addUpdateFormSteps.clickDelete();
+    List<Customer> customers = customerTableSteps.getAllCustomers();
+
+    // Then
+    assertFalse(customers.contains(createdCustomer));
+  }
+
+
   @Override
   public void prepareSteps() {
     addUpdateFormSteps = new AddUpdateFormSteps(getDriver());
