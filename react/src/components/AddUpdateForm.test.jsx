@@ -23,6 +23,14 @@ const EMPTY_CUSTOMER = {
 
 describe('Add-Update form', () => {
 
+  let crudOperations;
+
+  beforeEach(() => {
+    const deleteCustomer = jest.fn();
+    const addCustomer = jest.fn();
+    crudOperations = { deleteCustomer, addCustomer };
+  });
+
   afterEach(() => {
     CustomerContext.useCustomer.mockClear();
   });
@@ -51,7 +59,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
 
     // When
@@ -93,7 +101,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
 
     // When
@@ -122,7 +130,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
 
     const nameInput = screen.getByLabelText(nameLabel);
@@ -151,10 +159,9 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER
     }
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
-    const mockDelete = jest.fn();
 
     render(
-      <AddUpdateForm deleteCustomer={mockDelete} />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
     const deleteName = 'Delete';
     const deleteButton = screen.getByRole('button', { name: deleteName })
@@ -163,7 +170,7 @@ describe('Add-Update form', () => {
     fireEvent.click(deleteButton);
 
     // Then
-    expect(mockDelete).not.toHaveBeenCalled()
+    expect(crudOperations.deleteCustomer).not.toHaveBeenCalled()
   });
 
   it("Should be able to delete data when customer is selected", () => {
@@ -174,10 +181,9 @@ describe('Add-Update form', () => {
       setCustomer: jest.fn()
     }
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
-    const mockDelete = jest.fn();
 
     render(
-      <AddUpdateForm deleteCustomer={mockDelete} />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
     const deleteName = 'Delete';
     const deleteButton = screen.getByRole('button', { name: deleteName })
@@ -186,9 +192,65 @@ describe('Add-Update form', () => {
     fireEvent.click(deleteButton);
 
     // Then
-    expect(mockDelete).toHaveBeenCalledTimes(1);
-    expect(mockDelete).toHaveBeenCalledWith(CUSTOMER.id);
+    expect(crudOperations.deleteCustomer).toHaveBeenCalledTimes(1);
+    expect(crudOperations.deleteCustomer).toHaveBeenCalledWith(CUSTOMER.id);
     expect(contextValues.setCustomer).toHaveBeenCalledTimes(1);
     expect(contextValues.setCustomer).toHaveBeenCalledWith(EMPTY_CUSTOMER);
+  });
+
+  it("Should be able to add data when customer is not selected", async () => {
+    // Given
+    const namePlaceholder = 'Customer Name';
+    const emailPlaceholder = 'name@company.com';
+    const passwordPlaceholder = 'password';
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const saveName = 'Save';
+    const saveButton = screen.getByRole('button', { name: saveName });
+
+    // When
+    fireEvent.click(saveButton);
+    const emptyName = await screen.findByPlaceholderText(namePlaceholder);
+    const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
+    const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
+
+    // Then
+    expect(crudOperations.addCustomer).toHaveBeenCalledTimes(1);
+    expect(emptyName).toBeInTheDocument();
+    expect(emptyEmail).toBeInTheDocument();
+    expect(emptyPassword).toBeInTheDocument();
+  });
+
+  it("Should not save when customer is selected", async () => {
+    // Given
+    const namePlaceholder = 'Customer Name';
+    const emailPlaceholder = 'name@company.com';
+    const passwordPlaceholder = 'password';
+    const contextValues = {
+      customer: CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const saveName = 'Save';
+    const saveButton = screen.getByRole('button', { name: saveName });
+
+    // When
+    fireEvent.click(saveButton);
+
+    // Then
+    expect(crudOperations.addCustomer).not.toHaveBeenCalled();
   });
 });

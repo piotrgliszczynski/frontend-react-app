@@ -5,6 +5,7 @@ const AddUpdateForm = (props) => {
 
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
+  const { deleteCustomer, addCustomer } = props.crudOperations;
 
   const setTitle = () => {
     return customerData.id !== emptyCustomer.id ? 'Update' : 'Add'
@@ -21,8 +22,18 @@ const AddUpdateForm = (props) => {
 
   const onDelete = () => {
     if (customerData.id !== emptyCustomer.id) {
-      props.deleteCustomer(customerData.id);
+      deleteCustomer(customerData.id);
       setCustomer(emptyCustomer);
+    }
+  }
+
+  const onSave = () => {
+    if (customerData.id === emptyCustomer.id) {
+      let newCustomer = customerData;
+      delete newCustomer.id;
+
+      addCustomer(newCustomer);
+      setCustomerData(emptyCustomer);
     }
   }
 
@@ -53,7 +64,7 @@ const AddUpdateForm = (props) => {
       </div>
       <div>
         <button id="btn-delete" onClick={onDelete}>Delete</button>
-        <button id="btn-save">Save</button>
+        <button id="btn-save" onClick={onSave}>Save</button>
         <button id="btn-cancel">Cancel</button>
       </div>
     </>
