@@ -3,7 +3,7 @@ import React from "react";
 const AddUpdateForm = () => {
   return (
     <>
-      <h2>Add/Update</h2>
+      <h2 id="add-update-form-title">Add/Update</h2>
       <div>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" placeholder="Customer Name"></input>
@@ -17,9 +17,9 @@ const AddUpdateForm = () => {
         <input type="text" id="password" placeholder="password"></input>
       </div>
       <div>
-        <button>Delete</button>
-        <button>Save</button>
-        <button>Cancel</button>
+        <button id="btn-delete">Delete</button>
+        <button id="btn-save">Save</button>
+        <button id="btn-cancel">Cancel</button>
       </div>
     </>
   )
