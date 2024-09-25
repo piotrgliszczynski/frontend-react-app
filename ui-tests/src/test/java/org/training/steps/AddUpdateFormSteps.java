@@ -1,6 +1,7 @@
 package org.training.steps;
 
 import org.openqa.selenium.WebDriver;
+import org.training.data.Customer;
 import org.training.page.HomePage;
 import org.training.steps.base.BaseSteps;
 
@@ -19,7 +20,8 @@ public class AddUpdateFormSteps extends BaseSteps {
   }
 
   public boolean isFormVisible() {
-    if (!homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add/Update")) {
+    if (!homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add")
+        && !homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update")) {
       return false;
     }
     if (!homePage.getAddUpdateForm().getNameLabel().equals("Name:")) {
@@ -50,5 +52,32 @@ public class AddUpdateFormSteps extends BaseSteps {
       return false;
     }
     return true;
+  }
+
+  public boolean isFormInAddState() {
+    return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add");
+  }
+
+  public boolean isFormInUpdateState() {
+    return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update");
+  }
+
+  public boolean areFieldsEmpty() {
+    if (!homePage.getAddUpdateForm().getNameValue().isEmpty()) {
+      return false;
+    }
+    if (!homePage.getAddUpdateForm().getEmailValue().isEmpty()) {
+      return false;
+    }
+    if (!homePage.getAddUpdateForm().getPasswordValue().isEmpty()) {
+      return false;
+    }
+    return true;
+  }
+
+  public boolean areFieldsFilled(Customer customer) {
+    return homePage.getAddUpdateForm().getNameValue().equals(customer.getName())
+        && homePage.getAddUpdateForm().getEmailValue().equals(customer.getEmail())
+        && homePage.getAddUpdateForm().getPasswordValue().equals(customer.getPassword());
   }
 }
