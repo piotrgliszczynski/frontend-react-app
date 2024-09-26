@@ -249,7 +249,7 @@ describe('Add-Update form', () => {
     const saveButton = screen.getByRole('button', { name: saveName });
 
     // When
-    await fireEvent.click(saveButton);
+    fireEvent.click(saveButton);
     const emptyName = await screen.findByPlaceholderText(namePlaceholder);
     const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
     const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
@@ -257,6 +257,36 @@ describe('Add-Update form', () => {
     // Then
     expect(crudOperations.addCustomer).not.toHaveBeenCalled();
     expect(crudOperations.updateCustomer).toHaveBeenCalledTimes(1);
+    expect(emptyName).toBeInTheDocument();
+    expect(emptyEmail).toBeInTheDocument();
+    expect(emptyPassword).toBeInTheDocument();
+  });
+
+  it("Should deselect customer when Cancel is clicked", async () => {
+    // Given
+    const namePlaceholder = 'Customer Name';
+    const emailPlaceholder = 'name@company.com';
+    const passwordPlaceholder = 'password';
+    const contextValues = {
+      customer: CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const cancelName = 'Cancel';
+    const cancelButton = screen.getByRole('button', { name: cancelName });
+
+    // When
+    fireEvent.click(cancelButton);
+    const emptyName = await screen.findByPlaceholderText(namePlaceholder);
+    const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
+    const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
+
+    // Then
     expect(emptyName).toBeInTheDocument();
     expect(emptyEmail).toBeInTheDocument();
     expect(emptyPassword).toBeInTheDocument();
