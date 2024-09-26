@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727355085811" clover="3.2.0">
-  <project timestamp="1727355085811" name="All files">
-    <metrics statements="98" coveredstatements="98" conditionals="20" coveredconditionals="20" methods="26" coveredmethods="26" elements="144" coveredelements="144" complexity="0" loc="98" ncloc="98" packages="3" files="7" classes="7"/>
+<coverage generated="1727360070842" clover="3.2.0">
+  <project timestamp="1727360070843" name="All files">
+    <metrics statements="103" coveredstatements="103" conditionals="22" coveredconditionals="22" methods="28" coveredmethods="28" elements="153" coveredelements="153" complexity="0" loc="103" ncloc="103" packages="3" files="8" classes="8"/>
     <package name="components">
-      <metrics statements="57" coveredstatements="57" conditionals="12" coveredconditionals="12" methods="20" coveredmethods="20"/>
+      <metrics statements="62" coveredstatements="62" conditionals="14" coveredconditionals="14" methods="22" coveredmethods="22"/>
       <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
         <metrics statements="32" coveredstatements="32" conditionals="8" coveredconditionals="8" methods="10" coveredmethods="10"/>
         <line num="5" count="1" type="stmt"/>
@@ -66,6 +66,14 @@
         <line num="26" count="11" type="stmt"/>
         <line num="38" count="11" type="stmt"/>
       </file>
+      <file name="Heading.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\Heading.jsx">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="2" type="stmt"/>
+      </file>
       <file name="SearchBar.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\SearchBar.jsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="4" count="2" type="stmt"/>
@@ -81,9 +89,9 @@
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="CustomerContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\CustomerContext.jsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="3" count="4" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="12" count="4" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
         <line num="13" count="16" type="stmt"/>
         <line num="14" count="16" type="stmt"/>
         <line num="16" count="16" type="stmt"/>
