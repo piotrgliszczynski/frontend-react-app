@@ -138,6 +138,18 @@ public class AddUpdateFormTest extends BaseTest {
     assertTrue(formFilledCorrectly);
   }
 
+  @Test
+  void buttonsShouldBeVisible_Whe_NavigatingToMainPage() {
+    // Given
+    addUpdateFormSteps.openHomePage();
+
+    // When
+    boolean areButtonsVisible = addUpdateFormSteps.areButtonsVisible();
+
+    // Then
+    assertTrue(areButtonsVisible);
+  }
+
   @Override
   public void prepareSteps() {
     addUpdateFormSteps = new AddUpdateFormSteps(getDriver());
