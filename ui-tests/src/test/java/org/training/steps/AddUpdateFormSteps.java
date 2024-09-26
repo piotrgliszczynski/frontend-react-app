@@ -114,4 +114,8 @@ public class AddUpdateFormSteps extends BaseSteps {
   public void clickSave() {
     homePage.getAddUpdateForm().getCrudButtons().clickSave();
   }
+
+  public void clickCancel() {
+    homePage.getAddUpdateForm().getCrudButtons().clickCancel();
+  }
 }

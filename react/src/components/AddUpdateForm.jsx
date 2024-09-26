@@ -34,10 +34,14 @@ const AddUpdateForm = (props) => {
 
       addCustomer(newCustomer);
       setCustomerData(emptyCustomer);
+      return;
     }
     await updateCustomer(customerData);
     setCustomer(emptyCustomer);
-    setCustomerData(emptyCustomer);
+  }
+
+  const onCancel = () => {
+    setCustomer(emptyCustomer);
   }
 
   useEffect(() => {
@@ -68,7 +72,7 @@ const AddUpdateForm = (props) => {
       <div>
         <button id="btn-delete" onClick={onDelete}>Delete</button>
         <button id="btn-save" onClick={onSave}>Save</button>
-        <button id="btn-cancel">Cancel</button>
+        <button id="btn-cancel" onClick={onCancel}>Cancel</button>
       </div>
     </>
   )
