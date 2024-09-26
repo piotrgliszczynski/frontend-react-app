@@ -2,20 +2,20 @@ package org.training.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.training.data.Customer;
-import org.training.page.HomePage;
+import org.training.page.FormPage;
 import org.training.steps.base.BaseSteps;
 
 public class AddUpdateFormSteps extends BaseSteps {
 
-  private final HomePage homePage;
+  private final FormPage formPage;
 
   public AddUpdateFormSteps(WebDriver driver) {
     super(driver);
-    homePage = new HomePage(driver);
+    formPage = new FormPage(driver);
   }
 
-  public AddUpdateFormSteps openHomePage() {
-    homePage.load();
+  public AddUpdateFormSteps openFormPage() {
+    formPage.load();
     return this;
   }
 
@@ -25,33 +25,33 @@ public class AddUpdateFormSteps extends BaseSteps {
   }
 
   public AddUpdateFormSteps typeData(String name, String email, String password) {
-    homePage.getAddUpdateForm().typeName(name);
-    homePage.getAddUpdateForm().typeEmail(email);
-    homePage.getAddUpdateForm().typePassword(password);
+    formPage.getAddUpdateForm().typeName(name);
+    formPage.getAddUpdateForm().typeEmail(email);
+    formPage.getAddUpdateForm().typePassword(password);
     return this;
   }
 
   public boolean isFormVisible() {
-    if (!homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add")
-        && !homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update")) {
+    if (!formPage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add")
+        && !formPage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getNameLabel().equals("Name:")) {
+    if (!formPage.getAddUpdateForm().getNameLabel().equals("Name:")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getNamePlaceholder().equals("Customer Name")) {
+    if (!formPage.getAddUpdateForm().getNamePlaceholder().equals("Customer Name")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getEmailLabel().equals("Email:")) {
+    if (!formPage.getAddUpdateForm().getEmailLabel().equals("Email:")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getEmailPlaceholder().equals("name@company.com")) {
+    if (!formPage.getAddUpdateForm().getEmailPlaceholder().equals("name@company.com")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getPasswordLabel().equals("Pass:")) {
+    if (!formPage.getAddUpdateForm().getPasswordLabel().equals("Pass:")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getPasswordPlaceholder().equals("password")) {
+    if (!formPage.getAddUpdateForm().getPasswordPlaceholder().equals("password")) {
       return false;
     }
     if (!areButtonsVisible()) {
@@ -61,61 +61,62 @@ public class AddUpdateFormSteps extends BaseSteps {
   }
 
   public boolean areButtonsVisible() {
-    if (!homePage.getAddUpdateForm().getCrudButtons().getDeleteButtonText().equals("Delete")) {
+    if (!formPage.getAddUpdateForm().getCrudButtons().getDeleteButtonText().equals("Delete")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getCrudButtons().getSaveButtonText().equals("Save")) {
+    if (!formPage.getAddUpdateForm().getCrudButtons().getSaveButtonText().equals("Save")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getCrudButtons().getCancelButtonText().equals("Cancel")) {
+    if (!formPage.getAddUpdateForm().getCrudButtons().getCancelButtonText().equals("Cancel")) {
       return false;
     }
     return true;
   }
 
   public boolean isFormInAddState() {
-    return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add");
+    return formPage.getAddUpdateForm().getAddUpdateFormTitle().equals("Add");
   }
 
   public boolean isFormInUpdateState() {
-    return homePage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update");
+    return formPage.getAddUpdateForm().getAddUpdateFormTitle().equals("Update");
   }
 
   public boolean areFieldsEmpty() {
-    if (!homePage.getAddUpdateForm().getNameValue().isEmpty()) {
+    if (!formPage.getAddUpdateForm().getNameValue().isEmpty()) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getEmailValue().isEmpty()) {
+    if (!formPage.getAddUpdateForm().getEmailValue().isEmpty()) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getPasswordValue().isEmpty()) {
+    if (!formPage.getAddUpdateForm().getPasswordValue().isEmpty()) {
       return false;
     }
     return true;
   }
 
   public boolean areFieldsFilled(Customer customer) {
-    return homePage.getAddUpdateForm().getNameValue().equals(customer.getName())
-        && homePage.getAddUpdateForm().getEmailValue().equals(customer.getEmail())
-        && homePage.getAddUpdateForm().getPasswordValue().equals(customer.getPassword());
+    return formPage.getAddUpdateForm().getNameValue().equals(customer.getName())
+        && formPage.getAddUpdateForm().getEmailValue().equals(customer.getEmail())
+        && formPage.getAddUpdateForm().getPasswordValue().equals(customer.getPassword());
   }
 
   public boolean fieldsEqual(String name, String email, String password) {
-    return homePage.getAddUpdateForm().getNameValue().equals(name)
-        && homePage.getAddUpdateForm().getEmailValue().equals(email)
-        && homePage.getAddUpdateForm().getPasswordValue().equals(password);
+    return formPage.getAddUpdateForm().getNameValue().equals(name)
+        && formPage.getAddUpdateForm().getEmailValue().equals(email)
+        && formPage.getAddUpdateForm().getPasswordValue().equals(password);
   }
 
   public void clickDelete() {
-    homePage.getAddUpdateForm().getCrudButtons().clickDelete();
-    homePage.getAddUpdateForm().handleAlert();
+    formPage.getAddUpdateForm().getCrudButtons().clickDelete();
+    formPage.getAddUpdateForm().handleAlert();
   }
 
   public void clickSave() {
-    homePage.getAddUpdateForm().getCrudButtons().clickSave();
+    formPage.getAddUpdateForm().getCrudButtons().clickSave();
+    formPage.getAddUpdateForm().handleAlert();
   }
 
   public void clickCancel() {
-    homePage.getAddUpdateForm().getCrudButtons().clickCancel();
+    formPage.getAddUpdateForm().getCrudButtons().clickCancel();
   }
 }

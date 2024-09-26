@@ -18,9 +18,9 @@ public class AddUpdateFormTest extends BaseTest {
   private CustomerTableSteps customerTableSteps;
 
   @Test
-  void addUpdateFormShouldBeVisible_When_NavigateToMainPage() {
+  void addUpdateFormShouldBeVisible_When_NavigateToFormPage() {
     // Given
-    addUpdateFormSteps.openHomePage();
+    addUpdateFormSteps.openFormPage();
 
     // When
     boolean isFormVisible = addUpdateFormSteps.isFormVisible();
@@ -32,7 +32,7 @@ public class AddUpdateFormTest extends BaseTest {
   @Test
   void addUpdateFormShouldBeInAddState_When_NavigateToMainPage() {
     // Given
-    addUpdateFormSteps.openHomePage();
+    addUpdateFormSteps.openFormPage();
 
     // When
     boolean isFormInAddState = addUpdateFormSteps.isFormInAddState();
@@ -45,8 +45,9 @@ public class AddUpdateFormTest extends BaseTest {
   @ArgumentsSource(CustomerDataProvider.class)
   void addUpdateFormShouldBeInUpdateState_When_CustomerIsSelected(Customer customer) {
     // Given
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(customer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(customer)
+        .clickFormLink();
 
     // When
     boolean isFormInUpdateState = addUpdateFormSteps.isFormInUpdateState();
@@ -58,7 +59,7 @@ public class AddUpdateFormTest extends BaseTest {
   @Test
   void addUpdateFormInAddState_ShouldFieldsBeEmpty_When_NavigateToMainPage() {
     // Given
-    addUpdateFormSteps.openHomePage();
+    addUpdateFormSteps.openFormPage();
 
     // When
     boolean areFormsEmpty = addUpdateFormSteps.areFieldsEmpty();
@@ -71,8 +72,9 @@ public class AddUpdateFormTest extends BaseTest {
   @ArgumentsSource(CustomerDataProvider.class)
   void addUpdateFormInUpdateState_ShouldFieldsBeFilled_CustomerIsSelected(Customer customer) {
     // Given
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(customer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(customer)
+        .clickFormLink();
 
     // When
     boolean areFieldsFilled = addUpdateFormSteps.areFieldsFilled(customer);
@@ -89,6 +91,7 @@ public class AddUpdateFormTest extends BaseTest {
 
     // When
     customerTableSteps.clickFirstCustomer();
+    addUpdateFormSteps.openFormPage();
     boolean isFormInAddState = addUpdateFormSteps.isFormInAddState();
     boolean areFormsEmpty = addUpdateFormSteps.areFieldsEmpty();
 
@@ -106,7 +109,7 @@ public class AddUpdateFormTest extends BaseTest {
     String email = "test@test.com";
     String password = "12345";
 
-    addUpdateFormSteps.openHomePage();
+    addUpdateFormSteps.openFormPage();
 
     // When
     boolean formFilledCorrectly = addUpdateFormSteps.typeData(name, email, password)
@@ -124,8 +127,9 @@ public class AddUpdateFormTest extends BaseTest {
     String email = "changed";
     String password = "changed";
 
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(customer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(customer)
+        .clickFormLink();
 
     // When
     boolean formFilledCorrectly = addUpdateFormSteps.typeData(name, email, password)
@@ -141,7 +145,7 @@ public class AddUpdateFormTest extends BaseTest {
   @Test
   void buttonsShouldBeVisible_Whe_NavigatingToMainPage() {
     // Given
-    addUpdateFormSteps.openHomePage();
+    addUpdateFormSteps.openFormPage();
 
     // When
     boolean areButtonsVisible = addUpdateFormSteps.areButtonsVisible();
