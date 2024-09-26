@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
 import './styles/AddUpdateForm.css';
+import { useNavigate } from "react-router";
 
 const AddUpdateForm = (props) => {
 
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
   const { fetchCustomers, deleteCustomer, addCustomer, updateCustomer } = props.crudOperations;
+  const navigate = useNavigate();
 
   const setTitle = () => {
     return customerData.id !== emptyCustomer.id ? 'Update' : 'Add'
@@ -25,6 +27,7 @@ const AddUpdateForm = (props) => {
     if (customerData.id !== emptyCustomer.id) {
       deleteCustomer(customerData.id);
       setCustomer(emptyCustomer);
+      navigate("/");
     }
   }
 
@@ -35,18 +38,20 @@ const AddUpdateForm = (props) => {
 
       addCustomer(newCustomer);
       setCustomerData(emptyCustomer);
+      navigate("/");
       return;
     }
     await updateCustomer(customerData);
     setCustomer(emptyCustomer);
+    navigate("/");
   }
 
   const onCancel = () => {
     if (customerData.id !== emptyCustomer.id) {
       setCustomer(emptyCustomer);
-      return;
     }
     fetchCustomers();
+    navigate("/");
   }
 
   useEffect(() => {
