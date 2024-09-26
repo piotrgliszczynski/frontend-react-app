@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
+import './styles/AddUpdateForm.css';
 
 const AddUpdateForm = (props) => {
 
@@ -49,32 +50,28 @@ const AddUpdateForm = (props) => {
   }, [customer]);
 
   return (
-    <>
+    <div className="add-update-form">
       <h2 id="add-update-form-title">{setTitle()}</h2>
-      <div>
+      <div className="form-parent">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" onChange={(event) => onType('name', event)}
           placeholder="Customer Name"
           value={customerData.name}></input>
-      </div>
-      <div>
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" onChange={(event) => onType('email', event)}
           placeholder="name@company.com"
           value={customerData.email}></input>
-      </div>
-      <div>
         <label htmlFor="password">Pass:</label>
         <input type="text" id="password" onChange={(event) => onType('password', event)}
           placeholder="password"
           value={customerData.password}></input>
+        <div className="crud-buttons">
+          <button id="btn-delete" onClick={onDelete}>Delete</button>
+          <button id="btn-save" onClick={onSave}>Save</button>
+          <button id="btn-cancel" onClick={onCancel}>Cancel</button>
+        </div>
       </div>
-      <div>
-        <button id="btn-delete" onClick={onDelete}>Delete</button>
-        <button id="btn-save" onClick={onSave}>Save</button>
-        <button id="btn-cancel" onClick={onCancel}>Cancel</button>
-      </div>
-    </>
+    </div>
   )
 }
 
