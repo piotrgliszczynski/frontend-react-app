@@ -3,10 +3,20 @@
 }
 
 #customer-table {
-  width: inherit;
+  width: 305px;
   margin: 0;
   background-color: white;
   font-family: monospace;
+  overflow-y: scroll;
+  height: 315px;
+}
+
+.table-container {
+  height: 315px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scroll-margin: 5px;
 }
 
 table,
