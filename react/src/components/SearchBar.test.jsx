@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SearchBar from './SearchBar';
 
@@ -21,4 +21,26 @@ describe("Search Bar", () => {
     expect(inputElement).toBeInTheDocument();
     expect(buttonElement).toBeInTheDocument();
   });
+
+  it("Should be able to enter and search", () => {
+    // Given
+    const placeholderSearch = 'Search for customer name';
+    const buttonText = 'Search';
+
+    jest.spyOn(console, 'log').mockImplementationOnce(() => { });
+
+    render(
+      <SearchBar />
+    );
+    const inputElement = screen.getByPlaceholderText(placeholderSearch);
+    const buttonElement = screen.getByRole('button', { target: { name: buttonText } });
+
+    // When
+    fireEvent.change(inputElement, { target: { value: "test" } });
+    fireEvent.click(buttonElement);
+
+    // Then
+    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.log).toHaveBeenCalledWith('test');
+  })
 })
