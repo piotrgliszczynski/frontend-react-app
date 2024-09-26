@@ -2,8 +2,11 @@ package org.training.test;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.training.api.actions.CustomersApi;
 import org.training.data.Customer;
+import org.training.data.providers.CustomerDataProvider;
 import org.training.exception.RestApiException;
 import org.training.steps.AddUpdateFormSteps;
 import org.training.steps.CustomerTableSteps;
@@ -23,10 +26,13 @@ public class CrudButtonTest extends BaseTest {
 
   @AfterEach
   void deleteAllCreatedCustomers() {
-    try {
-      customersApi.deleteCustomer(createdCustomer);
-    } catch (RestApiException e) {
-      System.out.println("Record don't exist in the db already!");
+    if (createdCustomer != null) {
+      try {
+        customersApi.deleteCustomer(createdCustomer);
+      } catch (RestApiException e) {
+        System.out.println("Record don't exist in the db already!");
+      }
+      createdCustomer = null;
     }
   }
 
@@ -163,6 +169,42 @@ public class CrudButtonTest extends BaseTest {
         () -> assertFalse(isSelected),
         () -> assertTrue(customers.contains(changedCustomer))
     );
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(CustomerDataProvider.class)
+  void shouldDeselectRecordAndEmptyForm_When_CancelButtonIsClicked(Customer customer) {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(customer);
+
+    // When
+    addUpdateFormSteps.clickCancel();
+    boolean isSelected = customerTableSteps.isCustomerSelected(customer);
+    boolean isAddState = addUpdateFormSteps.isFormInAddState();
+    boolean areFormsEmpty = addUpdateFormSteps.areFieldsEmpty();
+
+    // Then
+    assertAll(
+        () -> assertFalse(isSelected),
+        () -> assertTrue(isAddState),
+        () -> assertTrue(areFormsEmpty)
+    );
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(CustomerDataProvider.class)
+  void shouldDeselectRecord_When_CancelButtonIsClicked(Customer customer) {
+    // Given
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(customer);
+
+    // When
+    addUpdateFormSteps.clickCancel();
+    boolean isSelected = customerTableSteps.isCustomerSelected(customer);
+
+    // Then
+    assertFalse(isSelected);
   }
 
   @Override

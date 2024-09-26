@@ -73,4 +73,7 @@ public class CustomerTableSteps extends BaseSteps {
     return homePage.getCustomerTable().getRowClass(2).contains("selected");
   }
 
+  public boolean isCustomerSelected(Customer customer) {
+    return homePage.getCustomerTable().getRowClass(customer).contains("selected");
+  }
 }

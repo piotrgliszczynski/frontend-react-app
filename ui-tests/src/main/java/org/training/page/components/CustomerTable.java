@@ -87,4 +87,9 @@ public class CustomerTable extends BasePage {
     By customerRow = By.cssSelector(String.format("#customer-table > tbody > tr:nth-child(%d)", row));
     return wait.until(ExpectedConditions.visibilityOfElementLocated(customerRow)).getAttribute("class");
   }
+
+  public String getRowClass(Customer customer) {
+    By customerRow = By.xpath(String.format("//tr[td[text()='%s']]", customer.getName()));
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(customerRow)).getAttribute("class");
+  }
 }
