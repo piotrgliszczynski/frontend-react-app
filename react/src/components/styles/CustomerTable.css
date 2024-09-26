@@ -25,3 +25,8 @@ tr {
   background-color: lightgray;
   border: 1px solid #aaa;
 }
+
+tbody>tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
