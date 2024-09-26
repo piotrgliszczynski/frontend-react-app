@@ -28,7 +28,8 @@ describe('Add-Update form', () => {
   beforeEach(() => {
     const deleteCustomer = jest.fn();
     const addCustomer = jest.fn();
-    crudOperations = { deleteCustomer, addCustomer };
+    const updateCustomer = jest.fn();
+    crudOperations = { deleteCustomer, addCustomer, updateCustomer };
   });
 
   afterEach(() => {
@@ -229,7 +230,7 @@ describe('Add-Update form', () => {
     expect(emptyPassword).toBeInTheDocument();
   });
 
-  it("Should not save when customer is selected", async () => {
+  it("Should update when customer is selected and fields are empty", async () => {
     // Given
     const namePlaceholder = 'Customer Name';
     const emailPlaceholder = 'name@company.com';
@@ -248,9 +249,16 @@ describe('Add-Update form', () => {
     const saveButton = screen.getByRole('button', { name: saveName });
 
     // When
-    fireEvent.click(saveButton);
+    await fireEvent.click(saveButton);
+    const emptyName = await screen.findByPlaceholderText(namePlaceholder);
+    const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
+    const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
 
     // Then
     expect(crudOperations.addCustomer).not.toHaveBeenCalled();
+    expect(crudOperations.updateCustomer).toHaveBeenCalledTimes(1);
+    expect(emptyName).toBeInTheDocument();
+    expect(emptyEmail).toBeInTheDocument();
+    expect(emptyPassword).toBeInTheDocument();
   });
 });

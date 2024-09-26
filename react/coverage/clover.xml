@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727277857321" clover="3.2.0">
-  <project timestamp="1727277857322" name="All files">
-    <metrics statements="83" coveredstatements="83" conditionals="18" coveredconditionals="18" methods="22" coveredmethods="22" elements="123" coveredelements="123" complexity="0" loc="83" ncloc="83" packages="3" files="6" classes="6"/>
+<coverage generated="1727281137198" clover="3.2.0">
+  <project timestamp="1727281137198" name="All files">
+    <metrics statements="86" coveredstatements="86" conditionals="18" coveredconditionals="18" methods="22" coveredmethods="22" elements="126" coveredelements="126" complexity="0" loc="86" ncloc="86" packages="3" files="6" classes="6"/>
     <package name="components">
-      <metrics statements="42" coveredstatements="42" conditionals="10" coveredconditionals="10" methods="16" coveredmethods="16"/>
+      <metrics statements="45" coveredstatements="45" conditionals="10" coveredconditionals="10" methods="16" coveredmethods="16"/>
       <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
-        <metrics statements="24" coveredstatements="24" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
+        <metrics statements="27" coveredstatements="27" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="6" count="11" type="stmt"/>
-        <line num="7" count="11" type="stmt"/>
-        <line num="8" count="11" type="stmt"/>
-        <line num="10" count="11" type="stmt"/>
-        <line num="11" count="11" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="11" type="stmt"/>
+        <line num="6" count="14" type="stmt"/>
+        <line num="7" count="14" type="stmt"/>
+        <line num="8" count="13" type="stmt"/>
+        <line num="10" count="13" type="stmt"/>
+        <line num="11" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="13" type="stmt"/>
         <line num="15" count="3" type="stmt"/>
-        <line num="23" count="11" type="stmt"/>
+        <line num="23" count="13" type="stmt"/>
         <line num="24" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-        <line num="30" count="11" type="stmt"/>
+        <line num="30" count="13" type="stmt"/>
         <line num="31" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="32" count="1" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
-        <line num="40" count="11" type="stmt"/>
-        <line num="41" count="7" type="stmt"/>
-        <line num="44" count="11" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="43" count="13" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="47" count="13" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
       </file>
       <file name="CustomerList.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerList.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
