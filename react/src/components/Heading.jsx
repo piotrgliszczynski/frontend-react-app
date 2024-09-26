@@ -13,7 +13,7 @@ const Heading = () => {
 
   return (
     <div>
-      <Link className="heading-button" to="/">Home</Link>
+      <Link reloadDocument className="heading-button" to="/">Home</Link>
       <Link className="heading-button" to="/customer-form">{formLinkTitle()}</Link>
     </div>
   )

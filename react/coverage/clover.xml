@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727360070842" clover="3.2.0">
-  <project timestamp="1727360070843" name="All files">
-    <metrics statements="103" coveredstatements="103" conditionals="22" coveredconditionals="22" methods="28" coveredmethods="28" elements="153" coveredelements="153" complexity="0" loc="103" ncloc="103" packages="3" files="8" classes="8"/>
+<coverage generated="1727361577153" clover="3.2.0">
+  <project timestamp="1727361577154" name="All files">
+    <metrics statements="107" coveredstatements="107" conditionals="22" coveredconditionals="22" methods="28" coveredmethods="28" elements="157" coveredelements="157" complexity="0" loc="107" ncloc="107" packages="3" files="8" classes="8"/>
     <package name="components">
-      <metrics statements="62" coveredstatements="62" conditionals="14" coveredconditionals="14" methods="22" coveredmethods="22"/>
+      <metrics statements="66" coveredstatements="66" conditionals="14" coveredconditionals="14" methods="22" coveredmethods="22"/>
       <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
-        <metrics statements="32" coveredstatements="32" conditionals="8" coveredconditionals="8" methods="10" coveredmethods="10"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="13" type="stmt"/>
-        <line num="8" count="13" type="stmt"/>
-        <line num="9" count="13" type="stmt"/>
-        <line num="11" count="13" type="stmt"/>
-        <line num="12" count="13" type="cond" truecount="2" falsecount="0"/>
-        <line num="15" count="13" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="24" count="13" type="stmt"/>
-        <line num="25" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="13" type="stmt"/>
-        <line num="32" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <metrics statements="36" coveredstatements="36" conditionals="8" coveredconditionals="8" methods="10" coveredmethods="10"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="23" type="stmt"/>
+        <line num="9" count="23" type="stmt"/>
+        <line num="10" count="23" type="stmt"/>
+        <line num="11" count="23" type="stmt"/>
+        <line num="13" count="23" type="stmt"/>
+        <line num="14" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="23" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="26" count="23" type="stmt"/>
+        <line num="27" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="34" count="23" type="stmt"/>
+        <line num="35" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="36" count="1" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
-        <line num="44" count="13" type="stmt"/>
-        <line num="45" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="52" count="13" type="stmt"/>
-        <line num="53" count="9" type="stmt"/>
-        <line num="56" count="13" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
+        <line num="49" count="23" type="stmt"/>
+        <line num="50" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="57" count="23" type="stmt"/>
+        <line num="58" count="12" type="stmt"/>
+        <line num="61" count="23" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
       </file>
       <file name="CustomerList.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\CustomerList.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
