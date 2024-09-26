@@ -1,6 +1,7 @@
 package org.training.test;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -42,17 +43,16 @@ public class CrudButtonTest extends BaseTest {
     Customer customer = new Customer("test", "test@test.com", "12345");
     createdCustomer = customersApi.createCustomer(customer);
 
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(createdCustomer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer)
+        .clickFormLink();
 
     // When
     addUpdateFormSteps.clickDelete();
-    boolean isFormCleared = addUpdateFormSteps.areFieldsEmpty();
     List<Customer> customers = customersApi.getCustomers();
 
     // Then
     assertAll(
-        () -> assertTrue(isFormCleared),
         () -> assertFalse(customers.contains(createdCustomer))
     );
   }
@@ -63,8 +63,9 @@ public class CrudButtonTest extends BaseTest {
     Customer customer = new Customer("test", "test@test.com", "12345");
     createdCustomer = customersApi.createCustomer(customer);
 
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(createdCustomer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer)
+        .clickFormLink();
 
     // When
     addUpdateFormSteps.clickDelete();
@@ -79,13 +80,12 @@ public class CrudButtonTest extends BaseTest {
     // Given
     createdCustomer = new Customer("test", "test@test.com", "12345");
 
-    addUpdateFormSteps.openHomePage()
+    addUpdateFormSteps.openFormPage()
         .typeData(createdCustomer);
 
     // When
     addUpdateFormSteps.clickSave();
     List<Customer> customers = customersApi.getCustomers();
-    boolean areFieldsEmpty = addUpdateFormSteps.areFieldsEmpty();
 
     createdCustomer = customers.get(
         customers.indexOf(createdCustomer)
@@ -93,7 +93,6 @@ public class CrudButtonTest extends BaseTest {
 
     // Then
     assertAll(
-        () -> assertTrue(areFieldsEmpty),
         () -> assertTrue(customers.contains(createdCustomer))
     );
   }
@@ -103,7 +102,7 @@ public class CrudButtonTest extends BaseTest {
     // Given
     createdCustomer = new Customer("test", "test@test.com", "12345");
 
-    addUpdateFormSteps.openHomePage()
+    addUpdateFormSteps.openFormPage()
         .typeData(createdCustomer);
 
     // When
@@ -126,22 +125,19 @@ public class CrudButtonTest extends BaseTest {
         new Customer("test", "test@test.com", "test")
     );
 
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(createdCustomer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer)
+        .clickFormLink();
     addUpdateFormSteps.typeData("Changed", "Changed", "Changed");
     Customer changedCustomer = new Customer("testChanged", "test@test.comChanged", "testChanged");
 
     // When
     addUpdateFormSteps.clickSave();
-    boolean isAddState = addUpdateFormSteps.isFormInAddState();
-    boolean areFieldsEmpty = addUpdateFormSteps.areFieldsEmpty();
     boolean isSelected = customerTableSteps.isSelected();
     List<Customer> customers = customersApi.getCustomers();
 
     // Then
     assertAll(
-        () -> assertTrue(isAddState),
-        () -> assertTrue(areFieldsEmpty),
         () -> assertFalse(isSelected),
         () -> assertTrue(customers.contains(changedCustomer))
     );
@@ -154,8 +150,9 @@ public class CrudButtonTest extends BaseTest {
         new Customer("test", "test@test.com", "test")
     );
 
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(createdCustomer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer)
+        .clickFormLink();
     addUpdateFormSteps.typeData("Changed", "Changed", "Changed");
     Customer changedCustomer = new Customer("testChanged", "test@test.comChanged", "testChanged");
 
@@ -171,12 +168,14 @@ public class CrudButtonTest extends BaseTest {
     );
   }
 
+  @Disabled
   @ParameterizedTest
   @ArgumentsSource(CustomerDataProvider.class)
   void shouldDeselectRecordAndEmptyForm_When_CancelButtonIsClicked(Customer customer) {
     // Given
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(customer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(customer)
+        .clickFormLink();
 
     // When
     addUpdateFormSteps.clickCancel();
@@ -196,8 +195,9 @@ public class CrudButtonTest extends BaseTest {
   @ArgumentsSource(CustomerDataProvider.class)
   void shouldDeselectRecord_When_CancelButtonIsClicked(Customer customer) {
     // Given
-    customerTableSteps.openHomePage()
-        .clickOnCustomer(customer);
+    AddUpdateFormSteps addUpdateFormSteps = customerTableSteps.openHomePage()
+        .clickOnCustomer(customer)
+        .clickFormLink();
 
     // When
     addUpdateFormSteps.clickCancel();

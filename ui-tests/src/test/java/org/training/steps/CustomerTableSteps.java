@@ -76,4 +76,9 @@ public class CustomerTableSteps extends BaseSteps {
   public boolean isCustomerSelected(Customer customer) {
     return homePage.getCustomerTable().getRowClass(customer).contains("selected");
   }
+
+  public AddUpdateFormSteps clickFormLink() {
+    homePage.getHeader().clickFormLink();
+    return new AddUpdateFormSteps(driver);
+  }
 }

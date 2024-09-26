@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SearchBar from './SearchBar';
+import { BrowserRouter } from 'react-router-dom';
 
 describe("Search Bar", () => {
   it("Should contain search bar and search button", () => {
@@ -10,7 +11,8 @@ describe("Search Bar", () => {
     const buttonText = 'Search';
 
     render(
-      <SearchBar />
+      <SearchBar />,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -30,7 +32,8 @@ describe("Search Bar", () => {
     const mockSearch = jest.fn();
 
     render(
-      <SearchBar doSearch={mockSearch} />
+      <SearchBar doSearch={mockSearch} />,
+      { wrapper: BrowserRouter }
     );
     const inputElement = screen.getByPlaceholderText(placeholderSearch);
     const buttonElement = screen.getByRole('button', { target: { name: buttonText } });

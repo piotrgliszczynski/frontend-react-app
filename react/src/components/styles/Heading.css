@@ -1,0 +1,9 @@
+.heading-button {
+  display: inline-block;
+  margin: 10px 20px;
+  color: black;
+}
+
+.heading-button:hover {
+  color: #333;
+}
