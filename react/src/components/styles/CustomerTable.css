@@ -1,3 +1,32 @@
 .selected {
   font-weight: bold;
 }
+
+#customer-table {
+  width: inherit;
+  margin: 0;
+  background-color: white;
+  font-family: monospace;
+}
+
+table,
+td,
+tr {
+  border: 1.3px solid #aaa;
+  border-collapse: collapse;
+  padding: 3px;
+}
+
+#customer-table>thead>tr>th {
+  margin: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  background-color: lightgray;
+  border: 1px solid #aaa;
+}
+
+tbody>tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
