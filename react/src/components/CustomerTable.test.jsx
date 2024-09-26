@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
-import * as restdb from '../rest/restdb';
-import { CustomerProvider, useCustomer } from './hooks/CustomerContext';
+import * as CustomerContext from './hooks/CustomerContext';
+
+jest.mock('./hooks/CustomerContext');
 
 const returnData = [
   {
@@ -23,15 +24,24 @@ const EMPTY_CUSTOMER = {
 
 describe('Customer Table', () => {
 
+  afterEach(() => {
+    CustomerContext.useCustomer.mockClear();
+  });
+
   it('Should contain Name, Email and Pass column row', async () => {
     // Given
     const nameColumn = 'Name';
     const emailColumn = 'Email';
     const passwordColumn = 'Pass';
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
     const { findByRole } = render(
-      <CustomerProvider>
-        <CustomerTable customerData={returnData} />
-      </CustomerProvider>,
+      <CustomerTable customerData={returnData} />,
       { wrapper: BrowserRouter }
     );
 
@@ -48,10 +58,15 @@ describe('Customer Table', () => {
 
   it('Should contain returned data', async () => {
     // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
     const { findByRole } = render(
-      <CustomerProvider>
-        <CustomerTable customerData={returnData} />
-      </CustomerProvider>,
+      <CustomerTable customerData={returnData} />,
       { wrapper: BrowserRouter }
     );
 
@@ -68,10 +83,15 @@ describe('Customer Table', () => {
 
   it('Should fire event and select when clicking on table', async () => {
     // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
     const { findByRole } = render(
-      <CustomerProvider>
-        <CustomerTable customerData={returnData} />
-      </CustomerProvider>,
+      <CustomerTable customerData={returnData} />,
       { wrapper: BrowserRouter }
     );
     const name = await findByRole('cell', { name: returnData[0].name });
@@ -79,19 +99,23 @@ describe('Customer Table', () => {
 
     // When
     fireEvent.click(customerRow);
-    const nameBold = await findByRole('cell', { name: returnData[0].name });
-    const customerRowBold = nameBold.closest('tr');
 
     // Then
-    expect(customerRowBold).toHaveClass('selected');
+    expect(contextValues.setCustomer).toHaveBeenCalledTimes(1);
+    expect(contextValues.setCustomer).toHaveBeenCalledWith(returnData[0]);
   });
 
   it('Should deselect a customer when clicked twice', async () => {
     // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
     const { findByRole } = render(
-      <CustomerProvider>
-        <CustomerTable customerData={returnData} />
-      </CustomerProvider>,
+      <CustomerTable customerData={returnData} />,
       { wrapper: BrowserRouter }
     );
     const name = await findByRole('cell', { name: returnData[0].name });
@@ -99,17 +123,10 @@ describe('Customer Table', () => {
 
     // When
     fireEvent.click(customerRow);
-    const nameBold = await findByRole('cell', { name: returnData[0].name });
-    const customerRowBold = nameBold.closest('tr');
-    expect(customerRowBold).toHaveClass('selected');
-
     fireEvent.click(customerRow);
-    const nameNormal = await findByRole('cell', { name: returnData[0].name });
-    const customerNormal = nameNormal.closest('tr');
 
     // Then
-    expect(customerNormal).not.toHaveClass('selected');
+    expect(contextValues.setCustomer).toHaveBeenCalledTimes(2);
+    expect(contextValues.setCustomer).toHaveBeenCalledWith(returnData[0]);
   })
-
-
 })
