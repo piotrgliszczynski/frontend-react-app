@@ -17,6 +17,11 @@ tr {
   padding: 3px;
 }
 
+td,
+th {
+  overflow-wrap: anywhere;
+}
+
 #customer-table>thead>tr>th {
   margin: 0;
   font-weight: normal;
