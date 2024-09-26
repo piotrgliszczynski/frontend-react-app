@@ -54,6 +54,13 @@ public class AddUpdateFormSteps extends BaseSteps {
     if (!homePage.getAddUpdateForm().getPasswordPlaceholder().equals("password")) {
       return false;
     }
+    if (!areButtonsVisible()) {
+      return false;
+    }
+    return true;
+  }
+
+  public boolean areButtonsVisible() {
     if (!homePage.getAddUpdateForm().getCrudButtons().getDeleteButtonText().equals("Delete")) {
       return false;
     }
