@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './styles/SearchBar.css';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 
   const [searchTerm, setSearchTerm] = useState();
 
@@ -10,7 +10,7 @@ const SearchBar = () => {
   }
 
   const onSearch = () => {
-    console.log(searchTerm);
+    props.doSearch(searchTerm);
   }
 
   return (

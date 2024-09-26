@@ -6,7 +6,7 @@ const AddUpdateForm = (props) => {
 
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
-  const { deleteCustomer, addCustomer, updateCustomer } = props.crudOperations;
+  const { fetchCustomers, deleteCustomer, addCustomer, updateCustomer } = props.crudOperations;
 
   const setTitle = () => {
     return customerData.id !== emptyCustomer.id ? 'Update' : 'Add'
@@ -42,7 +42,11 @@ const AddUpdateForm = (props) => {
   }
 
   const onCancel = () => {
-    setCustomer(emptyCustomer);
+    if (customerData.id !== emptyCustomer.id) {
+      setCustomer(emptyCustomer);
+      return;
+    }
+    fetchCustomers();
   }
 
   useEffect(() => {

@@ -8,7 +8,7 @@ const CustomerList = (props) => {
   return (
     <div className="customer-list">
       <CustomerListTitle />
-      <SearchBar />
+      <SearchBar doSearch={props.doSearch} />
       <CustomerTable customerData={props.customerData} />
     </div>
   )

@@ -27,10 +27,10 @@ describe("Search Bar", () => {
     const placeholderSearch = 'Search for customer name';
     const buttonText = 'Search';
 
-    jest.spyOn(console, 'log').mockImplementationOnce(() => { });
+    const mockSearch = jest.fn();
 
     render(
-      <SearchBar />
+      <SearchBar doSearch={mockSearch} />
     );
     const inputElement = screen.getByPlaceholderText(placeholderSearch);
     const buttonElement = screen.getByRole('button', { target: { name: buttonText } });
@@ -40,7 +40,7 @@ describe("Search Bar", () => {
     fireEvent.click(buttonElement);
 
     // Then
-    expect(console.log).toHaveBeenCalledTimes(1);
-    expect(console.log).toHaveBeenCalledWith('test');
+    expect(mockSearch).toHaveBeenCalledTimes(1);
+    expect(mockSearch).toHaveBeenCalledWith('test');
   })
 })
