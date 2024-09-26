@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import AddUpdateForm from './AddUpdateForm';
 import '@testing-library/jest-dom';
@@ -61,7 +62,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -103,7 +105,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -132,7 +135,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
 
     const nameInput = screen.getByLabelText(nameLabel);
@@ -163,7 +167,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
     const deleteName = 'Delete';
     const deleteButton = screen.getByRole('button', { name: deleteName })
@@ -185,7 +190,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
     const deleteName = 'Delete';
     const deleteButton = screen.getByRole('button', { name: deleteName })
@@ -213,7 +219,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
     const saveName = 'Save';
     const saveButton = screen.getByRole('button', { name: saveName });
@@ -244,7 +251,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
     const saveName = 'Save';
     const saveButton = screen.getByRole('button', { name: saveName });
@@ -276,7 +284,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
     const cancelName = 'Cancel';
     const cancelButton = screen.getByRole('button', { name: cancelName });
@@ -303,7 +312,8 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />
+      <AddUpdateForm crudOperations={crudOperations} />,
+      { wrapper: BrowserRouter }
     );
     const cancelName = 'Cancel';
     const cancelButton = screen.getByRole('button', { name: cancelName });

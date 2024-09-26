@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import CustomerList from './CustomerList';
 import '@testing-library/jest-dom';
@@ -21,7 +22,8 @@ describe("Customer List", () => {
     render(
       <CustomerProvider>
         <CustomerList customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -39,7 +41,8 @@ describe("Customer List", () => {
     const { findByRole } = render(
       <CustomerProvider>
         <CustomerList customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -58,7 +61,8 @@ describe("Customer List", () => {
     const { findByRole } = render(
       <CustomerProvider>
         <CustomerList customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -80,7 +84,8 @@ describe("Customer List", () => {
     render(
       <CustomerProvider>
         <CustomerList customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
 
     // When

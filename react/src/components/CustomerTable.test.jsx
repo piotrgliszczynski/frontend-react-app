@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
@@ -30,7 +31,8 @@ describe('Customer Table', () => {
     const { findByRole } = render(
       <CustomerProvider>
         <CustomerTable customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -49,7 +51,8 @@ describe('Customer Table', () => {
     const { findByRole } = render(
       <CustomerProvider>
         <CustomerTable customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
 
     // When
@@ -68,7 +71,8 @@ describe('Customer Table', () => {
     const { findByRole } = render(
       <CustomerProvider>
         <CustomerTable customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
     const name = await findByRole('cell', { name: returnData[0].name });
     const customerRow = name.closest('tr');
@@ -87,7 +91,8 @@ describe('Customer Table', () => {
     const { findByRole } = render(
       <CustomerProvider>
         <CustomerTable customerData={returnData} />
-      </CustomerProvider>
+      </CustomerProvider>,
+      { wrapper: BrowserRouter }
     );
     const name = await findByRole('cell', { name: returnData[0].name });
     const customerRow = name.closest('tr');
