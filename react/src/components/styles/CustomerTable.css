@@ -3,7 +3,11 @@
 }
 
 #customer-table {
-  width: inherit;
+  --width: 304px;
+  --max-height: 22px;
+  width: var(--width);
+  min-width: var(--width);
+  max-height: var(--max-height);
   margin: 0;
   background-color: white;
   font-family: monospace;
