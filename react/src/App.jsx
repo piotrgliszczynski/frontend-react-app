@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 import { getAll, deleteById, post, put } from './rest/restdb';
 import AddUpdateForm from './components/AddUpdateForm'
 import CustomerList from './components/CustomerList'
+import Heading from './components/Heading';
 import { CustomerProvider } from './components/hooks/CustomerContext'
 
 function App() {
@@ -52,10 +54,13 @@ function App() {
 
   return (
     <>
-      <CustomerProvider>
-        <CustomerList customerData={customerData} doSearch={searchCustomer} />
-        <AddUpdateForm crudOperations={{ fetchCustomers, deleteCustomer, addCustomer, updateCustomer }} />
-      </CustomerProvider>
+      <BrowserRouter>
+        <CustomerProvider>
+          <Heading />
+          <CustomerList customerData={customerData} doSearch={searchCustomer} />
+          <AddUpdateForm crudOperations={{ fetchCustomers, deleteCustomer, addCustomer, updateCustomer }} />
+        </CustomerProvider>
+      </BrowserRouter>
     </>
   )
 }
