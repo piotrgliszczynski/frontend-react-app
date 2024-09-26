@@ -1,10 +1,12 @@
 package org.training.page.components;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.training.page.base.BasePage;
 
+@Getter
 public class AddUpdateForm extends BasePage {
 
   private final By addUpdateFormTitle = By.id("add-update-form-title");
@@ -16,12 +18,11 @@ public class AddUpdateForm extends BasePage {
   private final By passwordLabel = By.cssSelector("label[for='password']");
   private final By passwordInput = By.id("password");
 
-  private final By deleteButton = By.id("btn-delete");
-  private final By saveButton = By.id("btn-save");
-  private final By cancelButton = By.id("btn-cancel");
+  private final CrudButtons crudButtons;
 
   public AddUpdateForm(WebDriver driver) {
     super(driver);
+    crudButtons = new CrudButtons(driver);
   }
 
   public void typeName(String name) {
@@ -38,6 +39,10 @@ public class AddUpdateForm extends BasePage {
 
   private void typeData(By element, String data) {
     wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(data);
+  }
+
+  public void handleAlert() {
+    wait.until(ExpectedConditions.alertIsPresent()).accept();
   }
 
   public String getAddUpdateFormTitle() {
@@ -78,17 +83,5 @@ public class AddUpdateForm extends BasePage {
 
   public String getPasswordValue() {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).getAttribute("value");
-  }
-
-  public String getDeleteButtonText() {
-    return wait.until(ExpectedConditions.visibilityOfElementLocated(deleteButton)).getText();
-  }
-
-  public String getSaveButtonText() {
-    return wait.until(ExpectedConditions.visibilityOfElementLocated(saveButton)).getText();
-  }
-
-  public String getCancelButtonText() {
-    return wait.until(ExpectedConditions.visibilityOfElementLocated(cancelButton)).getText();
   }
 }

@@ -23,6 +23,15 @@ const EMPTY_CUSTOMER = {
 
 describe('Add-Update form', () => {
 
+  let crudOperations;
+
+  beforeEach(() => {
+    const deleteCustomer = jest.fn();
+    const addCustomer = jest.fn();
+    const updateCustomer = jest.fn();
+    crudOperations = { deleteCustomer, addCustomer, updateCustomer };
+  });
+
   afterEach(() => {
     CustomerContext.useCustomer.mockClear();
   });
@@ -51,7 +60,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
 
     // When
@@ -62,9 +71,9 @@ describe('Add-Update form', () => {
     const emailPlaceholderElement = screen.getByPlaceholderText(emailPlaceholder);
     const passwordLabelElement = screen.getByText(passwordLabel);
     const passwordPlaceholderElement = screen.getByPlaceholderText(passwordPlaceholder);
-    const deleteButton = screen.getByRole('button', { name: deleteName })
-    const saveButton = screen.getByRole('button', { name: saveName })
-    const cancelButton = screen.getByRole('button', { name: cancelName })
+    const deleteButton = screen.getByRole('button', { name: deleteName });
+    const saveButton = screen.getByRole('button', { name: saveName });
+    const cancelButton = screen.getByRole('button', { name: cancelName });
 
     // Then
     expect(titleElement).toBeInTheDocument();
@@ -93,7 +102,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
 
     // When
@@ -122,7 +131,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm />
+      <AddUpdateForm crudOperations={crudOperations} />
     );
 
     const nameInput = screen.getByLabelText(nameLabel);
@@ -142,7 +151,114 @@ describe('Add-Update form', () => {
     expect(changedName).toBeInTheDocument();
     expect(changedEmail).toBeInTheDocument();
     expect(changedPassword).toBeInTheDocument();
+  });
 
+  it("Should do nothing when customer is not selected", () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const deleteName = 'Delete';
+    const deleteButton = screen.getByRole('button', { name: deleteName })
+
+    // When
+    fireEvent.click(deleteButton);
+
+    // Then
+    expect(crudOperations.deleteCustomer).not.toHaveBeenCalled()
+  });
+
+  it("Should be able to delete data when customer is selected", () => {
+    // Given
+    const contextValues = {
+      customer: CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const deleteName = 'Delete';
+    const deleteButton = screen.getByRole('button', { name: deleteName })
+
+    // When
+    fireEvent.click(deleteButton);
+
+    // Then
+    expect(crudOperations.deleteCustomer).toHaveBeenCalledTimes(1);
+    expect(crudOperations.deleteCustomer).toHaveBeenCalledWith(CUSTOMER.id);
+    expect(contextValues.setCustomer).toHaveBeenCalledTimes(1);
+    expect(contextValues.setCustomer).toHaveBeenCalledWith(EMPTY_CUSTOMER);
+  });
+
+  it("Should be able to add data when customer is not selected", async () => {
+    // Given
+    const namePlaceholder = 'Customer Name';
+    const emailPlaceholder = 'name@company.com';
+    const passwordPlaceholder = 'password';
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const saveName = 'Save';
+    const saveButton = screen.getByRole('button', { name: saveName });
+
+    // When
+    fireEvent.click(saveButton);
+    const emptyName = await screen.findByPlaceholderText(namePlaceholder);
+    const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
+    const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
+
+    // Then
+    expect(crudOperations.addCustomer).toHaveBeenCalledTimes(1);
+    expect(emptyName).toBeInTheDocument();
+    expect(emptyEmail).toBeInTheDocument();
+    expect(emptyPassword).toBeInTheDocument();
+  });
+
+  it("Should update when customer is selected and fields are empty", async () => {
+    // Given
+    const namePlaceholder = 'Customer Name';
+    const emailPlaceholder = 'name@company.com';
+    const passwordPlaceholder = 'password';
+    const contextValues = {
+      customer: CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const saveName = 'Save';
+    const saveButton = screen.getByRole('button', { name: saveName });
+
+    // When
+    await fireEvent.click(saveButton);
+    const emptyName = await screen.findByPlaceholderText(namePlaceholder);
+    const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
+    const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
+
+    // Then
+    expect(crudOperations.addCustomer).not.toHaveBeenCalled();
+    expect(crudOperations.updateCustomer).toHaveBeenCalledTimes(1);
+    expect(emptyName).toBeInTheDocument();
+    expect(emptyEmail).toBeInTheDocument();
+    expect(emptyPassword).toBeInTheDocument();
   });
 });

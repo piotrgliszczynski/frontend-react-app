@@ -19,6 +19,11 @@ public class AddUpdateFormSteps extends BaseSteps {
     return this;
   }
 
+  public AddUpdateFormSteps typeData(Customer customer) {
+    typeData(customer.getName(), customer.getEmail(), customer.getPassword());
+    return this;
+  }
+
   public AddUpdateFormSteps typeData(String name, String email, String password) {
     homePage.getAddUpdateForm().typeName(name);
     homePage.getAddUpdateForm().typeEmail(email);
@@ -49,13 +54,20 @@ public class AddUpdateFormSteps extends BaseSteps {
     if (!homePage.getAddUpdateForm().getPasswordPlaceholder().equals("password")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getDeleteButtonText().equals("Delete")) {
+    if (!areButtonsVisible()) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getSaveButtonText().equals("Save")) {
+    return true;
+  }
+
+  public boolean areButtonsVisible() {
+    if (!homePage.getAddUpdateForm().getCrudButtons().getDeleteButtonText().equals("Delete")) {
       return false;
     }
-    if (!homePage.getAddUpdateForm().getCancelButtonText().equals("Cancel")) {
+    if (!homePage.getAddUpdateForm().getCrudButtons().getSaveButtonText().equals("Save")) {
+      return false;
+    }
+    if (!homePage.getAddUpdateForm().getCrudButtons().getCancelButtonText().equals("Cancel")) {
       return false;
     }
     return true;
@@ -92,5 +104,14 @@ public class AddUpdateFormSteps extends BaseSteps {
     return homePage.getAddUpdateForm().getNameValue().equals(name)
         && homePage.getAddUpdateForm().getEmailValue().equals(email)
         && homePage.getAddUpdateForm().getPasswordValue().equals(password);
+  }
+
+  public void clickDelete() {
+    homePage.getAddUpdateForm().getCrudButtons().clickDelete();
+    homePage.getAddUpdateForm().handleAlert();
+  }
+
+  public void clickSave() {
+    homePage.getAddUpdateForm().getCrudButtons().clickSave();
   }
 }

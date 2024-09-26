@@ -3,14 +3,10 @@ import { useCustomer } from './hooks/CustomerContext';
 import { getAll } from '../rest/restdb';
 import './styles/CustomerTable.css';
 
-const CustomerTable = () => {
+const CustomerTable = (props) => {
 
-  const [customerData, setCustomerData] = useState([]);
+  const customerData = props.customerData;
   const { customer, emptyCustomer, setCustomer } = useCustomer();
-
-  useEffect(() => {
-    getAll().then(response => setCustomerData(response));
-  }, []);
 
   const onRowClick = (selectedCustomer) => {
     if (customer.id === selectedCustomer.id) {

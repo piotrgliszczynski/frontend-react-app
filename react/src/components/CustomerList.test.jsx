@@ -15,20 +15,12 @@ const returnData = [
 
 describe("Customer List", () => {
 
-  beforeEach(() => {
-    jest.spyOn(restdb, 'getAll').mockResolvedValueOnce(returnData);
-  })
-
-  afterEach(() => {
-    restdb.getAll.mockClear();
-  })
-
   it("Customer List title should be visible", async () => {
     // Given
     const HEADING_TITLE = 'Customer List';
     render(
       <CustomerProvider>
-        <CustomerList />
+        <CustomerList customerData={returnData} />
       </CustomerProvider>
     );
 
@@ -46,7 +38,7 @@ describe("Customer List", () => {
     const passwordColumn = 'Pass';
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerList />
+        <CustomerList customerData={returnData} />
       </CustomerProvider>
     );
 
@@ -65,7 +57,7 @@ describe("Customer List", () => {
     // Given
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerList />
+        <CustomerList customerData={returnData} />
       </CustomerProvider>
     );
 
@@ -75,7 +67,6 @@ describe("Customer List", () => {
     const password = await findByRole('cell', { name: returnData[0].password });
 
     // Then
-    expect(restdb.getAll).toHaveBeenCalledTimes(1);
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();

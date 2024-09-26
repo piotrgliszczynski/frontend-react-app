@@ -22,14 +22,6 @@ const EMPTY_CUSTOMER = {
 
 describe('Customer Table', () => {
 
-  beforeEach(() => {
-    jest.spyOn(restdb, 'getAll').mockResolvedValueOnce(returnData);
-  })
-
-  afterEach(() => {
-    restdb.getAll.mockClear();
-  })
-
   it('Should contain Name, Email and Pass column row', async () => {
     // Given
     const nameColumn = 'Name';
@@ -37,7 +29,7 @@ describe('Customer Table', () => {
     const passwordColumn = 'Pass';
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerTable />
+        <CustomerTable customerData={returnData} />
       </CustomerProvider>
     );
 
@@ -56,7 +48,7 @@ describe('Customer Table', () => {
     // Given
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerTable />
+        <CustomerTable customerData={returnData} />
       </CustomerProvider>
     );
 
@@ -66,7 +58,6 @@ describe('Customer Table', () => {
     const password = await findByRole('cell', { name: returnData[0].password });
 
     // Then
-    expect(restdb.getAll).toHaveBeenCalledTimes(1);
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
@@ -76,7 +67,7 @@ describe('Customer Table', () => {
     // Given
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerTable />
+        <CustomerTable customerData={returnData} />
       </CustomerProvider>
     );
     const name = await findByRole('cell', { name: returnData[0].name });
@@ -95,7 +86,7 @@ describe('Customer Table', () => {
     // Given
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerTable />
+        <CustomerTable customerData={returnData} />
       </CustomerProvider>
     );
     const name = await findByRole('cell', { name: returnData[0].name });
