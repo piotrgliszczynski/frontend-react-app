@@ -26,10 +26,11 @@ describe('Add-Update form', () => {
   let crudOperations;
 
   beforeEach(() => {
+    const fetchCustomers = jest.fn();
     const deleteCustomer = jest.fn();
     const addCustomer = jest.fn();
     const updateCustomer = jest.fn();
-    crudOperations = { deleteCustomer, addCustomer, updateCustomer };
+    crudOperations = { fetchCustomers, deleteCustomer, addCustomer, updateCustomer };
   });
 
   afterEach(() => {
@@ -290,5 +291,27 @@ describe('Add-Update form', () => {
     expect(emptyName).toBeInTheDocument();
     expect(emptyEmail).toBeInTheDocument();
     expect(emptyPassword).toBeInTheDocument();
+  });
+
+  it("Should reset search when Cancel is clicked and Customer is not selected", async () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <AddUpdateForm crudOperations={crudOperations} />
+    );
+    const cancelName = 'Cancel';
+    const cancelButton = screen.getByRole('button', { name: cancelName });
+
+    // When
+    fireEvent.click(cancelButton);
+
+    // Then
+    expect(crudOperations.fetchCustomers).toHaveBeenCalledTimes(1);
   });
 });
