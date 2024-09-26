@@ -9,6 +9,10 @@ function App() {
 
   const [customerData, setCustomerData] = useState([]);
 
+  const fetchCustomers = () => {
+    getAll().then(response => setCustomerData(response));
+  }
+
   const deleteCustomer = (id) => {
     deleteById(id).then(() => alert(`Customer with id ${id} was deleted`));
     setCustomerData(
@@ -32,15 +36,25 @@ function App() {
     ));
   }
 
+  const searchCustomer = async (searchTerm) => {
+    if (searchTerm) {
+      setCustomerData(
+        customerData.filter(customer => customer.name.includes(searchTerm))
+      );
+      return;
+    }
+    fetchCustomers();
+  }
+
   useEffect(() => {
-    getAll().then(response => setCustomerData(response));
+    fetchCustomers();
   }, []);
 
   return (
     <>
       <CustomerProvider>
-        <CustomerList customerData={customerData} />
-        <AddUpdateForm crudOperations={{ deleteCustomer, addCustomer, updateCustomer }} />
+        <CustomerList customerData={customerData} doSearch={searchCustomer} />
+        <AddUpdateForm crudOperations={{ fetchCustomers, deleteCustomer, addCustomer, updateCustomer }} />
       </CustomerProvider>
     </>
   )

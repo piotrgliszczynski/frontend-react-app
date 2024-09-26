@@ -24,24 +24,26 @@ const CustomerTable = (props) => {
   }
 
   return (
-    <table id='customer-table'>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Pass</th>
-        </tr>
-      </thead>
-      <tbody>
-        {customerData.map(customer => (
-          <tr onClick={() => onRowClick(customer)} className={selectedClass(customer.id)} key={customer.id}>
-            <td>{customer.name}</td>
-            <td>{customer.email}</td>
-            <td>{customer.password}</td>
+    <div className='table-container'>
+      <table id='customer-table'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Pass</th>
           </tr>
-        ))}
-      </tbody>
-    </table >
+        </thead>
+        <tbody>
+          {customerData.map(customer => (
+            <tr onClick={() => onRowClick(customer)} className={selectedClass(customer.id)} key={customer.id}>
+              <td>{customer.name}</td>
+              <td>{customer.email}</td>
+              <td>{customer.password}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table >
+    </div>
   )
 }
 

@@ -3,10 +3,23 @@
 }
 
 #customer-table {
-  width: inherit;
+  --width: 304px;
+  --max-height: 22px;
+  width: var(--width);
+  min-width: var(--width);
+  max-height: var(--max-height);
   margin: 0;
   background-color: white;
   font-family: monospace;
+  overflow-y: scroll;
+  height: 315px;
+}
+
+.table-container {
+  height: 315px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
 
 table,
@@ -15,6 +28,11 @@ tr {
   border: 1.3px solid #aaa;
   border-collapse: collapse;
   padding: 3px;
+}
+
+td,
+th {
+  overflow-wrap: anywhere;
 }
 
 #customer-table>thead>tr>th {

@@ -70,5 +70,25 @@ describe("Customer List", () => {
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
-  })
+  });
+
+  it("Should contain search bar and search button", () => {
+    // Given
+    const placeholderSearch = 'Search for customer name';
+    const buttonText = 'Search';
+
+    render(
+      <CustomerProvider>
+        <CustomerList customerData={returnData} />
+      </CustomerProvider>
+    );
+
+    // When
+    const inputElement = screen.getByPlaceholderText(placeholderSearch);
+    const buttonElement = screen.getByRole('button', { target: { name: buttonText } });
+
+    // Then
+    expect(inputElement).toBeInTheDocument();
+    expect(buttonElement).toBeInTheDocument();
+  });
 })
