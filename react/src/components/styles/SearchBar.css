@@ -1,0 +1,12 @@
+.search-bar-container {
+  width: inherit;
+  margin-bottom: 3px;
+}
+
+#search-bar {
+  width: 235px;
+}
+
+.search-button {
+  margin-left: 2px;
+}
