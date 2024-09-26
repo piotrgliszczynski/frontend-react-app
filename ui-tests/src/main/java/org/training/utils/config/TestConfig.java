@@ -10,6 +10,8 @@ public class TestConfig {
 
   private static Properties properties;
   public static String baseUrl = getProperty("baseUrl");
+  public static String apiBaseUrl = getProperty("apiBaseUrl");
+  public static String customersApi = getProperty("customersApi");
 
   private static String getProperty(String key) {
     Properties properties = getProperties();

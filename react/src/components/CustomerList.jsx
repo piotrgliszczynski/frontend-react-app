@@ -2,11 +2,11 @@ import React from 'react';
 import CustomerListTitle from './CustomerListTitle';
 import CustomerTable from './CustomerTable';
 
-const CustomerList = () => {
+const CustomerList = (props) => {
   return (
     <>
       <CustomerListTitle />
-      <CustomerTable />
+      <CustomerTable customerData={props.customerData} />
     </>
   )
 };
