@@ -57,8 +57,14 @@ function App() {
       <BrowserRouter>
         <CustomerProvider>
           <Heading />
-          <CustomerList customerData={customerData} doSearch={searchCustomer} />
-          <AddUpdateForm crudOperations={{ fetchCustomers, deleteCustomer, addCustomer, updateCustomer }} />
+          <Routes>
+            <Route exact path="/" element={
+              <CustomerList customerData={customerData} doSearch={searchCustomer} />}
+            />
+            <Route path="/customer-form" element={
+              <AddUpdateForm crudOperations={{ fetchCustomers, deleteCustomer, addCustomer, updateCustomer }} />}
+            />
+          </Routes>
         </CustomerProvider>
       </BrowserRouter>
     </>
