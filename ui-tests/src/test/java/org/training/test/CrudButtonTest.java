@@ -113,6 +113,58 @@ public class CrudButtonTest extends BaseTest {
     assertTrue(customers.contains(createdCustomer));
   }
 
+  @Test
+  void shouldUpdateRecord_AfterSaveClick_CustomerUpdatedInBackend() throws RestApiException {
+    // Given
+    createdCustomer = customersApi.createCustomer(
+        new Customer("test", "test@test.com", "test")
+    );
+
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer);
+    addUpdateFormSteps.typeData("Changed", "Changed", "Changed");
+    Customer changedCustomer = new Customer("testChanged", "test@test.comChanged", "testChanged");
+
+    // When
+    addUpdateFormSteps.clickSave();
+    boolean isAddState = addUpdateFormSteps.isFormInAddState();
+    boolean areFieldsEmpty = addUpdateFormSteps.areFieldsEmpty();
+    boolean isSelected = customerTableSteps.isSelected();
+    List<Customer> customers = customersApi.getCustomers();
+
+    // Then
+    assertAll(
+        () -> assertTrue(isAddState),
+        () -> assertTrue(areFieldsEmpty),
+        () -> assertFalse(isSelected),
+        () -> assertTrue(customers.contains(changedCustomer))
+    );
+  }
+
+  @Test
+  void shouldUpdateRecord_AfterSaveClick_CustomerUpdatedOnPagety() throws RestApiException {
+    // Given
+    createdCustomer = customersApi.createCustomer(
+        new Customer("test", "test@test.com", "test")
+    );
+
+    customerTableSteps.openHomePage()
+        .clickOnCustomer(createdCustomer);
+    addUpdateFormSteps.typeData("Changed", "Changed", "Changed");
+    Customer changedCustomer = new Customer("testChanged", "test@test.comChanged", "testChanged");
+
+    // When
+    addUpdateFormSteps.clickSave();
+    boolean isSelected = customerTableSteps.isSelected();
+    List<Customer> customers = customerTableSteps.getAllCustomers();
+
+    // Then
+    assertAll(
+        () -> assertFalse(isSelected),
+        () -> assertTrue(customers.contains(changedCustomer))
+    );
+  }
+
   @Override
   public void prepareSteps() {
     addUpdateFormSteps = new AddUpdateFormSteps(getDriver());
