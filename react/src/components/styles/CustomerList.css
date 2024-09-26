@@ -1,0 +1,10 @@
+.customer-list {
+  width: 315px;
+  background-color: #bababa;
+  border: 1.5px solid #aaa;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  margin: 10px
+}
