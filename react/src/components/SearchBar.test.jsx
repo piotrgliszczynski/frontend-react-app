@@ -3,8 +3,26 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SearchBar from './SearchBar';
 import { BrowserRouter } from 'react-router-dom';
+import * as DataProviderContext from './hooks/DataProviderContext';
+
+jest.mock('./hooks/DataProviderContext');
 
 describe("Search Bar", () => {
+
+  const dataContext = {
+    searchCustomer: jest.fn()
+  }
+
+  beforeEach(() => {
+    jest.spyOn(DataProviderContext, 'useCustomerData').mockImplementation(() => dataContext);
+  });
+
+  afterEach(() => {
+    DataProviderContext.useCustomerData.mockReset();
+    dataContext.searchCustomer.mockClear();
+  });
+
+
   it("Should contain search bar and search button", () => {
     // Given
     const placeholderSearch = 'Search for customer name';
@@ -29,10 +47,8 @@ describe("Search Bar", () => {
     const placeholderSearch = 'Search for customer name';
     const buttonText = 'Search';
 
-    const mockSearch = jest.fn();
-
     render(
-      <SearchBar doSearch={mockSearch} />,
+      <SearchBar />,
       { wrapper: BrowserRouter }
     );
     const inputElement = screen.getByPlaceholderText(placeholderSearch);
@@ -43,7 +59,7 @@ describe("Search Bar", () => {
     fireEvent.click(buttonElement);
 
     // Then
-    expect(mockSearch).toHaveBeenCalledTimes(1);
-    expect(mockSearch).toHaveBeenCalledWith('test');
+    expect(dataContext.searchCustomer).toHaveBeenCalledTimes(1);
+    expect(dataContext.searchCustomer).toHaveBeenCalledWith('test');
   })
 })
