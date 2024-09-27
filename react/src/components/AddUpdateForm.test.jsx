@@ -347,4 +347,26 @@ describe('Add-Update form', () => {
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith("/");
   });
+
+  it("Should display error when invalid", async () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
+
+    render(
+      <BrowserRouter>
+        <AddUpdateForm />
+      </BrowserRouter>
+    );
+
+    // When
+    const errorElement = await screen.findByText('Enter valid email address');
+
+    // Then
+    expect(errorElement).toBeInTheDocument();
+  });
 });

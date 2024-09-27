@@ -8,8 +8,6 @@ import * as DataProviderContext from './hooks/DataProviderContext';
 
 jest.mock('./hooks/DataProviderContext');
 
-
-
 describe("Customer List", () => {
 
   const returnData = [{
@@ -38,7 +36,7 @@ describe("Customer List", () => {
     const HEADING_TITLE = 'Customer List';
     render(
       <CustomerProvider>
-        <CustomerList customerData={returnData} />
+        <CustomerList />
       </CustomerProvider>,
       { wrapper: BrowserRouter }
     );
@@ -57,7 +55,7 @@ describe("Customer List", () => {
     const passwordColumn = 'Pass';
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerList customerData={returnData} />
+        <CustomerList />
       </CustomerProvider>,
       { wrapper: BrowserRouter }
     );
@@ -77,7 +75,7 @@ describe("Customer List", () => {
     // Given
     const { findByRole } = render(
       <CustomerProvider>
-        <CustomerList customerData={returnData} />
+        <CustomerList />
       </CustomerProvider>,
       { wrapper: BrowserRouter }
     );
@@ -101,7 +99,7 @@ describe("Customer List", () => {
 
     render(
       <CustomerProvider>
-        <CustomerList customerData={returnData} />
+        <CustomerList />
       </CustomerProvider>,
       { wrapper: BrowserRouter }
     );
