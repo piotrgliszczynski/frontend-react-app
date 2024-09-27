@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727431419785" clover="3.2.0">
-  <project timestamp="1727431419785" name="All files">
-    <metrics statements="134" coveredstatements="112" conditionals="24" coveredconditionals="22" methods="38" coveredmethods="29" elements="196" coveredelements="163" complexity="0" loc="134" ncloc="134" packages="3" files="9" classes="9"/>
+<coverage generated="1727435671240" clover="3.2.0">
+  <project timestamp="1727435671240" name="All files">
+    <metrics statements="134" coveredstatements="133" conditionals="24" coveredconditionals="24" methods="38" coveredmethods="37" elements="196" coveredelements="194" complexity="0" loc="134" ncloc="134" packages="3" files="9" classes="9"/>
     <package name="components">
       <metrics statements="68" coveredstatements="68" conditionals="14" coveredconditionals="14" methods="23" coveredmethods="23"/>
       <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
@@ -92,7 +92,7 @@
       </file>
     </package>
     <package name="components.hooks">
-      <metrics statements="32" coveredstatements="10" conditionals="2" coveredconditionals="0" methods="11" coveredmethods="2"/>
+      <metrics statements="32" coveredstatements="31" conditionals="2" coveredconditionals="2" methods="11" coveredmethods="10"/>
       <file name="CustomerContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\CustomerContext.jsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="5" type="stmt"/>
@@ -104,41 +104,41 @@
         <line num="23" count="8" type="stmt"/>
       </file>
       <file name="DataProviderContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\DataProviderContext.jsx">
-        <metrics statements="25" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="9" coveredmethods="0"/>
-        <line num="4" count="4" type="stmt"/>
-        <line num="6" count="4" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="33" count="0" type="stmt"/>
+        <metrics statements="25" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="7" count="12" type="stmt"/>
+        <line num="9" count="12" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="13" count="12" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="12" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="12" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="31" count="12" type="stmt"/>
+        <line num="32" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="50" count="4" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="12" type="stmt"/>
+        <line num="50" count="12" type="stmt"/>
       </file>
     </package>
     <package name="rest">
       <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
       <file name="restdb.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\rest\restdb.js">
         <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
-        <line num="1" count="5" type="stmt"/>
-        <line num="2" count="5" type="stmt"/>
-        <line num="4" count="5" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
@@ -146,7 +146,7 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
-        <line num="20" count="5" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
         <line num="21" count="3" type="stmt"/>
         <line num="22" count="3" type="stmt"/>
         <line num="24" count="3" type="stmt"/>
@@ -155,7 +155,7 @@
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
         <line num="40" count="2" type="stmt"/>
-        <line num="44" count="5" type="stmt"/>
+        <line num="44" count="6" type="stmt"/>
         <line num="45" count="3" type="stmt"/>
         <line num="46" count="3" type="stmt"/>
         <line num="48" count="3" type="stmt"/>
@@ -164,7 +164,7 @@
         <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
         <line num="64" count="2" type="stmt"/>
-        <line num="68" count="5" type="stmt"/>
+        <line num="68" count="6" type="stmt"/>
         <line num="69" count="3" type="stmt"/>
         <line num="70" count="3" type="stmt"/>
         <line num="75" count="2" type="cond" truecount="2" falsecount="0"/>
