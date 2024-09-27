@@ -4,7 +4,9 @@ import { fireEvent, render } from '@testing-library/react';
 import CustomerTable from './CustomerTable';
 import '@testing-library/jest-dom';
 import * as CustomerContext from './hooks/CustomerContext';
+import * as DataProviderContext from './hooks/DataProviderContext';
 
+jest.mock('./hooks/DataProviderContext');
 jest.mock('./hooks/CustomerContext');
 
 const returnData = [
@@ -24,8 +26,20 @@ const EMPTY_CUSTOMER = {
 
 describe('Customer Table', () => {
 
+  const dataContext = {
+    customerData: returnData,
+    fetchCustomers: jest.fn()
+  }
+
+  beforeEach(() => {
+    jest.spyOn(DataProviderContext, 'useCustomerData').mockImplementation(() => dataContext);
+  });
+
   afterEach(() => {
     CustomerContext.useCustomer.mockClear();
+
+    DataProviderContext.useCustomerData.mockReset();
+    dataContext.fetchCustomers.mockClear();
   });
 
   it('Should contain Name, Email and Pass column row', async () => {
@@ -79,6 +93,7 @@ describe('Customer Table', () => {
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
+    expect(dataContext.fetchCustomers).toHaveBeenCalledTimes(1);
   })
 
   it('Should fire event and select when clicking on table', async () => {
