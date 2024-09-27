@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import AddUpdateForm from './AddUpdateForm';
 import '@testing-library/jest-dom';
 import * as CustomerContext from './hooks/CustomerContext';
+import * as DataProviderContext from './hooks/DataProviderContext';
+import * as ReactRouter from 'react-router';
 
 jest.mock('./hooks/CustomerContext');
+jest.mock('./hooks/DataProviderContext');
 
 const CUSTOMER = {
   "id": 0,
@@ -21,21 +24,31 @@ const EMPTY_CUSTOMER = {
   password: ""
 };
 
-
 describe('Add-Update form', () => {
 
-  let crudOperations;
+  const dataContext = {
+    fetchCustomers: jest.fn(),
+    deleteCustomer: jest.fn(),
+    addCustomer: jest.fn(),
+    updateCustomer: jest.fn()
+  }
+  const mockNavigate = jest.fn();
 
   beforeEach(() => {
-    const fetchCustomers = jest.fn();
-    const deleteCustomer = jest.fn();
-    const addCustomer = jest.fn();
-    const updateCustomer = jest.fn();
-    crudOperations = { fetchCustomers, deleteCustomer, addCustomer, updateCustomer };
+    jest.spyOn(ReactRouter, 'useNavigate').mockImplementation(() => mockNavigate);
+    jest.spyOn(DataProviderContext, 'useCustomerData').mockImplementation(() => dataContext);
   });
 
   afterEach(() => {
-    CustomerContext.useCustomer.mockClear();
+    CustomerContext.useCustomer.mockReset();
+
+    DataProviderContext.useCustomerData.mockReset();
+    dataContext.fetchCustomers.mockClear();
+    dataContext.deleteCustomer.mockClear();
+    dataContext.addCustomer.mockClear();
+    dataContext.updateCustomer.mockClear();
+
+    mockNavigate.mockClear();
   });
 
   it('Should have all components and in state Add', () => {
@@ -62,7 +75,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
 
@@ -105,7 +118,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
 
@@ -135,7 +148,7 @@ describe('Add-Update form', () => {
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
 
@@ -164,10 +177,10 @@ describe('Add-Update form', () => {
       customer: EMPTY_CUSTOMER,
       emptyCustomer: EMPTY_CUSTOMER
     }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
     const deleteName = 'Delete';
@@ -177,7 +190,7 @@ describe('Add-Update form', () => {
     fireEvent.click(deleteButton);
 
     // Then
-    expect(crudOperations.deleteCustomer).not.toHaveBeenCalled()
+    expect(dataContext.deleteCustomer).not.toHaveBeenCalled()
   });
 
   it("Should be able to delete data when customer is selected", () => {
@@ -187,10 +200,10 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER,
       setCustomer: jest.fn()
     }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
     const deleteName = 'Delete';
@@ -200,10 +213,12 @@ describe('Add-Update form', () => {
     fireEvent.click(deleteButton);
 
     // Then
-    expect(crudOperations.deleteCustomer).toHaveBeenCalledTimes(1);
-    expect(crudOperations.deleteCustomer).toHaveBeenCalledWith(CUSTOMER.id);
+    expect(dataContext.deleteCustomer).toHaveBeenCalledTimes(1);
+    expect(dataContext.deleteCustomer).toHaveBeenCalledWith(CUSTOMER.id);
     expect(contextValues.setCustomer).toHaveBeenCalledTimes(1);
     expect(contextValues.setCustomer).toHaveBeenCalledWith(EMPTY_CUSTOMER);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
   it("Should be able to add data when customer is not selected", async () => {
@@ -216,10 +231,10 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER,
       setCustomer: jest.fn()
     }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
     const saveName = 'Save';
@@ -232,10 +247,12 @@ describe('Add-Update form', () => {
     const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
 
     // Then
-    expect(crudOperations.addCustomer).toHaveBeenCalledTimes(1);
+    expect(dataContext.addCustomer).toHaveBeenCalledTimes(1);
     expect(emptyName).toBeInTheDocument();
     expect(emptyEmail).toBeInTheDocument();
     expect(emptyPassword).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
   it("Should update when customer is selected and fields are empty", async () => {
@@ -248,10 +265,10 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER,
       setCustomer: jest.fn()
     }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
     const saveName = 'Save';
@@ -264,11 +281,13 @@ describe('Add-Update form', () => {
     const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
 
     // Then
-    expect(crudOperations.addCustomer).not.toHaveBeenCalled();
-    expect(crudOperations.updateCustomer).toHaveBeenCalledTimes(1);
+    expect(dataContext.addCustomer).not.toHaveBeenCalled();
+    expect(dataContext.updateCustomer).toHaveBeenCalledTimes(1);
     expect(emptyName).toBeInTheDocument();
     expect(emptyEmail).toBeInTheDocument();
     expect(emptyPassword).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
   it("Should deselect customer when Cancel is clicked", async () => {
@@ -281,10 +300,10 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER,
       setCustomer: jest.fn()
     }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
+      <AddUpdateForm />,
       { wrapper: BrowserRouter }
     );
     const cancelName = 'Cancel';
@@ -300,20 +319,23 @@ describe('Add-Update form', () => {
     expect(emptyName).toBeInTheDocument();
     expect(emptyEmail).toBeInTheDocument();
     expect(emptyPassword).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
-  it("Should reset search when Cancel is clicked and Customer is not selected", async () => {
+  it("Should navigate to main page when Cancel is clicked and no customer selected", () => {
     // Given
     const contextValues = {
       customer: EMPTY_CUSTOMER,
       emptyCustomer: EMPTY_CUSTOMER,
       setCustomer: jest.fn()
     }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
-      <AddUpdateForm crudOperations={crudOperations} />,
-      { wrapper: BrowserRouter }
+      <BrowserRouter>
+        <AddUpdateForm />
+      </BrowserRouter>
     );
     const cancelName = 'Cancel';
     const cancelButton = screen.getByRole('button', { name: cancelName });
@@ -322,6 +344,29 @@ describe('Add-Update form', () => {
     fireEvent.click(cancelButton);
 
     // Then
-    expect(crudOperations.fetchCustomers).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith("/");
+  });
+
+  it("Should display error when invalid", async () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
+
+    render(
+      <BrowserRouter>
+        <AddUpdateForm />
+      </BrowserRouter>
+    );
+
+    // When
+    const errorElement = await screen.findByText('Enter valid email address');
+
+    // Then
+    expect(errorElement).toBeInTheDocument();
   });
 });

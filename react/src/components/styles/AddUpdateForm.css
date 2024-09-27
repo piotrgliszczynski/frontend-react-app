@@ -34,8 +34,17 @@
   font-family: monospace;
 }
 
-.crud-buttons {
+#error-message {
   grid-area: 4 / 1 / 5 / 3;
+  color: red;
+}
+
+.crud-buttons {
+  grid-area: 5 / 1 / 6 / 3;
   padding: 2px;
   text-align: start;
+}
+
+#email:invalid {
+  border-color: red;
 }

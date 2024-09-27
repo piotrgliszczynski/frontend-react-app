@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
 import './styles/AddUpdateForm.css';
 import { useNavigate } from "react-router";
+import { useCustomerData } from "./hooks/DataProviderContext";
 
-const AddUpdateForm = (props) => {
+const AddUpdateForm = () => {
 
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
-  const { fetchCustomers, deleteCustomer, addCustomer, updateCustomer } = props.crudOperations;
+  const { deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
   const navigate = useNavigate();
 
   const setTitle = () => {
@@ -50,8 +51,12 @@ const AddUpdateForm = (props) => {
     if (customerData.id !== emptyCustomer.id) {
       setCustomer(emptyCustomer);
     }
-    fetchCustomers();
     navigate("/");
+  }
+
+  const isEmailValid = () => {
+    const emailRegex = /^.+@.+\..+$/i;
+    return emailRegex.test(customerData.email);
   }
 
   useEffect(() => {
@@ -67,20 +72,23 @@ const AddUpdateForm = (props) => {
           placeholder="Customer Name"
           value={customerData.name}></input>
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" onChange={(event) => onType('email', event)}
+        <input type="email" id="email"
+          onChange={(event) => onType('email', event)}
           placeholder="name@company.com"
           value={customerData.email}></input>
         <label htmlFor="password">Pass:</label>
         <input type="text" id="password" onChange={(event) => onType('password', event)}
           placeholder="password"
           value={customerData.password}></input>
+
+        {isEmailValid() ? null : (<div id="error-message">Enter valid email address</div>)}
         <div className="crud-buttons">
           <button id="btn-delete" onClick={onDelete}>Delete</button>
           <button id="btn-save" onClick={onSave}>Save</button>
           <button id="btn-cancel" onClick={onCancel}>Cancel</button>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

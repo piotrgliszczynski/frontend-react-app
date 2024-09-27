@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import './styles/SearchBar.css';
+import { useCustomerData } from "./hooks/DataProviderContext";
 
-const SearchBar = (props) => {
+const SearchBar = () => {
 
   const [searchTerm, setSearchTerm] = useState();
+  const { searchCustomer } = useCustomerData();
 
   const onType = (event) => {
     setSearchTerm(event.target.value);
   }
 
   const onSearch = () => {
-    props.doSearch(searchTerm);
+    searchCustomer(searchTerm);
   }
 
   return (
