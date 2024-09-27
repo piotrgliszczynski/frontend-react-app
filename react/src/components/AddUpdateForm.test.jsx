@@ -72,7 +72,7 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER
     }
 
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
       <AddUpdateForm />,
@@ -115,7 +115,7 @@ describe('Add-Update form', () => {
       emptyCustomer: EMPTY_CUSTOMER
     }
 
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
 
     render(
       <AddUpdateForm />,
@@ -171,7 +171,7 @@ describe('Add-Update form', () => {
     expect(changedPassword).toBeInTheDocument();
   });
 
-  it("Should do nothing when customer is not selected", () => {
+  it("Should not delete when customer is not selected", () => {
     // Given
     const contextValues = {
       customer: EMPTY_CUSTOMER,
@@ -241,21 +241,46 @@ describe('Add-Update form', () => {
     const saveButton = screen.getByRole('button', { name: saveName });
 
     // When
-    fireEvent.click(saveButton);
     const emptyName = await screen.findByPlaceholderText(namePlaceholder);
     const emptyEmail = await screen.findByPlaceholderText(emailPlaceholder);
     const emptyPassword = await screen.findByPlaceholderText(passwordPlaceholder);
+    fireEvent.change(emptyName, { target: { value: 'test' } });
+    fireEvent.change(emptyEmail, { target: { value: 'test@test.com' } });
+    fireEvent.change(emptyPassword, { target: { value: 'test' } });
+    fireEvent.click(saveButton);
+
 
     // Then
     expect(dataContext.addCustomer).toHaveBeenCalledTimes(1);
-    expect(emptyName).toBeInTheDocument();
-    expect(emptyEmail).toBeInTheDocument();
-    expect(emptyPassword).toBeInTheDocument();
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
-  it("Should update when customer is selected and fields are empty", async () => {
+  it("Should do nothing when fields are not valid", async () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
+
+    render(
+      <AddUpdateForm />,
+      { wrapper: BrowserRouter }
+    );
+    const saveName = 'Save';
+    const saveButton = screen.getByRole('button', { name: saveName });
+
+    // When
+    fireEvent.click(saveButton);
+
+
+    // Then
+    expect(dataContext.addCustomer).not.toHaveBeenCalled();
+  });
+
+  it("Should update when customer is selected", async () => {
     // Given
     const namePlaceholder = 'Customer Name';
     const emailPlaceholder = 'name@company.com';
@@ -364,9 +389,35 @@ describe('Add-Update form', () => {
     );
 
     // When
-    const errorElement = await screen.findByText('Enter valid email address');
+    const errorElement = await screen.findByText('Enter valid data:', { exact: false });
 
     // Then
     expect(errorElement).toBeInTheDocument();
+  });
+
+  it("Should field name when field has errors", async () => {
+    // Given
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER,
+      setCustomer: jest.fn()
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
+
+    render(
+      <BrowserRouter>
+        <AddUpdateForm />
+      </BrowserRouter>
+    );
+
+    // When
+    const errorElementName = await screen.findByText('Name,', { exact: false });
+    const errorElementEmail = await screen.findByText('Email,', { exact: false });
+    const errorElementPassword = await screen.findByText('Password', { exact: false });
+
+    // Then
+    expect(errorElementName).toBeInTheDocument();
+    expect(errorElementEmail).toBeInTheDocument();
+    expect(errorElementPassword).toBeInTheDocument();
   });
 });
