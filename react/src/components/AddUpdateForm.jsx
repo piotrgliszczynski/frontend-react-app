@@ -18,8 +18,8 @@ const AddUpdateForm = () => {
     return customerData.id !== emptyCustomer.id ? 'Update' : 'Add'
   }
 
-  const onType = async (field, event) => {
-    await setCustomerData(
+  const onType = (field, event) => {
+    setCustomerData(
       {
         ...customerData,
         [field]: event.target.value
