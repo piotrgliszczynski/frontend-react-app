@@ -4,12 +4,12 @@ import CustomerTable from './CustomerTable';
 import SearchBar from './SearchBar';
 import './styles/CustomerList.css';
 
-const CustomerList = (props) => {
+const CustomerList = () => {
   return (
     <div className="customer-list">
       <CustomerListTitle />
-      <SearchBar doSearch={props.doSearch} />
-      <CustomerTable customerData={props.customerData} />
+      <SearchBar />
+      <CustomerTable />
     </div>
   )
 };

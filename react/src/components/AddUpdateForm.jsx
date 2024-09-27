@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
 import './styles/AddUpdateForm.css';
 import { useNavigate } from "react-router";
+import { useCustomerData } from "./hooks/DataProviderContext";
 
-const AddUpdateForm = (props) => {
+const AddUpdateForm = () => {
 
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
-  const { fetchCustomers, deleteCustomer, addCustomer, updateCustomer } = props.crudOperations;
+  const { deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
   const navigate = useNavigate();
 
   const setTitle = () => {
@@ -50,7 +51,6 @@ const AddUpdateForm = (props) => {
     if (customerData.id !== emptyCustomer.id) {
       setCustomer(emptyCustomer);
     }
-    fetchCustomers();
     navigate("/");
   }
 

@@ -3,18 +3,35 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import CustomerList from './CustomerList';
 import '@testing-library/jest-dom';
-import * as restdb from '../rest/restdb';
 import { CustomerProvider } from './hooks/CustomerContext';
+import * as DataProviderContext from './hooks/DataProviderContext';
 
-const returnData = [
-  {
+jest.mock('./hooks/DataProviderContext');
+
+
+
+describe("Customer List", () => {
+
+  const returnData = [{
     "id": 0,
     "name": "Mary Jackson",
     "email": "maryj@abc.com",
     "password": "maryj"
   }];
 
-describe("Customer List", () => {
+  const dataContext = {
+    customerData: returnData,
+    fetchCustomers: jest.fn()
+  }
+
+  beforeEach(() => {
+    jest.spyOn(DataProviderContext, 'useCustomerData').mockImplementation(() => dataContext);
+  });
+
+  afterEach(() => {
+    DataProviderContext.useCustomerData.mockReset();
+    dataContext.fetchCustomers.mockClear();
+  });
 
   it("Customer List title should be visible", async () => {
     // Given
@@ -74,6 +91,7 @@ describe("Customer List", () => {
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
+    expect(dataContext.fetchCustomers).toHaveBeenCalledTimes(1);
   });
 
   it("Should contain search bar and search button", () => {

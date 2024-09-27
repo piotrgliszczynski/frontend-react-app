@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useCustomer } from './hooks/CustomerContext';
-import { getAll } from '../rest/restdb';
 import './styles/CustomerTable.css';
+import { useCustomerData } from './hooks/DataProviderContext';
 
-const CustomerTable = (props) => {
+const CustomerTable = () => {
 
-  const customerData = props.customerData;
+  const { customerData, fetchCustomers } = useCustomerData();
   const { customer, emptyCustomer, setCustomer } = useCustomer();
 
   const onRowClick = (selectedCustomer) => {
@@ -22,6 +22,10 @@ const CustomerTable = (props) => {
     }
     return "selected"
   }
+
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
 
   return (
     <div className='table-container'>
