@@ -22,7 +22,7 @@
 .form-parent {
   display: grid;
   grid-template-columns: 70px auto;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(4, auto);
   overflow: hidden;
   gap: 3px;
 
@@ -35,18 +35,18 @@
 }
 
 #error-message {
-  grid-area: 4 / 1 / 5 / 3;
-  padding: 3px;
+  padding: 2px;
   text-align: start;
   color: red;
 }
 
 .crud-buttons {
-  grid-area: 5 / 1 / 6 / 3;
+  grid-area: 4 / 1 / 5 / 3;
   padding: 2px;
   text-align: start;
 }
 
-#email:invalid {
-  border-color: red;
+input,
+label {
+  margin: 3px;
 }
