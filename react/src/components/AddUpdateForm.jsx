@@ -121,11 +121,11 @@ const AddUpdateForm = () => {
         <input type="text" id="password" onChange={(event) => onType('password', event)}
           placeholder="password"
           value={customerData.password}></input>
-        <div id="error-message">{errorMessage}</div>
         <div className="crud-buttons">
           <button id="btn-delete" onClick={onDelete}>Delete</button>
           <button id="btn-save" onClick={onSave}>Save</button>
           <button id="btn-cancel" onClick={onCancel}>Cancel</button>
+          <div id="error-message">{errorMessage}</div>
         </div>
       </div>
     </div >
