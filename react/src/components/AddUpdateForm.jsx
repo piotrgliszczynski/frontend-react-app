@@ -8,7 +8,7 @@ const AddUpdateForm = () => {
 
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
-  const { fetchCustomers, deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
+  const { deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
   const navigate = useNavigate();
 
   const setTitle = () => {
@@ -51,7 +51,6 @@ const AddUpdateForm = () => {
     if (customerData.id !== emptyCustomer.id) {
       setCustomer(emptyCustomer);
     }
-    fetchCustomers();
     navigate("/");
   }
 
