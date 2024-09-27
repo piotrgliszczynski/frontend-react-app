@@ -12,9 +12,12 @@ const Heading = () => {
       'Add' : 'Update';
 
   return (
-    <div>
-      <Link reloadDocument className="heading-button" to="/">Home</Link>
-      <Link className="heading-button" to="/customer-form">{formLinkTitle()}</Link>
+    <div className="header-container">
+      <Link reloadDocument className="heading-title" to="/">Customers App</Link>
+      <span>
+        <Link reloadDocument className="heading-button" to="/">Home</Link>
+        <Link className="heading-button" to="/customer-form">{formLinkTitle()}</Link>
+      </span>
     </div>
   )
 }

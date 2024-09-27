@@ -106,7 +106,7 @@ const AddUpdateForm = () => {
 
   return (
     <div className="add-update-form">
-      <h2 id="add-update-form-title">{setTitle()}</h2>
+      <h2 id="add-update-form-title">{setTitle()} customer</h2>
       <div className="form-parent">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" onChange={(event) => onType('name', event)}
@@ -121,11 +121,13 @@ const AddUpdateForm = () => {
         <input type="text" id="password" onChange={(event) => onType('password', event)}
           placeholder="password"
           value={customerData.password}></input>
-        <div className="crud-buttons">
-          <button id="btn-delete" onClick={onDelete}>Delete</button>
-          <button id="btn-save" onClick={onSave}>Save</button>
-          <button id="btn-cancel" onClick={onCancel}>Cancel</button>
+        <div className="buttons-message-row">
           <div id="error-message">{errorMessage}</div>
+          <div className="crud-buttons">
+            <button className="btn" id="btn-delete" onClick={onDelete}>Delete</button>
+            <button className="btn" id="btn-save" onClick={onSave}>Save</button>
+            <button className="btn" id="btn-cancel" onClick={onCancel}>Cancel</button>
+          </div>
         </div>
       </div>
     </div >
