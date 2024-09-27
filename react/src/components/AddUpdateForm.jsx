@@ -6,8 +6,11 @@ import { useCustomerData } from "./hooks/DataProviderContext";
 
 const AddUpdateForm = () => {
 
+  const ERROR_MESSAGE = 'Enter valid data: ';
+
   const { customer, emptyCustomer, setCustomer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
+  const [errorMessage, setErrorMessage] = useState();
   const { deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
   const navigate = useNavigate();
 
@@ -15,8 +18,8 @@ const AddUpdateForm = () => {
     return customerData.id !== emptyCustomer.id ? 'Update' : 'Add'
   }
 
-  const onType = (field, event) => {
-    setCustomerData(
+  const onType = async (field, event) => {
+    await setCustomerData(
       {
         ...customerData,
         [field]: event.target.value
@@ -33,6 +36,10 @@ const AddUpdateForm = () => {
   }
 
   const onSave = async () => {
+    if (!isFormValid()) {
+      return;
+    }
+
     if (customerData.id === emptyCustomer.id) {
       let newCustomer = customerData;
       delete newCustomer.id;
@@ -42,6 +49,7 @@ const AddUpdateForm = () => {
       navigate("/");
       return;
     }
+
     await updateCustomer(customerData);
     setCustomer(emptyCustomer);
     navigate("/");
@@ -54,14 +62,47 @@ const AddUpdateForm = () => {
     navigate("/");
   }
 
+  const isNameValid = () => {
+    return customerData.name;
+  }
+
   const isEmailValid = () => {
     const emailRegex = /^.+@.+\..+$/i;
     return emailRegex.test(customerData.email);
   }
 
+  const isPasswordValid = () => {
+    return customerData.password;
+  }
+
+  const isFormValid = () => {
+    return isNameValid()
+      && isEmailValid()
+      && isPasswordValid();
+  }
+
   useEffect(() => {
     setCustomerData(customer)
   }, [customer]);
+
+  useEffect(() => {
+    if (!isFormValid()) {
+      let errors = [];
+      if (!isNameValid()) {
+        errors.push('Name');
+      }
+      if (!isEmailValid()) {
+        errors.push('Email');
+      }
+      if (!isPasswordValid()) {
+        errors.push('Password');
+      }
+
+      setErrorMessage(`${ERROR_MESSAGE} ${errors.join(', ')}`);
+    } else {
+      setErrorMessage('');
+    }
+  }, [customerData]);
 
   return (
     <div className="add-update-form">
@@ -80,8 +121,7 @@ const AddUpdateForm = () => {
         <input type="text" id="password" onChange={(event) => onType('password', event)}
           placeholder="password"
           value={customerData.password}></input>
-
-        {isEmailValid() ? null : (<div id="error-message">Enter valid email address</div>)}
+        <div id="error-message">{errorMessage}</div>
         <div className="crud-buttons">
           <button id="btn-delete" onClick={onDelete}>Delete</button>
           <button id="btn-save" onClick={onSave}>Save</button>
