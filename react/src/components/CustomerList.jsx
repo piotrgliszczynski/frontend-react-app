@@ -7,8 +7,10 @@ import './styles/CustomerList.css';
 const CustomerList = () => {
   return (
     <div className="customer-list">
-      <CustomerListTitle />
-      <SearchBar />
+      <div className="list-heading">
+        <CustomerListTitle />
+        <SearchBar />
+      </div>
       <CustomerTable />
     </div>
   )

@@ -1,8 +1,9 @@
 #customer-list-title {
-  font-size: 17px;
+  font-size: 18px;
+  color: #302b25;
   font-weight: bold;
   font-style: sans-serif;
-  margin: 0;
+  margin: 10px;
   padding: 5px;
   padding-left: 0;
 }
