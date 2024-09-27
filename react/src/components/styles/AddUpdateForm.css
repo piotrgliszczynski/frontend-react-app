@@ -36,6 +36,8 @@
 
 #error-message {
   grid-area: 4 / 1 / 5 / 3;
+  padding: 3px;
+  text-align: start;
   color: red;
 }
 
