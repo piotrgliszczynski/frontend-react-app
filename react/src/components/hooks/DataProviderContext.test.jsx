@@ -3,10 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { DataProvider, useCustomerData } from './DataProviderContext';
 import * as RestApi from '../../rest/restdb';
-import * as SearchApi from '../../utils/ServerSideSearch';
 
 jest.mock('../../rest/restdb');
-jest.mock('../../utils/ServerSideSearch');
 
 const returnData = [
   {
@@ -80,10 +78,10 @@ const TestCreateCustomer = () => {
 }
 
 const TestResetSearch = () => {
-  const { customerData, searchCustomer } = useCustomerData();
+  const { customerData, fetchCustomers } = useCustomerData();
 
   useEffect(() => {
-    searchCustomer();
+    fetchCustomers();
   }, []);
 
   return (
@@ -94,10 +92,10 @@ const TestResetSearch = () => {
 }
 
 const TestSearchCustomer = () => {
-  const { customerData, searchCustomer } = useCustomerData();
+  const { customerData, fetchCustomers } = useCustomerData();
 
   useEffect(() => {
-    searchCustomer("Mary");
+    fetchCustomers("Mary");
   }, []);
 
   return (
@@ -140,6 +138,40 @@ describe("Data Provider Context", () => {
 
     // Then
     expect(customerElement).toBeInTheDocument();
+  });
+
+  it("Should reset search when empty search string", async () => {
+    // Given
+    render(
+      <DataProvider>
+        <TestResetSearch />
+      </DataProvider>
+    );
+
+    // When
+    const customerElement = await screen.findByText(JSON.stringify(returnData));
+
+    // Then
+    expect(customerElement).toBeInTheDocument();
+    expect(RestApi.getAll).toHaveBeenCalledTimes(1);
+    expect(RestApi.getAll).toHaveBeenCalledWith(undefined);
+  });
+
+  it("Should search for customer", async () => {
+    // Given
+    render(
+      <DataProvider>
+        <TestSearchCustomer />
+      </DataProvider>
+    );
+
+    // When
+    const customerElement = await screen.findByText(JSON.stringify(returnData));
+
+    // Then
+    expect(customerElement).toBeInTheDocument();
+    expect(RestApi.getAll).toHaveBeenCalledTimes(1);
+    expect(RestApi.getAll).toHaveBeenCalledWith("Mary");
   });
 
   it("Should delete customer", async () => {
@@ -197,43 +229,5 @@ describe("Data Provider Context", () => {
     expect(window.alert).toHaveBeenCalledTimes(1);
     expect(window.alert.mock.calls[0][0]).toContain(returnData[0].id.toString());
     expect(customerElement).toBeInTheDocument();
-  });
-
-  it("Should reset search when empty search string", async () => {
-    // Given
-    render(
-      <DataProvider>
-        <TestResetSearch />
-      </DataProvider>
-    );
-
-    // When
-    const customerElement = await screen.findByText(JSON.stringify(returnData));
-
-    // Then
-    expect(customerElement).toBeInTheDocument();
-    expect(RestApi.getAll).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should search for customer", async () => {
-    // Given
-    jest.spyOn(SearchApi, 'doSearch').mockReturnValue(returnData[0]);
-    render(
-      <DataProvider>
-        <TestSearchCustomer />
-      </DataProvider>
-    );
-
-    // When
-    const customerElement = await screen.findByText(JSON.stringify(returnData[0]));
-
-    // Then
-    expect(customerElement).toBeInTheDocument();
-    expect(RestApi.getAll).not.toHaveBeenCalled();
-    expect(SearchApi.doSearch).toHaveBeenCalledTimes(1);
-    expect(SearchApi.doSearch).toHaveBeenCalledWith("Mary");
-
-    //Clean-up
-    SearchApi.doSearch.mockReset();
   });
 })

@@ -92,10 +92,9 @@ describe("Customer List", () => {
     expect(dataContext.fetchCustomers).toHaveBeenCalledTimes(1);
   });
 
-  it("Should contain search bar and search button", () => {
+  it("Should contain search bar", () => {
     // Given
     const placeholderSearch = 'Search for customer name';
-    const buttonText = 'Search';
 
     render(
       <CustomerProvider>
@@ -106,10 +105,8 @@ describe("Customer List", () => {
 
     // When
     const inputElement = screen.getByPlaceholderText(placeholderSearch);
-    const buttonElement = screen.getByRole('button', { target: { name: buttonText } });
 
     // Then
     expect(inputElement).toBeInTheDocument();
-    expect(buttonElement).toBeInTheDocument();
   });
 })

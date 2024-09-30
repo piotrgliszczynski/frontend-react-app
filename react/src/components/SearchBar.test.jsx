@@ -10,7 +10,7 @@ jest.mock('./hooks/DataProviderContext');
 describe("Search Bar", () => {
 
   const dataContext = {
-    searchCustomer: jest.fn()
+    fetchCustomers: jest.fn()
   }
 
   beforeEach(() => {
@@ -19,14 +19,13 @@ describe("Search Bar", () => {
 
   afterEach(() => {
     DataProviderContext.useCustomerData.mockReset();
-    dataContext.searchCustomer.mockClear();
+    dataContext.fetchCustomers.mockClear();
   });
 
 
-  it("Should contain search bar and search button", () => {
+  it("Should contain search bar", () => {
     // Given
     const placeholderSearch = 'Search for customer name';
-    const buttonText = 'Search';
 
     render(
       <SearchBar />,
@@ -35,31 +34,26 @@ describe("Search Bar", () => {
 
     // When
     const inputElement = screen.getByPlaceholderText(placeholderSearch);
-    const buttonElement = screen.getByRole('button', { target: { name: buttonText } });
 
     // Then
     expect(inputElement).toBeInTheDocument();
-    expect(buttonElement).toBeInTheDocument();
   });
 
   it("Should be able to enter and search", () => {
     // Given
     const placeholderSearch = 'Search for customer name';
-    const buttonText = 'Search';
 
     render(
       <SearchBar />,
       { wrapper: BrowserRouter }
     );
     const inputElement = screen.getByPlaceholderText(placeholderSearch);
-    const buttonElement = screen.getByRole('button', { target: { name: buttonText } });
 
     // When
     fireEvent.change(inputElement, { target: { value: "test" } });
-    fireEvent.click(buttonElement);
 
     // Then
-    expect(dataContext.searchCustomer).toHaveBeenCalledTimes(1);
-    expect(dataContext.searchCustomer).toHaveBeenCalledWith('test');
+    expect(dataContext.fetchCustomers).toHaveBeenCalledTimes(1);
+    expect(dataContext.fetchCustomers).toHaveBeenCalledWith('test');
   })
 })
