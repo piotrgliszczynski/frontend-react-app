@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { getAll, post, put, deleteById } from '../../rest/restdb';
-import doSearch from '../../utils/ClientSideSearch';
+import doSearch from '../../utils/ServerSideSearch';
 
 const DataContext = createContext([]);
 
@@ -32,7 +32,7 @@ export const DataProvider = ({ children }) => {
 
   const searchCustomer = async (searchTerm) => {
     if (searchTerm) {
-      let searchResult = search(customerData, customer => customer.name.includes(searchTerm));
+      let searchResult = await search(searchTerm);
       setCustomerData(searchResult);
       return;
     }

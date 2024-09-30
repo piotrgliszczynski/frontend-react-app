@@ -3,10 +3,10 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { DataProvider, useCustomerData } from './DataProviderContext';
 import * as RestApi from '../../rest/restdb';
-import * as SearchApi from '../../utils/ClientSideSearch';
+import * as SearchApi from '../../utils/ServerSideSearch';
 
 jest.mock('../../rest/restdb');
-jest.mock('../../utils/ClientSideSearch');
+jest.mock('../../utils/ServerSideSearch');
 
 const returnData = [
   {
@@ -231,7 +231,7 @@ describe("Data Provider Context", () => {
     expect(customerElement).toBeInTheDocument();
     expect(RestApi.getAll).not.toHaveBeenCalled();
     expect(SearchApi.doSearch).toHaveBeenCalledTimes(1);
-    expect(SearchApi.doSearch.mock.calls[0][1](returnData[0])).toBe(true);
+    expect(SearchApi.doSearch).toHaveBeenCalledWith("Mary");
 
     //Clean-up
     SearchApi.doSearch.mockReset();
