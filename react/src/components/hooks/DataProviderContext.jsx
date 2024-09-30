@@ -1,15 +1,13 @@
 import React, { createContext, useContext, useState } from 'react';
 import { getAll, post, put, deleteById } from '../../rest/restdb';
-import doSearch from '../../utils/ServerSideSearch';
 
 const DataContext = createContext([]);
 
 export const DataProvider = ({ children }) => {
   const [customerData, setCustomerData] = useState([]);
-  const search = doSearch;
 
-  const fetchCustomers = () => {
-    getAll().then(response => setCustomerData(response));
+  const fetchCustomers = (searchTerm) => {
+    getAll(searchTerm).then(response => setCustomerData(response));
   }
 
   const deleteCustomer = async (id) => {
@@ -30,18 +28,9 @@ export const DataProvider = ({ children }) => {
     fetchCustomers();
   }
 
-  const searchCustomer = async (searchTerm) => {
-    if (searchTerm) {
-      let searchResult = await search(searchTerm);
-      setCustomerData(searchResult);
-      return;
-    }
-    fetchCustomers();
-  }
-
   return (
     <DataContext.Provider value={
-      { customerData, fetchCustomers, deleteCustomer, addCustomer, updateCustomer, searchCustomer }
+      { customerData, fetchCustomers, deleteCustomer, addCustomer, updateCustomer }
     }>
       {children}
     </DataContext.Provider>
