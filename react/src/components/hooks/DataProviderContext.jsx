@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
 import { getAll, post, put, deleteById } from '../../rest/restdb';
+import doSearch from '../../utils/ClientSideSearch';
 
 const DataContext = createContext([]);
 
 export const DataProvider = ({ children }) => {
   const [customerData, setCustomerData] = useState([]);
+  const search = doSearch;
 
   const fetchCustomers = () => {
     getAll().then(response => setCustomerData(response));
@@ -30,9 +32,8 @@ export const DataProvider = ({ children }) => {
 
   const searchCustomer = async (searchTerm) => {
     if (searchTerm) {
-      setCustomerData(
-        customerData.filter(customer => customer.name.includes(searchTerm))
-      );
+      let searchResult = search(customerData, customer => customer.name.includes(searchTerm));
+      setCustomerData(searchResult);
       return;
     }
     fetchCustomers();

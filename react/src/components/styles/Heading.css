@@ -1,9 +1,30 @@
+.header-container {
+  display: flex;
+  background-color: #776B5D;
+  font-size: 18px;
+  font-weight: 900;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0px 2px 4px 1px #a0978e;
+}
+
+.heading-title {
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.heading-title,
+.heading-title:hover,
+.heading-title:active,
 .heading-button {
+  min-width: 60px;
   display: inline-block;
   margin: 10px 20px;
-  color: black;
+  color: #EBE3D5;
 }
 
 .heading-button:hover {
-  color: #333;
+  color: #181513;
+  text-decoration: underline;
 }
