@@ -20,7 +20,7 @@
 .form-parent {
   display: grid;
   grid-template-columns: 70px auto;
-  grid-template-rows: repeat(4, auto);
+  grid-template-rows: repeat(7, auto);
   overflow: hidden;
   gap: 3px;
 
@@ -38,8 +38,31 @@
   padding: 10px;
 }
 
-.buttons-message-row {
+#name-error {
+  grid-area: 2 / 1 / 3 / 3;
+}
+
+#email-error {
   grid-area: 4 / 1 / 5 / 3;
+}
+
+#password-error {
+  grid-area: 6 / 1 / 7 / 3;
+}
+
+.error-message {
+  padding: 2px;
+  margin-bottom: 5px;
+  margin-left: 25px;
+
+  font-size: 14px;
+  text-align: start;
+  font-weight: bold;
+  color: red;
+}
+
+.buttons-message-row {
+  grid-area: 7 / 1 / 8 / 3;
 }
 
 .crud-buttons {
@@ -71,12 +94,4 @@
 .btn:hover {
   cursor: pointer;
   background-color: #6b6054;
-}
-
-#error-message {
-  padding: 2px;
-  margin-top: 5px;
-  text-align: center;
-  font-weight: bold;
-  color: red;
 }

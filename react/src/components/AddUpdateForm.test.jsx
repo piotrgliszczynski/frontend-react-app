@@ -373,7 +373,7 @@ describe('Add-Update form', () => {
     expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
-  it("Should display error when invalid", async () => {
+  it("Should display errors when field has errors", async () => {
     // Given
     const contextValues = {
       customer: EMPTY_CUSTOMER,
@@ -389,31 +389,9 @@ describe('Add-Update form', () => {
     );
 
     // When
-    const errorElement = await screen.findByText('Enter valid data:', { exact: false });
-
-    // Then
-    expect(errorElement).toBeInTheDocument();
-  });
-
-  it("Should field name when field has errors", async () => {
-    // Given
-    const contextValues = {
-      customer: EMPTY_CUSTOMER,
-      emptyCustomer: EMPTY_CUSTOMER,
-      setCustomer: jest.fn()
-    }
-    jest.spyOn(CustomerContext, 'useCustomer').mockImplementation(() => contextValues);
-
-    render(
-      <BrowserRouter>
-        <AddUpdateForm />
-      </BrowserRouter>
-    );
-
-    // When
-    const errorElementName = await screen.findByText('Name,', { exact: false });
-    const errorElementEmail = await screen.findByText('Email,', { exact: false });
-    const errorElementPassword = await screen.findByText('Password', { exact: false });
+    const errorElementName = await screen.findByText('Enter valid name', { exact: false });
+    const errorElementEmail = await screen.findByText('Enter valid email', { exact: false });
+    const errorElementPassword = await screen.findByText('Enter valid password', { exact: false });
 
     // Then
     expect(errorElementName).toBeInTheDocument();
