@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
-import AddUpdateFormTitle from './AddUpdateFormTitle';
-import './styles/AddUpdateForm.css';
-import { useNavigate } from "react-router";
-import { useCustomerData } from "./hooks/DataProviderContext";
 import { isValidText, isValidEmail } from "../utils/Validator";
+import AddUpdateFormTitle from './AddUpdateFormTitle';
+import FormButtons from './FormButtons';
+import './styles/AddUpdateForm.css';
 
 const AddUpdateForm = () => {
 
-  const { customer, emptyCustomer, setCustomer } = useCustomer();
+  const { customer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
-  const { deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
-  const navigate = useNavigate();
 
   const onType = (field, event) => {
     setCustomerData(
@@ -20,47 +17,6 @@ const AddUpdateForm = () => {
         [field]: event.target.value
       }
     )
-  }
-
-  const isFormValid = () => {
-    return isValidText(customerData.name)
-      && isValidEmail(customerData.email)
-      && isValidText(customerData.password);
-  }
-
-  const onDelete = () => {
-    if (customerData.id !== emptyCustomer.id) {
-      deleteCustomer(customerData.id);
-      setCustomer(emptyCustomer);
-      navigate("/");
-    }
-  }
-
-  const onSave = async () => {
-    if (!isFormValid()) {
-      return;
-    }
-
-    if (customerData.id === emptyCustomer.id) {
-      let newCustomer = customerData;
-      delete newCustomer.id;
-
-      addCustomer(newCustomer);
-      setCustomerData(emptyCustomer);
-      navigate("/");
-      return;
-    }
-
-    await updateCustomer(customerData);
-    setCustomer(emptyCustomer);
-    navigate("/");
-  }
-
-  const onCancel = () => {
-    if (customerData.id !== emptyCustomer.id) {
-      setCustomer(emptyCustomer);
-    }
-    navigate("/");
   }
 
   useEffect(() => {
@@ -93,11 +49,7 @@ const AddUpdateForm = () => {
         <div id="password-error">
           {isValidText(customerData.password) ? '' : <div className="error-message">Enter valid password, password cannot be empty</div>}
         </div>
-        <div className="crud-buttons">
-          <button className="btn" id="btn-delete" onClick={onDelete}>Delete</button>
-          <button className="btn" id="btn-save" onClick={onSave}>Save</button>
-          <button className="btn" id="btn-cancel" onClick={onCancel}>Cancel</button>
-        </div>
+        <FormButtons customerData={customerData} setCustomerData={setCustomerData} />
       </div>
     </div >
   )
