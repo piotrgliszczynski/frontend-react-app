@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727699425414" clover="3.2.0">
-  <project timestamp="1727699425414" name="All files">
-    <metrics statements="149" coveredstatements="149" conditionals="37" coveredconditionals="37" methods="42" coveredmethods="42" elements="228" coveredelements="228" complexity="0" loc="149" ncloc="149" packages="4" files="11" classes="11"/>
+<coverage generated="1727701447461" clover="3.2.0">
+  <project timestamp="1727701447461" name="All files">
+    <metrics statements="152" coveredstatements="152" conditionals="39" coveredconditionals="39" methods="42" coveredmethods="42" elements="233" coveredelements="233" complexity="0" loc="152" ncloc="152" packages="4" files="12" classes="12"/>
     <package name="components">
       <metrics statements="74" coveredstatements="74" conditionals="25" coveredconditionals="25" methods="24" coveredmethods="24"/>
       <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
@@ -98,7 +98,7 @@
       </file>
     </package>
     <package name="components.hooks">
-      <metrics statements="33" coveredstatements="33" conditionals="2" coveredconditionals="2" methods="11" coveredmethods="11"/>
+      <metrics statements="33" coveredstatements="33" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="10"/>
       <file name="CustomerContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\CustomerContext.jsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="5" type="stmt"/>
@@ -110,7 +110,7 @@
         <line num="23" count="8" type="stmt"/>
       </file>
       <file name="DataProviderContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\DataProviderContext.jsx">
-        <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="9"/>
+        <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="8" coveredmethods="8"/>
         <line num="5" count="5" type="stmt"/>
         <line num="7" count="5" type="stmt"/>
         <line num="8" count="12" type="stmt"/>
@@ -140,51 +140,57 @@
       </file>
     </package>
     <package name="rest">
-      <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
+      <metrics statements="35" coveredstatements="35" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
       <file name="restdb.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\rest\restdb.js">
-        <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
-        <line num="1" count="6" type="stmt"/>
-        <line num="2" count="6" type="stmt"/>
-        <line num="4" count="6" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="20" count="6" type="stmt"/>
-        <line num="21" count="3" type="stmt"/>
+        <metrics statements="35" coveredstatements="35" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="2" count="7" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
         <line num="22" count="3" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="33" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="44" count="6" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="45" count="7" type="stmt"/>
         <line num="46" count="3" type="stmt"/>
-        <line num="48" count="3" type="stmt"/>
-        <line num="57" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
-        <line num="68" count="6" type="stmt"/>
-        <line num="69" count="3" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="69" count="7" type="stmt"/>
         <line num="70" count="3" type="stmt"/>
-        <line num="75" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="79" count="2" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="76" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="80" count="2" type="stmt"/>
       </file>
     </package>
     <package name="utils">
-      <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
       <file name="ClientSideSearch.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\utils\ClientSideSearch.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="2" count="6" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
+      </file>
+      <file name="ServerSideSearch.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\utils\ServerSideSearch.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
       </file>
       <file name="Validator.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\utils\Validator.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
