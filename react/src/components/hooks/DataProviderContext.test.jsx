@@ -3,8 +3,10 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { DataProvider, useCustomerData } from './DataProviderContext';
 import * as RestApi from '../../rest/restdb';
+import * as SearchApi from '../../utils/ClientSideSearch';
 
 jest.mock('../../rest/restdb');
+jest.mock('../../utils/ClientSideSearch');
 
 const returnData = [
   {
@@ -92,7 +94,7 @@ const TestResetSearch = () => {
 }
 
 const TestSearchCustomer = () => {
-  const { searchCustomer } = useCustomerData();
+  const { customerData, searchCustomer } = useCustomerData();
 
   useEffect(() => {
     searchCustomer("Mary");
@@ -100,6 +102,7 @@ const TestSearchCustomer = () => {
 
   return (
     <div>
+      {JSON.stringify(customerData)}
     </div>
   )
 }
@@ -214,6 +217,7 @@ describe("Data Provider Context", () => {
 
   it("Should search for customer", async () => {
     // Given
+    jest.spyOn(SearchApi, 'doSearch').mockReturnValue(returnData[0]);
     render(
       <DataProvider>
         <TestSearchCustomer />
@@ -221,8 +225,15 @@ describe("Data Provider Context", () => {
     );
 
     // When
+    const customerElement = await screen.findByText(JSON.stringify(returnData[0]));
 
     // Then
+    expect(customerElement).toBeInTheDocument();
     expect(RestApi.getAll).not.toHaveBeenCalled();
+    expect(SearchApi.doSearch).toHaveBeenCalledTimes(1);
+    expect(SearchApi.doSearch.mock.calls[0][1](returnData[0])).toBe(true);
+
+    //Clean-up
+    SearchApi.doSearch.mockReset();
   });
 })

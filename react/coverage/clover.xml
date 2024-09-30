@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727441971161" clover="3.2.0">
-  <project timestamp="1727441971162" name="All files">
-    <metrics statements="158" coveredstatements="157" conditionals="37" coveredconditionals="36" methods="43" coveredmethods="42" elements="238" coveredelements="235" complexity="0" loc="158" ncloc="158" packages="3" files="9" classes="9"/>
+<coverage generated="1727689985862" clover="3.2.0">
+  <project timestamp="1727689985863" name="All files">
+    <metrics statements="161" coveredstatements="161" conditionals="37" coveredconditionals="36" methods="44" coveredmethods="44" elements="242" coveredelements="241" complexity="0" loc="161" ncloc="161" packages="4" files="10" classes="10"/>
     <package name="components">
       <metrics statements="92" coveredstatements="92" conditionals="27" coveredconditionals="26" methods="28" coveredmethods="28"/>
       <file name="AddUpdateForm.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\AddUpdateForm.jsx">
@@ -116,7 +116,7 @@
       </file>
     </package>
     <package name="components.hooks">
-      <metrics statements="32" coveredstatements="31" conditionals="2" coveredconditionals="2" methods="11" coveredmethods="10"/>
+      <metrics statements="33" coveredstatements="33" conditionals="2" coveredconditionals="2" methods="11" coveredmethods="11"/>
       <file name="CustomerContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\CustomerContext.jsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="5" type="stmt"/>
@@ -128,32 +128,33 @@
         <line num="23" count="8" type="stmt"/>
       </file>
       <file name="DataProviderContext.jsx" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\components\hooks\DataProviderContext.jsx">
-        <metrics statements="25" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
-        <line num="4" count="5" type="stmt"/>
-        <line num="6" count="5" type="stmt"/>
-        <line num="7" count="12" type="stmt"/>
+        <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="9"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="12" type="stmt"/>
         <line num="9" count="12" type="stmt"/>
-        <line num="10" count="5" type="stmt"/>
-        <line num="13" count="12" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
+        <line num="11" count="12" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="15" count="12" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="19" count="12" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="12" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="25" count="12" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="12" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
-        <line num="31" count="12" type="stmt"/>
-        <line num="32" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="12" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="2" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="41" count="12" type="stmt"/>
-        <line num="50" count="12" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="42" count="12" type="stmt"/>
+        <line num="51" count="12" type="stmt"/>
       </file>
     </package>
     <package name="rest">
@@ -194,6 +195,14 @@
         <line num="75" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="76" count="1" type="stmt"/>
         <line num="79" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="ClientSideSearch.js" path="C:\Users\pgliszcz\OneDrive - Automatic Data Processing Inc\Dokumenty\graduate-program\frontend-react-app\react\src\utils\ClientSideSearch.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
       </file>
     </package>
   </project>

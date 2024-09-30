@@ -53,7 +53,7 @@ describe('Add-Update form', () => {
 
   it('Should have all components and in state Add', () => {
     // Given
-    const title = 'Add';
+    const title = 'Add customer';
     const nameLabel = 'Name:';
     const namePlaceholder = 'Customer Name';
 
@@ -106,7 +106,7 @@ describe('Add-Update form', () => {
 
   it("Should fill form when in Update state", async () => {
     // Given
-    const title = 'Update';
+    const title = 'Update customer';
     const nameValue = CUSTOMER.name;
     const emailValue = CUSTOMER.email;
     const passwordValue = CUSTOMER.password;
