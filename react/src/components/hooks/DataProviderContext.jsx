@@ -6,8 +6,8 @@ const DataContext = createContext([]);
 export const DataProvider = ({ children }) => {
   const [customerData, setCustomerData] = useState([]);
 
-  const fetchCustomers = () => {
-    getAll().then(response => setCustomerData(response));
+  const fetchCustomers = (searchTerm) => {
+    getAll(searchTerm).then(response => setCustomerData(response));
   }
 
   const deleteCustomer = async (id) => {
@@ -28,19 +28,9 @@ export const DataProvider = ({ children }) => {
     fetchCustomers();
   }
 
-  const searchCustomer = async (searchTerm) => {
-    if (searchTerm) {
-      setCustomerData(
-        customerData.filter(customer => customer.name.includes(searchTerm))
-      );
-      return;
-    }
-    fetchCustomers();
-  }
-
   return (
     <DataContext.Provider value={
-      { customerData, fetchCustomers, deleteCustomer, addCustomer, updateCustomer, searchCustomer }
+      { customerData, fetchCustomers, deleteCustomer, addCustomer, updateCustomer }
     }>
       {children}
     </DataContext.Provider>

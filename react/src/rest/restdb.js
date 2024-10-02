@@ -1,9 +1,10 @@
 const BASE_URL = 'http://localhost:4000';
 const CUSTOMERS_ENDPOINT = 'customers';
 
-export const getAll = async () => {
+export const getAll = async (searchQuery) => {
   try {
-    const response = await fetch(`${BASE_URL}/${CUSTOMERS_ENDPOINT}`);
+    const nameLike = searchQuery || "";
+    const response = await fetch(`${BASE_URL}/${CUSTOMERS_ENDPOINT}?name_like=${nameLike}`);
 
     if (!response.ok) {
       throw new Error(`Could not fetch data from ${BASE_URL}/${CUSTOMERS_ENDPOINT}`);

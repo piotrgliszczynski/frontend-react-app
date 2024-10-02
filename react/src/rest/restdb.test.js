@@ -43,7 +43,29 @@ describe("Rest requests", () => {
 
       // Then
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers');
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?name_like=');
+    });
+
+    it("should correctly fetch filtered data", () => {
+      // Given
+      const returnData = [
+        {
+          "id": 0,
+          "name": "Mary Jackson",
+          "email": "maryj@abc.com",
+          "password": "maryj"
+        }];
+      fetch.mockResponseOnce(JSON.stringify(returnData));
+
+      // When
+      getAll("ma")
+        .then(response => {
+          expect(response).toEqual(returnData);
+        });
+
+      // Then
+      expect(fetch.mock.calls.length).toEqual(1);
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?name_like=ma');
     });
 
     it("Should fail when error during fetch returned", async () => {
@@ -58,7 +80,7 @@ describe("Rest requests", () => {
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(console.error.mock.calls[0][1].toString()).toContain(errorMessage);
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers');
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?name_like=');
     });
 
     it("Should fail when error response code returned", async () => {
@@ -73,7 +95,7 @@ describe("Rest requests", () => {
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(console.error.mock.calls[0][1].toString()).toContain(errorMessage);
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers');
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?name_like=');
     });
   });
 

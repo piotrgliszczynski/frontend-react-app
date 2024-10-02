@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/SearchBar.jsx</title>
+    <title>Code coverage report for components/AddUpdateFormTitle.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> SearchBar.jsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> AddUpdateFormTitle.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -80,50 +80,41 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
-import './styles/SearchBar.css';
-import { useCustomerData } from "./hooks/DataProviderContext";
+import { useCustomer } from "./hooks/CustomerContext";
+import './styles/AddUpdateFormTitle.css';
 &nbsp;
-const SearchBar = () =&gt; {
+const AddUpdateFormTitle = (props) =&gt; {
 &nbsp;
-  const { fetchCustomers } = useCustomerData();
+  const { emptyCustomer } = useCustomer();
 &nbsp;
-  const onType = (event) =&gt; {
-    fetchCustomers(event.target.value);
+  const setTitle = () =&gt; {
+    return props.customerId !== emptyCustomer.id ? 'Update' : 'Add'
   }
 &nbsp;
   return (
-    &lt;div className="search-bar-container"&gt;
-      &lt;input type="text" name="search-bar" id="search-bar"
-        placeholder="Search for customer name" onChange={onType} /&gt;
-    &lt;/div&gt;
+    &lt;h2 id="add-update-form-title"&gt;{setTitle()} customer&lt;/h2&gt;
   )
 }
 &nbsp;
-export default SearchBar;</pre></td></tr></table></pre>
+export default AddUpdateFormTitle</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

@@ -78,10 +78,10 @@ const TestCreateCustomer = () => {
 }
 
 const TestResetSearch = () => {
-  const { customerData, searchCustomer } = useCustomerData();
+  const { customerData, fetchCustomers } = useCustomerData();
 
   useEffect(() => {
-    searchCustomer();
+    fetchCustomers();
   }, []);
 
   return (
@@ -92,14 +92,15 @@ const TestResetSearch = () => {
 }
 
 const TestSearchCustomer = () => {
-  const { searchCustomer } = useCustomerData();
+  const { customerData, fetchCustomers } = useCustomerData();
 
   useEffect(() => {
-    searchCustomer("Mary");
+    fetchCustomers("Mary");
   }, []);
 
   return (
     <div>
+      {JSON.stringify(customerData)}
     </div>
   )
 }
@@ -137,6 +138,40 @@ describe("Data Provider Context", () => {
 
     // Then
     expect(customerElement).toBeInTheDocument();
+  });
+
+  it("Should reset search when empty search string", async () => {
+    // Given
+    render(
+      <DataProvider>
+        <TestResetSearch />
+      </DataProvider>
+    );
+
+    // When
+    const customerElement = await screen.findByText(JSON.stringify(returnData));
+
+    // Then
+    expect(customerElement).toBeInTheDocument();
+    expect(RestApi.getAll).toHaveBeenCalledTimes(1);
+    expect(RestApi.getAll).toHaveBeenCalledWith(undefined);
+  });
+
+  it("Should search for customer", async () => {
+    // Given
+    render(
+      <DataProvider>
+        <TestSearchCustomer />
+      </DataProvider>
+    );
+
+    // When
+    const customerElement = await screen.findByText(JSON.stringify(returnData));
+
+    // Then
+    expect(customerElement).toBeInTheDocument();
+    expect(RestApi.getAll).toHaveBeenCalledTimes(1);
+    expect(RestApi.getAll).toHaveBeenCalledWith("Mary");
   });
 
   it("Should delete customer", async () => {
@@ -194,35 +229,5 @@ describe("Data Provider Context", () => {
     expect(window.alert).toHaveBeenCalledTimes(1);
     expect(window.alert.mock.calls[0][0]).toContain(returnData[0].id.toString());
     expect(customerElement).toBeInTheDocument();
-  });
-
-  it("Should reset search when empty search string", async () => {
-    // Given
-    render(
-      <DataProvider>
-        <TestResetSearch />
-      </DataProvider>
-    );
-
-    // When
-    const customerElement = await screen.findByText(JSON.stringify(returnData));
-
-    // Then
-    expect(customerElement).toBeInTheDocument();
-    expect(RestApi.getAll).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should search for customer", async () => {
-    // Given
-    render(
-      <DataProvider>
-        <TestSearchCustomer />
-      </DataProvider>
-    );
-
-    // When
-
-    // Then
-    expect(RestApi.getAll).not.toHaveBeenCalled();
   });
 })
