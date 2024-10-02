@@ -11,7 +11,7 @@ const LoginForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const onLogin = async (event) => {
+  const onLogin = (event) => {
     event.preventDefault();
     login(username, password);
   }
@@ -28,7 +28,7 @@ const LoginForm = () => {
   }
 
   useEffect(() => {
-    if (user?.email !== username) {
+    if (!user) {
       return;
     }
 
