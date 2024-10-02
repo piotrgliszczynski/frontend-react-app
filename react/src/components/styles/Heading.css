@@ -1,8 +1,6 @@
 .header-container {
   display: flex;
   background-color: #776B5D;
-  font-size: 18px;
-  font-weight: 900;
   justify-content: space-between;
   align-items: center;
 
@@ -12,6 +10,18 @@
 .heading-title {
   font-size: 22px;
   text-transform: uppercase;
+}
+
+.greeting-message {
+  font-size: 16px;
+  font-weight: 500;
+  color: #181513;
+  margin-right: 30px;
+}
+
+.heading-button {
+  text-align: center;
+  font-size: 16px;
 }
 
 .heading-title,

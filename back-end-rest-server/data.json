@@ -617,6 +617,12 @@
       "name": "Stan Mulcock",
       "email": "smulcock2r@uiuc.edu",
       "password": "oX0'<Dj)"
+    },
+    {
+      "name": "admin",
+      "email": "admin@test.com",
+      "password": "admin",
+      "id": 103
     }
   ]
 }
