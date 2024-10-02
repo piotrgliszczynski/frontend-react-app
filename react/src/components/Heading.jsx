@@ -17,6 +17,7 @@ const Heading = () => {
       <span>
         <Link reloadDocument className="heading-button" to="/">Home</Link>
         <Link className="heading-button" to="/customer-form">{formLinkTitle()}</Link>
+        <Link className="heading-button" to="/">Login</Link>
       </span>
     </div>
   )

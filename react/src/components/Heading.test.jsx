@@ -75,5 +75,27 @@ describe("Heading", () => {
     // Then
     expect(homeLinkElement).toBeInTheDocument();
     expect(formLinkElement).toBeInTheDocument();
-  })
+  });
+
+  it("Should have Login link when customer is not logged in", () => {
+    // Given
+    const loginLink = "Login";
+
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    render(
+      <Heading />,
+      { wrapper: BrowserRouter }
+    );
+
+    // When
+    const loginLinkElement = screen.getByRole("link", { name: loginLink });
+
+    // Then
+    expect(loginLinkElement).toBeInTheDocument();
+  });
 });
