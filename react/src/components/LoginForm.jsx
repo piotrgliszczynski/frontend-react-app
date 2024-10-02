@@ -14,8 +14,6 @@ const LoginForm = () => {
       case 'password':
         setPassword(event.target.value);
         break;
-      default:
-        return;
     }
   }
 
