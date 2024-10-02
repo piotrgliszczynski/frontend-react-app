@@ -93,6 +93,23 @@ describe('Auth Context', () => {
     expect(window.alert).toHaveBeenCalledTimes(1);
   });
 
+  it('Should not set user when login failed when empty array returned', async () => {
+    // Given
+    jest.spyOn(RestApi, 'getByEmail').mockResolvedValue([]);
+
+    render(
+      <TestLogin />,
+      { wrapper: AuthProvider }
+    );
+
+    // When
+    const customerElement = await screen.findByText('null');
+
+    // Then
+    expect(customerElement).toBeInTheDocument();
+    expect(window.alert).toHaveBeenCalledTimes(1);
+  });
+
   it('Should not set user when login failed when password mismatch', async () => {
     // Given
     jest.spyOn(RestApi, 'getByEmail').mockResolvedValue(WRONG_PASSWORD);
