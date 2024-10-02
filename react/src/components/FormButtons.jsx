@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useCustomer } from "./hooks/CustomerContext";
 import { useCustomerData } from "./hooks/DataProviderContext";
 import { isValidText, isValidEmail } from "../utils/Validator";
+import './styles/FormButtons.css';
 
 const FormButtons = (props) => {
 
@@ -53,11 +54,11 @@ const FormButtons = (props) => {
   }
 
   return (
-    <div className="crud-buttons">
+    <>
       <button className="btn" id="btn-delete" onClick={onDelete}>Delete</button>
       <button className="btn" id="btn-save" onClick={onSave}>Save</button>
       <button className="btn" id="btn-cancel" onClick={onCancel}>Cancel</button>
-    </div>
+    </>
   )
 }
 

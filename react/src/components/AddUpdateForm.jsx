@@ -49,7 +49,10 @@ const AddUpdateForm = () => {
         <div id="password-error">
           {isValidText(customerData.password) ? '' : <div className="error-message">Enter valid password, password cannot be empty</div>}
         </div>
-        <FormButtons customerData={customerData} setCustomerData={setCustomerData} />
+
+        <div className="crud-buttons">
+          <FormButtons customerData={customerData} setCustomerData={setCustomerData} />
+        </div>
       </div>
     </div >
   )
