@@ -3,8 +3,23 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import * as AuthContext from './hooks/AuthContext';
+
+jest.mock('./hooks/AuthContext');
 
 describe('Login form', () => {
+
+  beforeEach(() => {
+    const loginContext = {
+      login: jest.fn()
+    }
+    jest.spyOn(AuthContext, 'useAuth').mockImplementation(() => loginContext);
+  })
+
+  afterEach(() => {
+    AuthContext.useAuth.mockReset();
+  });
+
   it('Should have title, username, password and Login button elements', () => {
     // Given
     const title = 'Login';

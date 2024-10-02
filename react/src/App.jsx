@@ -8,6 +8,7 @@ import { CustomerProvider } from './components/hooks/CustomerContext'
 import { DataProvider } from './components/hooks/DataProviderContext';
 import LoginForm from './components/LoginForm';
 import RequireAuth from './components/RequireAuth';
+import { AuthProvider } from './components/hooks/AuthContext';
 
 function App() {
 
@@ -16,16 +17,18 @@ function App() {
       <BrowserRouter>
         <CustomerProvider>
           <DataProvider>
-            <Heading />
-            <Routes>
-              <Route exact path="/" element={<CustomerList />} />
-              <Route path="/customer-form" element={
-                <RequireAuth>
-                  <AddUpdateForm />
-                </RequireAuth>
-              } />
-              <Route path="/login" element={<LoginForm />} />
-            </Routes>
+            <AuthProvider>
+              <Heading />
+              <Routes>
+                <Route exact path="/" element={<CustomerList />} />
+                <Route path="/customer-form" element={
+                  <RequireAuth>
+                    <AddUpdateForm />
+                  </RequireAuth>
+                } />
+                <Route path="/login" element={<LoginForm />} />
+              </Routes>
+            </AuthProvider>
           </DataProvider>
         </CustomerProvider>
       </BrowserRouter>

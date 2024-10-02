@@ -28,7 +28,10 @@ export const getByEmail = async (email) => {
     }
 
     const resopnseJson = await response.json();
-    return resopnseJson;
+    if (resopnseJson.length === 1) {
+      return resopnseJson[0];
+    }
+    return {};
 
   } catch (error) {
     console.error('Fetching customers with error:', error);

@@ -72,9 +72,10 @@ describe('Require Auth', () => {
   it('Should reroute when user is not logged in', async () => {
     // Given    
     const userContext = {
-      user: null
+      user: null,
+      login: jest.fn()
     };
-    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => userContext);
+    jest.spyOn(AuthContext, 'useAuth').mockImplementation(() => userContext);
 
     render(
       <RouterProvider router={router} />
@@ -90,7 +91,8 @@ describe('Require Auth', () => {
   it('Should allow when user is logged in', async () => {
     // Given    
     const userContext = {
-      user: CUSTOMER
+      user: CUSTOMER,
+      login: jest.fn()
     };
     jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => userContext);
 

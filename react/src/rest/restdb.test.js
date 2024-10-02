@@ -101,23 +101,23 @@ describe("Rest requests", () => {
 
     it("Should correctly fetch user by email", async () => {
       // Given
-      const returnData = {
+      const returnData = [{
         "id": 0,
         "name": "Mary Jackson",
         "email": "maryj@abc.com",
         "password": "maryj"
-      };
+      }];
       fetch.mockResponseOnce(JSON.stringify(returnData));
 
       // When
-      getByEmail(returnData.email)
+      getByEmail(returnData[0].email)
         .then(response => {
-          expect(response).toEqual(returnData);
+          expect(response).toEqual(returnData[0]);
         });
 
       // Then
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual(`http://localhost:4000/customers?email=${returnData.email}`);
+      expect(fetch.mock.calls[0][0]).toEqual(`http://localhost:4000/customers?email=${returnData[0].email}`);
     });
 
     it("Should fail when error during fetch by email returned", async () => {
@@ -158,7 +158,7 @@ describe("Rest requests", () => {
       const response = await getByEmail();
 
       // Then
-      expect(response).toEqual([]);
+      expect(response).toEqual({});
       expect(fetch.mock.calls.length).toEqual(1);
       expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?email=');
     });
