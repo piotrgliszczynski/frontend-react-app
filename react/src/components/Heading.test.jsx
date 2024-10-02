@@ -176,4 +176,58 @@ describe("Heading", () => {
     // Then
     expect(authContextValues.logout).toHaveBeenCalledTimes(1);
   });
+
+  it("Should not display greeting when user is not logged in", () => {
+    // Given
+    const greetingMessage = "Hello";
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    const authContextValues = {
+      user: null,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
+
+    render(
+      <Heading />,
+      { wrapper: BrowserRouter }
+    );
+
+    // When
+    const greetingElement = screen.queryByText(greetingMessage, { exact: false });
+
+    // Then
+    expect(greetingElement).not.toBeInTheDocument();
+  });
+
+  it("Should have greeting when customer is logged in", () => {
+    // Given
+    const greetingMessage = "Hello";
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    const authContextValues = {
+      user: CUSTOMER,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
+
+    render(
+      <Heading />,
+      { wrapper: BrowserRouter }
+    );
+
+    // When
+    const greetingElement = screen.getByText(greetingMessage, { exact: false });
+
+    // Then
+    expect(greetingElement).toBeInTheDocument();
+  });
 });
