@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useCustomer } from "./hooks/CustomerContext";
-import './styles/AddUpdateForm.css';
-import { useNavigate } from "react-router";
-import { useCustomerData } from "./hooks/DataProviderContext";
 import { isValidText, isValidEmail } from "../utils/Validator";
+import AddUpdateFormTitle from './AddUpdateFormTitle';
+import FormButtons from './FormButtons';
+import './styles/AddUpdateForm.css';
 
 const AddUpdateForm = () => {
 
-  const ERROR_MESSAGE = 'Enter valid data: ';
-
-  const { customer, emptyCustomer, setCustomer } = useCustomer();
+  const { customer } = useCustomer();
   const [customerData, setCustomerData] = useState(customer);
-  const [errorMessage, setErrorMessage] = useState();
-  const { deleteCustomer, addCustomer, updateCustomer } = useCustomerData();
-  const navigate = useNavigate();
-
-  const setTitle = () => {
-    return customerData.id !== emptyCustomer.id ? 'Update' : 'Add'
-  }
 
   const onType = (field, event) => {
     setCustomerData(
@@ -28,54 +19,13 @@ const AddUpdateForm = () => {
     )
   }
 
-  const isFormValid = () => {
-    return isValidText(customerData.name)
-      && isValidEmail(customerData.email)
-      && isValidText(customerData.password);
-  }
-
-  const onDelete = () => {
-    if (customerData.id !== emptyCustomer.id) {
-      deleteCustomer(customerData.id);
-      setCustomer(emptyCustomer);
-      navigate("/");
-    }
-  }
-
-  const onSave = async () => {
-    if (!isFormValid()) {
-      return;
-    }
-
-    if (customerData.id === emptyCustomer.id) {
-      let newCustomer = customerData;
-      delete newCustomer.id;
-
-      addCustomer(newCustomer);
-      setCustomerData(emptyCustomer);
-      navigate("/");
-      return;
-    }
-
-    await updateCustomer(customerData);
-    setCustomer(emptyCustomer);
-    navigate("/");
-  }
-
-  const onCancel = () => {
-    if (customerData.id !== emptyCustomer.id) {
-      setCustomer(emptyCustomer);
-    }
-    navigate("/");
-  }
-
   useEffect(() => {
     setCustomerData(customer)
   }, [customer]);
 
   return (
     <div className="add-update-form">
-      <h2 id="add-update-form-title">{setTitle()} customer</h2>
+      <AddUpdateFormTitle customerId={customerData.id} />
       <div className="form-parent">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" onChange={(event) => onType('name', event)}
@@ -99,12 +49,9 @@ const AddUpdateForm = () => {
         <div id="password-error">
           {isValidText(customerData.password) ? '' : <div className="error-message">Enter valid password, password cannot be empty</div>}
         </div>
-        <div className="buttons-message-row">
-          <div className="crud-buttons">
-            <button className="btn" id="btn-delete" onClick={onDelete}>Delete</button>
-            <button className="btn" id="btn-save" onClick={onSave}>Save</button>
-            <button className="btn" id="btn-cancel" onClick={onCancel}>Cancel</button>
-          </div>
+
+        <div className="crud-buttons">
+          <FormButtons customerData={customerData} setCustomerData={setCustomerData} />
         </div>
       </div>
     </div >

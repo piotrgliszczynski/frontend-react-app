@@ -9,14 +9,6 @@
   margin-right: auto;
 }
 
-#add-update-form-title {
-  color: #302b25;
-  font-size: 18px;
-  font-weight: bold;
-  font-style: Arial, Helvetica, sans-serif;
-  margin: 10px;
-}
-
 .form-parent {
   display: grid;
   grid-template-columns: 70px auto;
@@ -61,37 +53,10 @@
   color: red;
 }
 
-.buttons-message-row {
-  grid-area: 7 / 1 / 8 / 3;
-}
-
 .crud-buttons {
+  grid-area: 7 / 1 / 8 / 3;
   padding: 2px;
   margin-top: 10px;
   display: flex;
   justify-content: center;
-}
-
-.btn {
-  height: 37px;
-  width: 75px;
-  border-radius: 50px 50px;
-  border: none;
-  margin: 0 20px;
-
-  font-weight: bold;
-  color: #EBE3D5;
-  text-transform: uppercase;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: #776B5D;
-  box-shadow: 1px 1px 10px 1px #a0978e;
-}
-
-.btn:hover {
-  cursor: pointer;
-  background-color: #6b6054;
 }
