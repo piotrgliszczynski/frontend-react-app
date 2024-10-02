@@ -28,7 +28,6 @@ export const getByEmail = async (email) => {
     }
 
     const resopnseJson = await response.json();
-    console.log(resopnseJson);
     return resopnseJson;
 
   } catch (error) {
