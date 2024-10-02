@@ -1,11 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Heading from './Heading';
 import { BrowserRouter } from 'react-router-dom';
 import * as CustomerContext from './hooks/CustomerContext';
+import * as AuthContext from './hooks/AuthContext';
 
 jest.mock('./hooks/CustomerContext');
+jest.mock('./hooks/AuthContext');
 
 const CUSTOMER = {
   "id": 0,
@@ -24,7 +26,8 @@ const EMPTY_CUSTOMER = {
 describe("Heading", () => {
 
   afterEach(() => {
-    CustomerContext.useCustomer.mockClear();
+    CustomerContext.useCustomer.mockReset();
+    AuthContext.useAuth.mockReset();
   });
 
   it("Should have Home and Add links when customer is not selected", () => {
@@ -35,8 +38,14 @@ describe("Heading", () => {
     const contextValues = {
       customer: EMPTY_CUSTOMER,
       emptyCustomer: EMPTY_CUSTOMER
-    }
+    };
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    const authContextValues = {
+      user: null,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
 
     render(
       <Heading />,
@@ -63,6 +72,12 @@ describe("Heading", () => {
     }
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
+    const authContextValues = {
+      user: null,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
+
     render(
       <Heading />,
       { wrapper: BrowserRouter }
@@ -87,6 +102,12 @@ describe("Heading", () => {
     }
     jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
 
+    const authContextValues = {
+      user: null,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
+
     render(
       <Heading />,
       { wrapper: BrowserRouter }
@@ -97,5 +118,62 @@ describe("Heading", () => {
 
     // Then
     expect(loginLinkElement).toBeInTheDocument();
+  });
+
+  it("Should have Logout link when customer is logged in", () => {
+    // Given
+    const logoutLink = "Logout";
+
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    const authContextValues = {
+      user: CUSTOMER,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
+
+    render(
+      <Heading />,
+      { wrapper: BrowserRouter }
+    );
+
+    // When
+    const logoutLinkElement = screen.getByRole("link", { name: logoutLink });
+
+    // Then
+    expect(logoutLinkElement).toBeInTheDocument();
+  });
+
+  it("Logout link should logout correctly", () => {
+    // Given
+    const logoutLink = "Logout";
+
+    const contextValues = {
+      customer: EMPTY_CUSTOMER,
+      emptyCustomer: EMPTY_CUSTOMER
+    }
+    jest.spyOn(CustomerContext, 'useCustomer').mockImplementationOnce(() => contextValues);
+
+    const authContextValues = {
+      user: CUSTOMER,
+      logout: jest.fn()
+    };
+    jest.spyOn(AuthContext, 'useAuth').mockImplementationOnce(() => authContextValues);
+
+    render(
+      <Heading />,
+      { wrapper: BrowserRouter }
+    );
+
+    // When
+    const logoutLinkElement = screen.getByRole("link", { name: logoutLink });
+    fireEvent.click(logoutLinkElement);
+
+    // Then
+    expect(authContextValues.logout).toHaveBeenCalledTimes(1);
   });
 });
