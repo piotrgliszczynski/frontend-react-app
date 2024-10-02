@@ -7,6 +7,7 @@ import CustomerList from './components/CustomerList'
 import Heading from './components/Heading';
 import { CustomerProvider } from './components/hooks/CustomerContext'
 import { DataProvider } from './components/hooks/DataProviderContext';
+import LoginForm from './components/LoginForm';
 
 function App() {
 
@@ -17,12 +18,9 @@ function App() {
           <DataProvider>
             <Heading />
             <Routes>
-              <Route exact path="/" element={
-                <CustomerList />}
-              />
-              <Route path="/customer-form" element={
-                <AddUpdateForm />}
-              />
+              <Route exact path="/" element={<CustomerList />} />
+              <Route path="/customer-form" element={<AddUpdateForm />} />
+              <Route path="/login" element={<LoginForm />} />
             </Routes>
           </DataProvider>
         </CustomerProvider>
