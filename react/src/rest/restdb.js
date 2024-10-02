@@ -21,13 +21,14 @@ export const getAll = async (searchQuery) => {
 export const getByEmail = async (email) => {
   try {
     const emailLike = email || "";
-    const response = await fetch(`${BASE_URL}/${CUSTOMERS_ENDPOINT}?email_like=${emailLike}`);
+    const response = await fetch(`${BASE_URL}/${CUSTOMERS_ENDPOINT}?email=${emailLike}`);
 
     if (!response.ok) {
       throw new Error(`Could not fetch data from ${BASE_URL}/${CUSTOMERS_ENDPOINT}`);
     }
 
     const resopnseJson = await response.json();
+    console.log(resopnseJson);
     return resopnseJson;
 
   } catch (error) {

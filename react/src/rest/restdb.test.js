@@ -117,7 +117,7 @@ describe("Rest requests", () => {
 
       // Then
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual(`http://localhost:4000/customers?email_like=${returnData.email}`);
+      expect(fetch.mock.calls[0][0]).toEqual(`http://localhost:4000/customers?email=${returnData.email}`);
     });
 
     it("Should fail when error during fetch by email returned", async () => {
@@ -132,7 +132,7 @@ describe("Rest requests", () => {
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(console.error.mock.calls[0][1].toString()).toContain(errorMessage);
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?email_like=test@test.com');
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?email=test@test.com');
     });
 
     it("Should fail when error response code returned", async () => {
@@ -147,7 +147,20 @@ describe("Rest requests", () => {
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(console.error.mock.calls[0][1].toString()).toContain(errorMessage);
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?email_like=test@test.com');
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?email=test@test.com');
+    });
+
+    it("Should query empty email when no email provided", async () => {
+      // Given
+      fetch.mockResponseOnce(JSON.stringify([]));
+
+      // When
+      const response = await getByEmail();
+
+      // Then
+      expect(response).toEqual([]);
+      expect(fetch.mock.calls.length).toEqual(1);
+      expect(fetch.mock.calls[0][0]).toEqual('http://localhost:4000/customers?email=');
     });
   });
 
